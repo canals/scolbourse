@@ -1,0 +1,7 @@
+db_driver=mysql
+db_user=bourse12
+db_password=bourse12
+
+host=localhost
+dbname=bourse12
+

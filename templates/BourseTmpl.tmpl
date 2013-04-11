@@ -1,0 +1,54 @@
+<patTemplate:tmpl name="BourseTmpl">
+		
+	<script type="text/javascript" language="javascript" >
+		var currentUrl = window.location;
+		var leHash = {PNL_ACTIVE};	
+		if(leHash!=null)
+			currentUrl.hash = leHash;
+	</script>
+	
+	
+	<!-- Famille Section //-->
+	<div>
+		<h4 style="margin-left:1%">1° Selectionnez une famille</h4>
+		<patTemplate:tmpl name="Famille" src="FamilleSelect.tmpl" parse="on"/>
+	</div>
+		
+	<!-- Bourse Section //-->
+	<br /><br />		
+	<a id="actions" name="actions"/>
+	<link   type="text/css" rel="stylesheet" href="/ScolBoursePHP/css/tabPane.css" /> 
+	<script type="text/javascript" language="javascript" src="/ScolBoursePHP/js/tabPane.js"></script>		
+	<div style="margin:0% 2% 0% 1%" align="left">		
+		<div class="tab-container" id="cntLivres">
+			<ul class="tabs">
+				<li><a name="tabDepot" id="tabDepot" href="#" onclick="return showPane('pnlDepot', this);" >Dep&ocirc;t</a></li>
+				<li><a name="tabAchat" id="tabAchat" href="#" onclick="return showPane('pnlAchat', this);">Achat</a></li>
+			</ul>			
+			<div class="tab-panes">  
+				<div id="pnlDepot">
+					<patTemplate:tmpl name="Depot" src="DepotTmpl.tmpl" parse="on"/>
+				</div>			
+				<div id="pnlAchat">
+					<patTemplate:tmpl name="Achat" src="AchatTmpl.tmpl" parse="on"/>
+				</div>				  
+			</div>
+		</div>										
+	</div>			
+	<input type="hidden" id="tabActive" name="tabActive" value="{TAB_ACTIVE}"/>		
+	<br/>	
+	<script type="text/javascript" language="javascript">
+		var tabActive = document.getElementById("tabActive"); 
+		tabActive = tabActive.value; 			
+		setupPanes("cntLivres", tabActive);	
+		
+		if((leHash=="tabAchat")||(tabActive=="tabAchat")) {
+			var field = document.getElementById("codeExemplaireA");			
+			field.focus(); 						
+		} else if((leHash=="tabDepot")||(tabActive=="tabDepot")) {
+			var field = document.getElementById("codeManuel");			
+			field.focus();			
+		}   		
+	</script>
+
+</patTemplate:tmpl>

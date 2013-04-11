@@ -1,0 +1,14 @@
+OK ajouter n° dossier dans affichage famille
+Semble OK. Bug Update familles : ' dans les strings
+OK -  import des listes de manuels
+OK Export liste manuels - 
+OK affichage des tarifs des manuels
+OK export/import familles - 
+OK calcul du tarif dans l'ajout d'un manuel - 
+OK Tableau de bord bourse : dépots, ventes, nbre de dossiers, CA, paiements, frais
+5. retour invendus : case à cocher
+5. Changer le type de la colonne "enlever les frais" -> integer, pour y stocker le taux.
+OK arrondis sur les calculs de facture
+OK. installeur : test de connexion base, choix sur création/utilisation base + création/utilisation tables + imports données par défaut.
+OK éditions : titre et logo paramétrables-  ATTENTION : Encoding du ficher config.edit.php = Windows-1252
+9. intégration des rapports jasper

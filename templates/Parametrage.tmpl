@@ -1,0 +1,80 @@
+<patTemplate:tmpl name="Parametrage">
+
+<script type="text/javascript" language="javascript" src="/ScolBoursePHP/js/UtilisateurListe.js"></script>
+<script type="text/javascript" language="javascript" src="/ScolBoursePHP/js/GestionFrais.js"></script>	
+
+<div class="liste">
+	<h4>Gestion des frais</h4>
+	<form method='POST' action=''>
+		<table width="50%" align="center" border="0">
+			<patTemplate:tmpl name="ligne_frais">
+			<tr>
+				<td> Taux des frais de dossiers : </td>
+				<td>&nbsp;<input type='text' name='frais_dossier' id='frais_dossier' size='5' value='{FRAIS_DOSSIER}'>%</td>
+			</tr>
+			<tr>
+				<td>Montant des frais d'envoi : </td>
+				<td><input type='text' name='frais_envoi' id='frais_envoi' size='5' value='{FRAIS_ENVOI}'>&euro;</td>
+			</tr>
+			<tr>
+				<td></td>
+				<td><input type='button' name='valider_frais' id='valider_frais' value='valider' onclick="ModifierTaux();return false;"/></td>
+			</tr>
+			</patTemplate:tmpl>
+		</table>
+	</form>
+</div>
+ 
+<div class="liste">
+    <h4>Gestion des paiements</h4>
+	<table width="50%" align="center" border="0">
+		<tr>
+			<th width='40%' align='center'>Code paiement</th>
+			<th width='60%' align='center'>Libell&eacute;</th>
+		</tr>
+		<patTemplate:tmpl name="ligne_paiement">
+		<tr class="{CLASS}" style="font-size:90%" onmouseover="javascript:soulignerRow(this, 'hiliterows'); return false;" 
+		onmouseout="javascript:soulignerRow(this, '{CLASS}'); return false;">			
+			<td width="2%"  align="left">{CODE_PAIEMENT}.</td>
+			<td width="30%" align="left">
+				<a href="#" onclick="displayMessage('/ScolBoursePHP/index.php/Parametrage/detail/reglements/{CODE_PAIEMENT}');return false;">{LIBELLE_PAIEMENT}</a>
+			</td>
+		</tr>
+		</patTemplate:tmpl>	
+	</table>
+	<br/>		
+	<p>
+		<i>Si vous voulez ajouter un autre moyen de paiement cliquez  
+		<a href="/ScolBoursePHP/index.php/Parametrage/creer/paiement"><strong>ICI</strong></a></i>.
+	</p>
+	<br/>
+</div>
+
+<div class="liste">
+    <h4>Gestion de l'etat des livres</h4>
+	<table width="50%" align="center" border="0">
+		<tr>
+			<th width="25%" align="center">Code &eacute;tat</th>
+			<th width="50%">Libell&eacute;</th>
+			<th width="25%">Pourcentage</th>
+		</tr>
+		<patTemplate:tmpl name="ligne">
+		<tr class="{CLASS}" style="font-size:90%" onmouseover="javascript:soulignerRow(this, 'hiliterows'); return false;" 
+		onmouseout="javascript:soulignerRow(this, '{CLASS}'); return false;">			
+			<td width="2%"  align="left">{CODE}.</td>
+			<td width="30%" align="left">
+				<a href="#" onclick="displayMessage('/ScolBoursePHP/index.php/Parametrage/detail/etats/{CODE}');return false;">{LIBELLE}</a>
+			</td>
+			<td width="15%" align="left"><i>{POURCENTAGE}</i></td>
+		</tr>
+		</patTemplate:tmpl>	
+	</table>
+	<br/>		
+	<p>
+		<i>Si vous voulez ajouter un autre &eacute;tat cliquez  
+		<a href="/ScolBoursePHP/index.php/Parametrage/creer/etat"><strong>ICI</strong></a></i>.
+	</p>
+	<br/>
+</div> 
+
+</patTemplate:tmpl>

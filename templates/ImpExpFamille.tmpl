@@ -1,0 +1,30 @@
+<patTemplate:tmpl name="ImpExpFamille">
+<table>
+	<tr>
+		<td><h4>1° Importer une liste de Familles</h4></td>
+		<td>&nbsp;</td>
+		<td><h4>2° Exporter la liste des Familles</h4></td>
+	</tr>
+	
+	<tr>
+		<td>			
+			<form name="formFamille" method="post" enctype="multipart/form-data" action="/ScolBoursePHP/index.php/Famille/import">	
+				Importer un fichier de familles au format <i>CSV</i>. <br/><br/>
+				<input type="file" name="fichier">&nbsp;&nbsp;<input type="submit" name="ok" value="Telecharger">
+			</form>
+		</td>
+		<td>
+			&nbsp;
+		</td>
+		<td>						
+			<form name="expFamille" method=post action="/ScolBoursePHP/index.php/Famille/export/csv">	
+				<i>Toutes</i> les familles              <input type="radio" name="content" value="1"/><br/>
+				<i>Les familles <i>ayant un dossier</i> <input type="radio" name="content" value="0" checked/><br/><br/>
+				<input type="submit" name="ok" value="exporter" align="right">
+				
+<!--	<input type="button" name="ok" value="Exporter" onclick="exporter(this.form.format);return false;"> -->
+			</form>
+		</td>
+	</tr>
+</table>
+</patTemplate:tmpl>

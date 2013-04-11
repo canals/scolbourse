@@ -1,0 +1,47 @@
+.tabs {
+	position:relative; 
+	height: 23px; 
+	margin: 0; 
+	padding: 0;
+	background:#fefefe url("/ScolBoursePHP/images/bar_off.gif") repeat-x; 	 
+	overflow:hidden;
+}
+
+.tabs li {
+	display:inline;
+}
+
+.tabs a:hover, .tabs a.tab-active {
+	background:#FEFEFE url("/ScolBoursePHP/images/bar_on.gif") repeat-x; 
+	border-right: 1px solid #FFFFFF;
+	color:#000000;
+} 
+
+.tabs a  {
+	height: 27px; 
+	font:12px verdana, helvetica, sans-serif;
+	font-weight:bold;
+    position:relative; 
+	
+	padding:10px 10px 10px 10px; 
+	margin: 0px -4px 0px 0px; 
+	
+	color:#000000;
+	text-decoration:none;
+	
+	border-left:1px solid #FEFEFE; 
+	border-right:1px solid #999999;
+	border-bottom:1px solid #FEFEFE;
+}
+.tab-container {
+	background: #FBFBFB; 
+	border:1px solid #999999;
+		
+}
+.tab-panes { 
+	margin: 3px;
+	padding:10px 10px 10px 10px; 
+	color:#333333;
+	background: #FBFBFB; 
+	font-size:90%;
+}

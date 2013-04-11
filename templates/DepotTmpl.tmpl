@@ -1,0 +1,166 @@
+<patTemplate:tmpl name="DepotTmpl">
+
+<link type="text/css" rel="stylesheet" href="/ScolBoursePHP/css/main.css" /> 
+<script type="text/javascript" language="javascript" src="/ScolBoursePHP/js/DepotActions.js"></script>
+
+<script type="text/javascript" language="javascript" >
+	function handleDernierEnterDepot(field, event) {
+	var keyCode = event.keyCode ? event.keyCode : event.which ? event.which : event.charCode;
+	if ((keyCode == 9)||(keyCode == 13)){		
+		ajouterExemplaire();
+		return;
+	} 
+	else
+		return true;
+} 
+</script>
+
+<div>
+	<h3>2° Entrez les livres &agrave; d&eacute;poser </h3><br/>		
+	<div style="font-size:75%; border:#9F9F9F solid thin; background:#EFEFEF;" align="center">
+		<form>
+		<table width="100%" border="0" cellspacing="0" style="padding:5px">
+			<tr>
+				<td width="30%">
+					<table border="0" cellspacing="0" cellpadding="0">
+						<tr>
+							<td width="35%">Code Manuel :</td>
+							<td width="65%" align="left">
+								<input name="codeManuel" type="text" id="codeManuel" maxlength="20" size="21" {ACTCHER} onkeypress="return handleEnter(this, event)"/>
+							</td>
+						</tr>
+					</table>
+				</td>
+				<td width="30%">
+					<table border="0" cellspacing="0" cellpadding="0">
+						<tr>
+							<td width="40%">Code Exemplaire:</td>
+							<td width="60%" align="left">
+								<input name="codeExemplaire" type="text" id="codeExemplaire" maxlength="20" size="21" {ACTCHER} onkeypress="return handleEnter(this, event);"/>
+							</td>
+						</tr>
+					</table>
+				</td>
+				<td width="25%">
+					<table border="0" cellspacing="0" cellpadding="0">
+						<tr>
+							<td width="40%">Code Etat:</td>
+							<td width="60%" align="left">
+								<input name="codeEtat" type="text" id="codeEtat" maxlength="5" size="7" {ACTCHER} onkeypress="handleDernierEnterDepot(this, event);"/>
+							</td>
+						</tr>
+					</table>
+				</td>				
+				<td width="15%">
+					<table border="0" cellspacing="0" cellpadding="0">
+						<tr>
+							<td align="center">
+								<input name="numDossierDepot" type="hidden" id="numDossierDepot" value="{NUM_FAMILLE}"/>
+								<input name="btnDepot" type="button" id="btnDepot" value="Ajouter" onclick="ajouterExemplaire(); return false;" {ACTCHER}/>
+							</td>							
+						</tr>
+					</table>
+				</td>
+			</tr>	
+		</table>
+		</form>
+	</div>
+	<br/>
+	
+	<div class="liste">
+	<table align="left" width="100%" style="background-color:#EFEFEF;"> 
+		<tr>
+			<th width="10px"><div align="right"></div></th>
+			<th width="85px"><div align="left">Manuel N°</div></th>
+			<th width="85px"><div align="left">Exemplaire N°</div></th>
+			<th><div align="left">Titre</div></th>
+			<th><div align="left">Mati&egrave;re</div></th>
+			<th><div align="center">Etat</div></th>
+			<th width="40px"><div align="right">Tarif</div></th>
+			<th><div align="center">&nbsp;&nbsp;&nbsp;</div></th>			
+		</tr>		
+		
+		<patTemplate:tmpl name="detailDepot" type="condition" conditionvar="SELECT">
+			
+			<patTemplate:sub condition="empty">
+				<tr>		
+					<td align="center" colspan="8">Il n'y a pas des exemplaires dans le dossier</td>													
+				</tr>	
+			</patTemplate:sub>			
+			
+			<patTemplate:sub condition="default">
+				<patTemplate:tmpl name="ligneDepot">		
+				<tr class="{CLASS}" style="font-size:80%;" onmouseover="javascript:soulignerRow(this, 'hiliterows'); return false;" onmouseout="javascript:soulignerRow(this, '{CLASS}'); return false;">									
+					<td align="right" width="10px">{NRO}.</td>			
+					<td align="left"  width="85px">
+						<a href="javascript:voirManuel({CODE_MANUEL})">{CODE_MANUEL}</a>
+					</td>			
+					<td align="left"  width="85px">
+						<a href="javascript:SupprimerExemplaire({CODE_EXEMPLAIRE})">{CODE_EXEMPLAIRE}</a>
+					</td>			
+					<td align="left"><i>{TITRE}<i></td>			
+					<td align="left">{MATIERE}</td>			
+					<td align="center"><strong>{ETAT}</strong></td>			
+					<td align="right" width="40px"><strong>{TARIF} &euro;</strong></td>			
+					<td align="center"><span style="color:#E35F06">{VENDU}</span></td>						
+				</tr>
+				</patTemplate:tmpl>
+				<tr>		
+					<td align="right" colspan="6">Montant total par livres depos&eacute;es:</td>								
+					<td align="right"><strong>{MONTANT_LIVRE} &euro;</strong></td>
+					<td align="right">&nbsp;</td>
+				</tr>	
+			</patTemplate:sub>	
+		</patTemplate:tmpl>														
+	</table>		
+		<div style="text-align:left; clear:both; font-size:98%;">
+			- Il est possible de <strong><i>supprimer un exemplaire</i></strong>  en le selectionnant dans le tableau.<br/>
+			- Il est possible aussi de <strong><i>consulter un manuel</i></strong>  en le selectionnant dans le tableau.<br/>
+			- <span style="color:#E35F06">&radic;</span> signifie que l'exemplaire a &eacute;t&eacute; vendu.<br/>
+			- <span style="color:#E35F06">&reg;</span> signifie que l'exemplaire a &eacute;t&eacute; rendu &agrave; la famille.			
+		</div>		
+	</div>	
+	<br />
+
+	<h3>3° R&eacute;capitulatif</h3><br />				
+	<table width="100%"  border="0" cellspacing="0" cellpadding="3">
+		<tr>
+			<td>Livres d&eacute;pos&eacute;s: <strong>{LIVRES_DEPOSEES}</strong></td>
+			<td>Montant des ventes:  <strong>{MONTANT_VENTES} &euro;</strong></td>		
+			<td>Frais dossier:  <strong>{FRAIS_DOSSIER} &euro;</strong></td>
+			<td>Frais d'envoi: <strong>{FRAIS_ENVOI} &euro;</strong></td>							
+			<td>
+				<div style="font-size:75%; border:#9F9F9F solid thin; background:#EFEFEF; padding:5px;" align="center">
+					<strong><i>MONTANT A PAYER: {MONTANT_TOTAL} &euro;</i></strong>
+				</div>
+			</td>						
+		</tr>
+		<tr>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>		
+			<td>&nbsp;</td>						
+			<td>
+				Enlever frais d'envoi: 
+				<input name="enleverFrais" id="enleverFrais" type="checkbox" value="Oui" {ENLEVER_FRAIS} {ACTCHER} onclick="miseAJourDepot({NUM_FAMILLE}, this); return false;"/>
+			</td>
+			<td>&nbsp;</td>		
+		</tr>
+		<tr>
+			<td colspan="5">&nbsp;</td>
+		</tr>
+		<tr>			
+			<td colspan="3">
+				<div align="center">					
+					<input type="button" name="Imprimmer" value="Imprimer R&eacute;c&eacute;piss&eacute;" {ACTCHER} onclick="impprimerRecipisee({NUM_FAMILLE}); return true;"/>						
+				</div>
+			</td>
+			<td colspan="3">
+				<div align="left">										
+					<input type="button" name="Retour" value="Retour invendus" {ACTCHER} onclick="retourInvendus({NUM_FAMILLE}); return true;"/>					
+				</div>
+			</td>
+		</tr>
+	</table>
+</div>	
+				
+</patTemplate:tmpl>

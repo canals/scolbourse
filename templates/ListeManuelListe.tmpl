@@ -1,0 +1,31 @@
+<patTemplate:tmpl name="ListeManuelListe">
+
+<script type="text/javascript" language="javascript" src="/ScolBoursePHP/js/ManuelListe.js"></script>	
+  
+<div class="liste">
+	<table width="50%" align="left">
+		<tr>
+			<th width="2%" align="center">Id</th>
+			<th width="50%">Nom</th>
+			<th width="25%">Type</th>
+		</tr>
+		<patTemplate:tmpl name="ligne">
+		<tr class="{CLASS}" style="font-size:90%" onmouseover="javascript:soulignerRow(this, 'hiliterows'); return false;" 
+		onmouseout="javascript:soulignerRow(this, '{CLASS}'); return false;">			
+			<td width="2%"  align="left">{NRO}.</td>
+			<td width="30%" align="left">
+				<a href="#" onclick="displayMessageListe('/ScolBoursePHP/index.php/Manuel/listeDetail/{ID}');return false;">{LIB}</a>
+			</td>			
+			<td width="15%" align="left"><i>{CLA}</i></td>
+		</tr>
+		</patTemplate:tmpl>	
+	</table>
+	<br/>		
+	<p>
+		<i>	<a href="javascript:AfficherFormulaireListe();"><strong>Ajouter une liste</strong></a></i>.
+	</p>
+	<br/>
+
+</div> 
+
+</patTemplate:tmpl>

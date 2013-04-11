@@ -1,0 +1,129 @@
+/**
+ *
+ ****************************************************************************
+  ScolBourse : Application pour la gestion d'une bourse aux livres scolaires
+  fonctionnant en mode dépot-vente
+  Copyright (C) 2007-2008-2009 - Noémie Jarnoux ; Luis Sustaita ; 
+                                 Guillaume Courtois ; Ronel Rivas ; 
+				 Gérôme Canals — Tous droits réservés.
+  
+  Ce programme est un logiciel libre ; vous pouvez le redistribuer ou le
+  modifier suivant les termes de la “GNU General Public License” telle que
+  publiée par la Free Software Foundation : soit la version 3 de cette
+  licence, soit (à votre gré) toute version ultérieure.
+  
+  Ce programme est distribué dans l’espoir qu’il vous sera utile, mais SANS
+  AUCUNE GARANTIE : sans même la garantie implicite de COMMERCIALISABILITÉ
+  ni d’ADÉQUATION À UN OBJECTIF PARTICULIER. Consultez la Licence Générale
+  Publique GNU pour plus de détails.
+  
+  Vous devriez avoir reçu une copie de la Licence Générale Publique GNU avec
+  ce programme ; si ce n’est pas le cas, consultez :
+  <http://www.gnu.org/licenses/>.
+  ***************************************************************************
+  *
+  **/
+
+*
+* NOTES D'INSTALLATION
+*
+*
+
+Etape 1 : Installation d'un serveur web
+----------------------------------------
+Installer une distribution Apache/PHP/Mysql - Xampp conseillé - 
+Minimum requis : Apache + PHP 5.1 + Mysql 5.0
+configuration et options PHP : 
+  - PDO : obligatoire (installé avec PHP5.1)
+
+Etape 2 : Création d'une base de données
+----------------------------------------
+Créer une base de données sur votre serveur BD - créer un utilisateur ayant 
+des droits de création de tables sur cette base.
+
+Etape 3 : Installation de ScolBourse
+------------------------------------
+Copier le répertoire ScolBoursePHP dans un répertoire accessible par votre serveur web.
+(par exemple, .../htdocs).
+Lancer l'installation à l'aide de votre navigateur, 
+url : http://localhost/ScolBoursePHP
+Renseignez le formulaire :
+  - répertoire d'installation : répertoire où sera installée l'application scolBourse. Il est conseillé
+    d'utiliser la racine des documents de votre serveur web (DocumentRoot). Souvent appelé htdocs ou www.
+  - url du serveur web : localhost pour une installation sur la machine locale
+  - port du serveur : 80, sauf exception
+  - configuration de la connexion à la base données
+** ATTENTION : par défaut, l'installeur supprime les tables existantes et crée de nouvelles tables.
+UNE BASE EXEVNTUELLEMENT EXISTANTE EST DONC DETRUITE ET TOUTES LES DONNEES SONT PERDUES
+Pour ne pas détruire des tables existantes et faire une réinstallation de l'application en conservant 
+les données existantes : décocher l'option "créer les tables".
+
+** SOURCES DE PROBLEMES : 
+   - droits d'accès dans le répertoire d'installation
+   - paramètres de connexio à la base
+   
+L'installeur configure l'application et si nécessaire crée les tables de la base de données.
+L'installeur crée un utilisateur initial avec des droits d'administration :
+  login : admin
+  passwd: admin
+
+FICHIER DE CONFIGURATION : ScolBoursePHP/config/db_config.ini
+
+Etape 4 : Configuration de l'application
+----------------------------------------
+ * se connecter en tant qu'administrateur
+ * Onglet "paramètres" : 
+     - définition des frais de dossier : % ajoutés ou retirés sur les achats et les dépots
+	 - moyen de paiement : les moyens de paiement utilisables (espèces, chèques, carte multipass, multipass différé)
+	 - etats des livres : libéllé et % du prix neuf
+ * Onglet "Manuels" : 
+     - définition des listes de manuels : les différentes listes utilisées par la bourse (conseil : 1 liste/niveau)
+	 - import de manuels : importer des manuels et les ajouter à une liste - voir fichiers exemples dans le répertoire
+	   ScolBoursePHP/import - Format UNIQUE : csv, ;, "
+	 - export de listes de manuels : sauvegarde dans un fichier dans le répertoire ScolBoursePHP/export
+	 - Calculer les tarifs : Déclenche le calcul des tarifs occasion à partir des tarifs neufs et des états.
+	    INDISPENSABLE
+	 - Recherche, ajout, modification de manuels 
+  * Onglet Famille : 
+     - importer un fichier de familles : voir exemple dans  ScolBoursePHP/import
+	 - exporter des familles : sauvegarde dans un fichier dans le répertoire ScolBoursePHP/export
+	 - gérer les familles : rechercher, ajouter, modifier des familles
+  * Onglet Base : USAGE DECONSEILLE (NON TESTE)
+  * Onglet Bénévoles : gestion des comptes d'utilisateurs de l'application. Créer au moins un compte par machine.
+  
+Etatpe 5 : Editions et rapports
+----------------------------------
+* Les factures et récépissés de dépot sont générés en pdf par l'application.
+* Un viewer pdf doit être installé sur chaque client : les récépissés et factures sont ouverts par le viewer pdf
+* L'impression de fait à partir du viewer pdf.
+* Configuration des factures et récépissé : voir le fichier ScolBoursePHP/config/config.edit.php
+* les pdf générés sont conservés dans le répertoire ScolBoursePHP/rapports/particuliers
+
+* Autres éditions et rapports : listes, chèques, enveloppes, courriers etc..
+ - réalisés avec iReport : 
+    - installer iReport - configuer une source de données (dans iReport) pour accéder à la base de l'application
+	  (une machine virtuelle java est nécessaire)
+	- des modèles sont présents dans le répertoire ScolBoursePHP/editions/sources
+	- modèles présents :
+	    * chèques.jrxml : modèle pour impression chèques Crédit Mutuel (talon bord supérieur)
+		* paiements_depots.jrxml : courrier pour paiement des livres déposés vendus
+		* enveloppes_paiement.jrxml : impression des enveloppes pour envoi des chèques de paiement
+		* invendus_*.jrxml : listes d'invendus
+		* Listes_manuels.jrxml : impression des listes de manuels
+		* dossiers_non_regularisés.jrxml : liste des dossiers avec un paiement multipass différé
+		   non encore régularisé (attention : vérifier la requète, en particulier le code paiement)
+
+CONTENU du CD : 
+===============
+* applications externes : 
+   - xampp pour windows
+   - iReport windows
+   - Adobe AcrobatReader windows
+   - Herma label (génération d'étiquettes)
+   - connecteur jdbc
+* application ScolBourse
+* documents : documents divers liés à l'organisation de la bourse - modèles d'étiquettes
+   
+		   
+
+

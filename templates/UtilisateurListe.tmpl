@@ -1,0 +1,31 @@
+<patTemplate:tmpl name="UtilisateurListe">
+
+<script type="text/javascript" language="javascript" src="/ScolBoursePHP/js/UtilisateurListe.js"></script>	
+  
+<div class="liste">
+	<table width="50%" align="center">
+		<tr>
+			<th width="2%" align="center">Id</th>
+			<th width="50%">Nom</th>
+			<th width="25%">Type</th>
+		</tr>
+		<patTemplate:tmpl name="ligne">
+		<tr class="{CLASS}" style="font-size:90%" onmouseover="javascript:soulignerRow(this, 'hiliterows'); return false;" 
+		onmouseout="javascript:soulignerRow(this, '{CLASS}'); return false;">			
+			<td width="2%"  align="left">{NRO}.</td>
+			<td width="30%" align="left">
+				<a href="#" onclick="displayMessage('/ScolBoursePHP/index.php/Utilisateur/detail/{ID}');return false;">{NOM}</a>
+			</td>			
+			<td width="15%" align="left"><i>{TYPE}</i></td>
+		</tr>
+		</patTemplate:tmpl>	
+	</table>
+	<br/>		
+	<p>
+		<i>Si vous voulez ajouter un autre utilisateur cliquez  
+		<a href="/ScolBoursePHP/index.php/Utilisateur/creer"><strong>ici</strong></a></i>.
+	</p>
+	<br/>
+</div> 
+
+</patTemplate:tmpl>

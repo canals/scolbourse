@@ -1,0 +1,81 @@
+<patTemplate:tmpl name="FamilleListeParExempSelect">
+
+<link type="text/css" rel="stylesheet" href="/ScolBoursePHP/css/main.css" /> 
+	
+<div style='width:100%; overflow:auto;'>
+	<h2>R&eacute;sultats de la consulte</h2>
+</div>
+		
+<div style='width:100%; overflow:auto; border-bottom: 1px dashed #ccc;'>	
+	<br/><br/>
+	<h3>Famille qui a depos&eacute;e l'exemplaire</h3>
+	<table align='left' width='95%'>
+		<tr>			
+			<th width='42%' align='left'>Nom,Prenom</th>
+			<th width='10%' align='left'>&nbsp;CodePostal</th>
+			<th width='30%' align='left'>&nbsp;Ville</th>
+			<th width='18%' align='left'>&nbsp;&nbsp;T&eacute;l&eacute;phone</th>			
+		</tr>
+	</table>
+	<div class="liste">
+		<table align="left" width="99%" style="background-color:#EFEFEF;">	
+			<patTemplate:tmpl name="famDepot">		
+			<tr class="{CLASS_DEP}" style="font-size:80%;" onmouseover="javascript:soulignerRow(this, 'hiliterows'); return false;" onmouseout="javascript:soulignerRow(this, '{CLASS}'); return false;">										
+				<td width="42%" align="left">
+					<a href="javascript:selectFamille({ID_DEP})">{NOM_DEP}</a>
+				</td>
+				<td width="10%" align="left">
+					<a href="javascript:selectFamille({ID_DEP})">{CODEPOSTAL_DEP}</a>
+				</td>
+				<td width="30%" align="left">
+					<a href="javascript:selectFamille({ID_DEP})">{VILLE_DEP}</a>
+				</td>
+				<td width="18%" align="left">
+					<a href="javascript:selectFamille({ID_DEP})">{TEL_DEP}</a>			
+				</td>			
+			</tr>
+			</patTemplate:tmpl>	
+		</table>
+		<br/>		
+	</div> 
+	<br/><br/>
+</div>
+
+
+<div style='width:100%; overflow:auto; border-bottom: 1px dashed #ccc;'>	
+	<br/><br/>
+	<h3>Famille qui a achet&eacute;e l'exemplaire</h3>
+	<table align='left' width='95%'>
+		<tr>			
+			<th width='42%' align='left'>Nom,Prenom</th>
+			<th width='10%' align='left'>&nbsp;CodePostal</th>
+			<th width='30%' align='left'>&nbsp;Ville</th>
+			<th width='18%' align='left'>&nbsp;&nbsp;T&eacute;l&eacute;phone</th>			
+		</tr>
+	</table>
+	<div class="liste">
+		<table align="left" width="99%" style="background-color:#EFEFEF;">	
+			<patTemplate:tmpl name="famAchat">		
+			<tr class="{CLASS_ACHAT}" style="font-size:80%;" onmouseover="javascript:soulignerRow(this, 'hiliterows'); return false;" onmouseout="javascript:soulignerRow(this, '{CLASS}'); return false;">										
+				<td width="42%" align="left">
+					<a href="javascript:selectFamille({ID_ACHAT})">{NOM_ACHAT}</a>
+				</td>
+				<td width="10%" align="left">
+					<a href="javascript:selectFamille({ID_ACHAT})">{CODEPOSTAL_ACHAT}</a>
+				</td>
+				<td width="30%" align="left">
+					<a href="javascript:selectFamille({ID_ACHAT})">{VILLE_ACHAT}</a>
+				</td>
+				<td width="18%" align="left">
+					<a href="javascript:selectFamille({ID_ACHAT})">{TEL_ACHAT}</a>			
+				</td>			
+			</tr>
+			</patTemplate:tmpl>	
+		</table>
+		<br/>		
+	</div> 
+	<br/><br/>
+</div>
+
+
+</patTemplate:tmpl>
