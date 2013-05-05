@@ -103,14 +103,16 @@ function confirmSupprimer(idExemplaire)	{
 }
 
 function supprimer() { 	
-	if ((xmlHttp.readyState == 4)&&(xmlHttp.status == 200)){ 		
+	if ((xmlHttp.readyState == 4)&&(xmlHttp.status == 200)){
+                var data = $.parseJSON(xmlHttp.responseText);
 		var msg = "";
 		msg += "<div class='liste' style='padding:10px; text-align:left;'>";
 		msg += "<div align='left'>";
 		msg += "	<h3>DEPOT: Supprimer exemplaire</h3>";		
 		msg += "</div>";	
 		msg += "<div align='left'>";
-		msg += xmlHttp.responseText;
+		/*msg += xmlHttp.responseText;*/
+                msg += data.message ;
 		msg += "</div>";	
 		msg += "<div align='center'>";
 		msg += " <h3>&nbsp;</h3>";			 
@@ -175,14 +177,15 @@ function ajouterExemplaire(){
 function ajouterAction() { 	
 	if ((xmlHttp.readyState == 4)&&(xmlHttp.status == 200)){ 										
 		var resp = xmlHttp.responseText;
-		if(resp!="OK") {
+                var data = $.parseJSON(xmlHttp.responseText);
+		if(data.message != "OK") {
 			var msg = "";
 			msg += "<div class='liste' style='padding:10px; text-align:left;'>";
 			msg += "<div align='left'>";
 			msg += "	<h3>DEPOT: Ajouter exemplaire</h3>";		
 			msg += "</div>";	
 			msg += "<div align='left'>";
-			msg += resp;
+			msg += data.message;
 			msg += "</div>";	
 			msg += "<div align='center'>";
 			msg += " <h3>&nbsp;</h3>";			 
@@ -197,7 +200,7 @@ function ajouterAction() {
 		var messageContent = ""; 
 		messageContent += "<div>"; 
 		messageContent += "	  <h3 style='text-decoration:blink;'>DEPOT: Ajouter Exemplaire...</h3><br/>";
-		messageContent += "	  <div align='center'>Veuillez patienter pendant la mise &agrave; jour des donn&eacute;es !</div><br/>";
+		messageContent += "	  <div align='center'>Mise &agrave; jour des donn&eacute;es !</div><br/>";
 		messageContent += "</div><br/>";					
 		displayMessage(messageContent,200,100);
 	}
@@ -223,15 +226,15 @@ function miseAJourDepot(idDossierDepot, field) {
 
 function miseAJourDepotAction() { 	
 	if ((xmlHttp.readyState == 4)&&(xmlHttp.status == 200)){ 		
-		var resp = xmlHttp.responseText;
-		if(resp!="OK") {
+		var data = $.parseJSON(xmlHttp.responseText);
+		if(data.message != "OK") {
 			var msg = "";
 			msg += "<div class='liste' style='padding:10px; text-align:left;'>";
 			msg += "<div align='left'>";
 			msg += "	<h3>Ajouter exemplaire</h3>";		
 			msg += "</div>";	
 			msg += "<div align='left'>";
-			msg += resp;
+			msg += data.message;
 			msg += "</div>";	
 			msg += "<div align='center'>";
 			msg += " <h3>&nbsp;</h3>";			 
@@ -419,8 +422,8 @@ function rendreExemplaire(numDossi,codeExem){
 
 function rendre() { 	
 	if ((xmlHttp.readyState == 4)&&(xmlHttp.status == 200)){ 										
-		var resp = xmlHttp.responseText;
-		if(resp!="OK") {
+		var data = $.parseJSON(xmlHttp.responseText);
+		if(data.message != "OK") {
 			var msg = "";
 			msg += "<div class='liste' style='padding:10px; text-align:left;'>";
 			msg += "<div align='left'>";

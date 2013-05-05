@@ -62,7 +62,7 @@ class DepotControleur extends AbstractControleur {
 	public function ajouterAction() {				
 		if(count($this->valeur)!=4) {
 			// Erreur numero de parametres invalid!!!
-			$message = "L'exemplaire n'a pas pu &ecirc;tre ajout&eacute;.<br/>Veuillez v&eacute;rifier les informations fournies.";			
+			$message = "Echec de l'ajout de l'exemplaire <br/>Veuillez v&eacute;rifier les informations fournies.";			
 		} else {
 			// On obtient les parametres
 			$params = $this->valeur;
@@ -80,11 +80,11 @@ class DepotControleur extends AbstractControleur {
 			
 			// On fait tous les validations
 			if($famille==null) 
-				$message = "Le num&eacute;ro de dossier de dep&ocirc;t n'est pas valide.<br/>Veuillez v&eacute;rifier les informations fournies."; 			
+				$message = "Num&eacute;ro de dossier dep&ocirc;t non valide.<br/>Veuillez v&eacute;rifier les informations fournies."; 			
 			else if($manuel==null)
-				$message = "Le code du manuel n'est pas valide.<br/>Veuillez v&eacute;rifier les informations fournies."; 			
+				$message = "Code  manuel non valide.<br/>Veuillez v&eacute;rifier les informations fournies."; 			
 			else if($etat==null)
-				$message = "Le code etat n'est pas valide.<br/>Veuillez v&eacute;rifier les informations fournies."; 			
+				$message = "Code etat non valide.<br/>Veuillez v&eacute;rifier les informations fournies."; 			
 			else if($exemplaire!=null)
 				$message = "L'exemplaire existe d&eacute;j&agrave; dans la base.<br/>Veuillez v&eacute;rifier les informations fournies."; 			
 			else {	
@@ -128,7 +128,7 @@ class DepotControleur extends AbstractControleur {
 					$message = "OK"; 			
 				}catch(Exception $e) {			
 					// Notifier l'erreur
-					$message = "L'exemplaire n'a pas pu &ecirc;tre ajout&eacute;.<br/>Veuillez v&eacute;rifier les informations fournies.";
+					$message = "Echec de l'ajout de l'exemplaire <br/>Veuillez v&eacute;rifier les informations fournies.";
 				}				
 			}		
 		}			
@@ -152,14 +152,14 @@ class DepotControleur extends AbstractControleur {
 				$r = $dossier->save();	
 				
 				// afficher le resultat
-				$message = "L'exemplaire &eacute; &eacute;t&eacute; supprim&eacute; avec succ&egrave;s..."; 			
+				$message = "L'exemplaire  supprim&eacute; "; 			
 			}catch(Exception $e) {			
 				// Notifier l'erreur
-				$message = "L'exemplaire n'a pas pu &ecirc;tre supprim&eacute;.<br/>V&eacute;rifiez les informations fournies.";
+				$message = "Echec de la suppression.<br/>V&eacute;rifiez les informations fournies.";
 			}				
 		} else {
 			// Notifier l'erreur
-				$message = "L'exemplaire n'a pas pu &ecirc;tre supprim&eacute;, il est d&eacute;j&agrave; vendu.<br/>V&eacute;rifiez les informations fournies.";
+				$message = "Exemplaire  d&eacute;j&agrave; vendu : suppression impossible !";
 		}		
 								
 		$view = new DepotView($message,"supprimer");
@@ -187,7 +187,8 @@ class DepotControleur extends AbstractControleur {
 			$message = "Le dossier n'a pas pu &ecirc;tre mis &agrave; jour.<br/>Veuillez v&eacute;rifier les informations fournies.";
 		}				
 							
-		echo $message ;	 			
+		$view = new DepotView($message,"maj");
+		$view->display();			
 	}	
 		
 	private function retourInvendusAction(){
@@ -201,7 +202,7 @@ class DepotControleur extends AbstractControleur {
 	private function rendreExemplaireAction(){
 		if(count($this->valeur)!=2) {
 			// Erreur numero de parametres invalid!!!
-			$message = "L'exemplaire n'a pas pu &ecirc;tre rendu.<br/>Veuillez v&eacute;rifier les informations fournies.";			
+			$message = "L'exemplaire n'a pas pu &ecirc;tre rendu.";			
 		} else {
 			// On obtient les parametres
 			$params = $this->valeur;
@@ -217,9 +218,9 @@ class DepotControleur extends AbstractControleur {
 			 			
 			// On fait tous les validations
 			if($famille==null) 
-				$message = "Le num&eacute;ro de dossier de dep&ocirc;t n'est pas valide.<br/>Veuillez v&eacute;rifier les informations fournies."; 						
+				$message = "Num&eacute;ro de dossier invalide."; 						
 			else if($exemplaire==null)
-				$message = "L'exemplaire n'existe pas dans la base.<br/>Veuillez v&eacute;rifier les informations fournies."; 			
+				$message = "Exemplaire inconnu."; 			
 			else {	
 								
 				try {
@@ -237,7 +238,7 @@ class DepotControleur extends AbstractControleur {
 					$message = "OK"; 			
 				}catch(Exception $e) {			
 					// Notifier l'erreur
-					$message = "L'exemplaire n'a pas pu &ecirc;tre rendu.<br/>Veuillez v&eacute;rifier les informations fournies.";
+					$message = "Echec du rendu exemplaire !";
 				}				
 			}		
 		}			

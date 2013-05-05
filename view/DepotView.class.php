@@ -81,7 +81,11 @@ class DepotView {
 			case "rendre": {				
 				echo $this->rendreView(); 
 				return;
-			} break;	
+			} break;
+                        case "maj": {				
+				echo $this->majView(); 
+				return;
+			} break;
 			
 			case "retourInvendus": {				
 				echo $this->retourInvendusView(); 
@@ -106,15 +110,18 @@ class DepotView {
 	}
 	
 	public function ajouterView() {
-		return $this->getAttr("depot");
+		return '{ "message": "'.$this->getAttr("depot").'"}';
 	}
 		
 	public function supprimerView() {
-		return $this->getAttr("depot");
+		return '{ "message": "'.$this->getAttr("depot").'"}';
 	}
 	
 	public function rendreView() {
-		return $this->getAttr("depot");
+		return '{ "message": "'.$this->getAttr("depot").'"}';
+	}
+        public function majView() {
+		return '{ "message": "'.$this->getAttr("depot").'"}';
 	}
 		
 	public function detailView() {
