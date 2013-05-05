@@ -61,7 +61,7 @@
 						</tr>
 						<tr>
 							<td>&nbsp;</td>
-							<td colspan="2" style="background-color:#6F6F6F; color:#FFFFFF; padding:3px; font-size:medium; font-weight:bold;"><i>Vous avez install&eacute; proprement l'aplication!</i></td>
+							<td colspan="2" style="background-color:#6F6F6F; color:#FFFFFF; padding:3px; font-size:medium; font-weight:bold;"><i>INSTALLATION de l'application ScolBoursePHP COMPLETE</i></td>
 							<td style="font-size:90%; font-style:italic; color:#003333">&nbsp;</td>
 						</tr>
 						<tr>
@@ -151,7 +151,7 @@
 		<!-- pie de page //-->
 		<div id="footer">
 			<span id="footTime" class="footTime"></span>
-			<strong>&copy;2007-2008.</strong> <i>IUT Nancy2 - Charlemagne</i> &nbsp;&nbsp;	&middot;  
+			<strong>&copy;2007-2008.</strong> <i>IUT Nancy-Charlemagne</i> &nbsp;&nbsp;	&middot;  
 		</div>
 		<!-- fin pie //-->
 		

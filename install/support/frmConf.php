@@ -152,6 +152,28 @@
 							<td><input type="checkbox" name="creatable" value="checked" <?php echo ($creatable?"checked":"");?></td>
 							<td style="font-size:90%; font-style:italic; color:#003333">ne pas coccher pour installer sur <br/> une base existante</td>
 						</tr>
+                                                <tr>
+							<td>&nbsp;</td>
+							<td colspan="2" style="background-color:#6F6F6F; color:#FFFFFF; padding:3px;">
+								3) Administrateur de l'application							</td>							 
+							<td style="font-size:90%; font-style:italic; color:#003333">&nbsp;</td>
+						</tr>
+                                                <tr>
+							<td>&nbsp;</td>
+							<td>administrateur:</td>
+							<td>
+								<input type="text" name="admin" id="admin" value="<?php echo $admin;?>" size="33"/>							</td>
+							<td style="font-size:90%; font-style:italic; color:#003333">ex: "root"</td>
+						</tr>						
+						<tr>
+							<td>&nbsp;</td>
+							<td>Mot de passe:</td>
+							<td>
+								<input type="password" name="adpass" id="adpass" value="<?php echo $adpass;?>" size="33"/>							</td>
+							<td style="font-size:90%; font-style:italic; color:#003333">&nbsp;</td>
+						</tr>
+                                            
+                                            
 						<tr>
 							<td>&nbsp;</td>
 							<td>&nbsp;</td>

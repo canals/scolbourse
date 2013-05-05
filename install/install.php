@@ -171,7 +171,8 @@ if(!isset($_REQUEST['frmConf_submit'])) {
 		$port 	   = "3306";
 		$dbname    = "scolbourse";
 		$creatable = "checked";
-
+                $admin     = "admin" ;
+                $adpass    = "";
 		include("./support/frmConf.php");
 	} else {
 	$ERROR_MSG = null;
@@ -188,6 +189,8 @@ if(!isset($_REQUEST['frmConf_submit'])) {
 	$port 	   = (isset($_REQUEST["port"]))?  $_REQUEST["port"]:"3306";
 	$dbname    = (isset($_REQUEST["dbname"]))?$_REQUEST["dbname"]:"scolbourse";
 	$creatable = (isset($_REQUEST["creatable"]))?$_REQUEST["creatable"]:null;
+        $admin = (isset($_REQUEST["admin"]))?$_REQUEST["admin"]:"admin";
+        $adpass = (isset($_REQUEST["adpass"]))?$_REQUEST["adpass"]:"admin";
 
 	//$repSource = dirname(__FILE__) . DIRECTORY_SEPARATOR . 'SB-sources';
         //$zipSource = dirname(__FILE__) . DIRECTORY_SEPARATOR . 'ScolBoursePHP.zip';
@@ -249,7 +252,7 @@ if(!isset($_REQUEST['frmConf_submit'])) {
 	//zipExtractTo( $zipSource, $repInstall );
 
 	// Mise à jour le fichier de configuration: CONFIG.PHP
-	$repApp = '/scolBoursePHP';
+	$repApp = '/ScolBoursePHP';
 	$file_name = $configdir.DIRECTORY_SEPARATOR.CONFIG_FILE_NAME;
 
 	//configFile($file_name, $repApp, $dbtype, $user, $pass, $host, $port, $dbname) ;
@@ -277,34 +280,37 @@ if(!isset($_REQUEST['frmConf_submit'])) {
                                                PDO::ERRMODE_EXCEPTION=>true,
                                             PDO::ATTR_PERSISTENT=>true));
         $db->beginTransaction();
+        
+        /* first step : table creation */
         $rep = "./support/sql/";
-		$dir = opendir($rep);
+	$dir = opendir($rep);
 
-		while ($f = readdir($dir)) {
-			if(is_file($rep.$f)) {
-				$fichier = $rep . $f;
-				$queries = explode(';',file_get_contents($fichier));
-				foreach ($queries as $query) {
-      					//$dbres = $db->query($query);
-				$dbres = $db->exec($query);
-				
-				}
-				}
-			}
-			$rep = "./support/init/";
-			$dir = opendir($rep);
-			echo "<br/><strong>données initiales</strong><br/>";
-			while ($f = readdir($dir)) {
-				if(is_file($rep.$f)) {
-					$fichier = $rep . $f;
-					$queries = explode(';',file_get_contents($fichier));
-					foreach ($queries as $query) {
-                                        //$dbres = $db->exec($query);
-					$dbres = $db->exec($query);
-					
-				}
-				}
-			}
+	while ($f = readdir($dir)) {
+            if(is_file($rep.$f)) {
+            $fichier = $rep . $f;
+            $queries = explode(';',file_get_contents($fichier));
+            foreach ($queries as $query) {
+     			//$dbres = $db->query($query);
+                    $dbres = $db->exec($query);
+            }
+            }
+	}
+        /* second step : loading data from init files */
+	$rep = "./support/init/";
+	$dir = opendir($rep);
+        $qadm = "insert into utilisateur 
+                     (idUtilisateur, nom, prenom, login, pwd, typeUtilisateur) VALUES
+                     (1, 'Admin', 'Admin', '$admin', '".md5($adpass)."', 101)";
+	$dbres = $db->exec($qadm);	;
+	while ($f = readdir($dir)) {
+            if(is_file($rep.$f)) {
+		$fichier = $rep . $f;
+		$queries = explode(';',file_get_contents($fichier));
+		foreach ($queries as $query) {
+                    $dbres = $db->exec($query);
+                    }
+		}
+	}
         $db->commit();
         } catch (PDOException $e) {
           $db->rollback();

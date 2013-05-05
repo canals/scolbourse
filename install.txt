@@ -43,7 +43,7 @@ des droits de création de tables sur cette base.
 
 Etape 3 : Installation de ScolBourse
 ------------------------------------
-Copier le répertoire ScolBoursePHP dans un répertoire accessible par votre serveur web.
+Copier l'ensemble des fichiers   dans un répertoire nommé ScolBoursePHP et accessible par votre serveur web.
 (par exemple, .../htdocs).
 Lancer l'installation à l'aide de votre navigateur, 
 url : http://localhost/ScolBoursePHP
@@ -113,17 +113,5 @@ Etatpe 5 : Editions et rapports
 		* dossiers_non_regularisés.jrxml : liste des dossiers avec un paiement multipass différé
 		   non encore régularisé (attention : vérifier la requète, en particulier le code paiement)
 
-CONTENU du CD : 
-===============
-* applications externes : 
-   - xampp pour windows
-   - iReport windows
-   - Adobe AcrobatReader windows
-   - Herma label (génération d'étiquettes)
-   - connecteur jdbc
-* application ScolBourse
-* documents : documents divers liés à l'organisation de la bourse - modèles d'étiquettes
-   
-		   
 
 
