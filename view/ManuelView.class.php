@@ -239,17 +239,15 @@ class ManuelView {
 		$estAdmin = ($this->getAttr("user")->getAttr("type")==BourseAuth::$ADMIN_LEVEL);
 				
 		$man = $this->getAttr("manuel");
-		$html = "";				
-		$html .= "<div>";		
-		$html .= "	Code manuel: <i>".$man->getAttr("code_manuel")."</i><BR/>" ;
-		$html .= "	Titre: <i><strong>".$man->getAttr("titre_manuel")."</strong></i><BR/>" ;
-		$html .= "	Classe: <i>".$man->getAttr("classe_manuel")."</i><BR/>" ;
-		$html .= "	Editeur: <i>".$man->getAttr("editeur_manuel")."</i><BR/>" ;
-		$html .= "	Tarif neuf: <i>".$man->getAttr("tarif_neuf_manuel")."</i><BR/>" ;
-		$html .= "	Date edition: <i>".$man->getAttr("date_edition_manuel")."</i><BR/>" ;
-		$html .= "</div>" ;
+						
+		$json['code_manuel']= $man->getAttr("code_manuel");
+		$json['titre_manuel']=$man->getAttr("titre_manuel");
+		$json['classe_manuel']=$man->getAttr("classe_manuel");
+		$json['editeur_manuel']=$man->getAttr("editeur_manuel");
+		$json['tarif_neuf_manuel']=$man->getAttr("tarif_neuf_manuel");
+		$json['date_edition_manuel']=$man->getAttr("date_edition_manuel");
 		
-		return $html;
+		return json_encode($json);
 	}
 	
 	public function defaultView() {

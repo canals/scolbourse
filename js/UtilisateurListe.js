@@ -1,9 +1,11 @@
 // JavaScript Document
 
-messageObj = new DHTML_modalMessage();	 
+var messageObj = new DHTML_modalMessage();	 
 messageObj.setShadowOffset(10);	 
 		
-function displayMessage(url){			
+function displayMessage(url){
+    messageObj = new DHTML_modalMessage();	 
+messageObj.setShadowOffset(10);
 	messageObj.setSource(url);
 	messageObj.setCssClassMessageBox(false);
 	messageObj.setSize(300,150);

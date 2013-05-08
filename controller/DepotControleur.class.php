@@ -152,7 +152,7 @@ class DepotControleur extends AbstractControleur {
 				$r = $dossier->save();	
 				
 				// afficher le resultat
-				$message = "L'exemplaire  supprim&eacute; "; 			
+				$message = "OK"; 			
 			}catch(Exception $e) {			
 				// Notifier l'erreur
 				$message = "Echec de la suppression.<br/>V&eacute;rifiez les informations fournies.";

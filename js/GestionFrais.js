@@ -92,7 +92,9 @@ function ModifierTaux() {
 	xmlHttp.send(null);	
 }
 
-function showMessage(html, width, heigth){			
+function showMessage(html, width, heigth){
+        messageObj = new DHTML_modalMessage();	
+messageObj.setShadowOffset(10);	
 	messageObj.setSource(false);
 	messageObj.setHtmlContent(html);
 	messageObj.setCssClassMessageBox(false);

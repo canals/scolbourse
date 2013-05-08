@@ -154,8 +154,8 @@ EOT;
  * 4) if every thing goes well, create the config file
  */
         
-if (version_compare(PHP_VERSION, '5.1', '<')) {
-    echo "<b>fatal error : php 5.1+ required, ". PHP_VERSION ." found </b>";
+if (version_compare(PHP_VERSION, '5.2', '<')) {
+    echo "<b>fatal error : php 5.2+ required, ". PHP_VERSION ." found </b>";
     exit(0);
 }
         

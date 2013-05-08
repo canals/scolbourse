@@ -30,7 +30,10 @@ function displayMessage(html, width, heigth){
 	content += "<body>";
 	content += html;
 	content += "<body></html>";	
-	
+        //messageObj.close();
+        messageObj = new DHTML_modalMessage();	
+messageObj.setShadowOffset(10);	
+
 	messageObj.setSource(false);
 	messageObj.setHtmlContent(content);	
 	messageObj.setCssClassMessageBox(false);

@@ -110,18 +110,18 @@ class DepotView {
 	}
 	
 	public function ajouterView() {
-		return '{ "message": "'.$this->getAttr("depot").'"}';
+		return json_encode(array("message"=>$this->getAttr("depot")));
 	}
 		
 	public function supprimerView() {
-		return '{ "message": "'.$this->getAttr("depot").'"}';
+		return json_encode(array("message"=>$this->getAttr("depot")));
 	}
 	
 	public function rendreView() {
-		return '{ "message": "'.$this->getAttr("depot").'"}';
+		return json_encode(array("message"=>$this->getAttr("depot")));
 	}
         public function majView() {
-		return '{ "message": "'.$this->getAttr("depot").'"}';
+		return json_encode(array("message"=>$this->getAttr("depot")));
 	}
 		
 	public function detailView() {

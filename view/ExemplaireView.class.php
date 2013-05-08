@@ -173,6 +173,7 @@ class ExemplaireView {
 		$determine = Determine::findById($exemp->getAttr("code_etat"),$exemp->getAttr("code_manuel"));
 		
 		// Afficher l'exemplaire
+                /*
 		$html = "";				
 		$html .= "<div>";		
 		$html .= "	Code exemplaire: <i>".$exemp->getAttr("code_exemplaire")."</i><BR/>" ;
@@ -181,12 +182,16 @@ class ExemplaireView {
 		$html .= "	Etat: <i>".$etat->getAttr("libelle_etat")."</i><BR/>" ;
 		$html .= "	Tarif: <i>".$determine->getAttr("tarif")."</i><BR/>" ;
 		$html .= "</div>" ;
-		
-		$res= '{ "code": "'.$exemp->getAttr("code_exemplaire").'" , ';
-                $res.= '"titre": "'.$man->getAttr("titre_manuel").'",';
-                $res.= '"matiere": "'.$man->getAttr("matiere_manuel").'",';
-                $res.= '"tarif" : "'.$determine->getAttr("tarif").'" }';
-                return $res;
+		*/
+                /*
+                 * json object generation
+                 */
+		$res['code_exemplaire']=$exemp->getAttr("code_exemplaire");
+                $res['titre_manuel']=$man->getAttr("titre_manuel");
+                $res['matiere_manuel']=$man->getAttr("matiere_manuel");
+                $res['libelle_etat']=$etat->getAttr("libelle_etat");
+                $res['tarif']=$determine->getAttr("tarif");
+                return json_encode($res);
 	}
 
 }

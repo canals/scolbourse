@@ -102,7 +102,9 @@ function exporter(radio) {
 	xmlHttp.send(null);	
 }
 
-function displayMessage(html, width, heigth){			
+function displayMessage(html, width, heigth){
+        messageObj = new DHTML_modalMessage();	
+messageObj.setShadowOffset(10);	
 	messageObj.setSource(false);
 	messageObj.setHtmlContent(html);
 	messageObj.setCssClassMessageBox(false);
