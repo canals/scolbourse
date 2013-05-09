@@ -230,20 +230,14 @@ class RapportControleur extends AbstractControleur {
 		
 		echo $html;
 	}
-	
-	public function generer_facture_achat_particulier(){
-		include 'config/config.edit.php';
-		$oid = ($this->valeur!=null) ? $this->valeur : 0 ;
-		
-		if($oid!=0) {
-			$famille = Famille::findById($oid);		
-			$dossier = $famille->getAttr("dossierDAchat");
-			if ($dossier!=null){ 
-				$exemplaires = $dossier->getAttr("exemplaires");					
-				$pdf=new FPDF('P','mm','A4');
-				$pdf->SetCreator('ScolBourse');
-				$pdf->SetDisplayMode('real');
-				$pdf->AddPage();
+        
+        private function creer_facture_particulier($famille, $dossier) {
+            include 'config/config.edit.php';
+            $exemplaires = $dossier->getAttr("exemplaires");					
+            $pdf=new FPDF('P','mm','A4');
+            $pdf->SetCreator('ScolBourse');
+            $pdf->SetDisplayMode('real');
+            $pdf->AddPage();
 				$pdf->SetFont('Arial','B',17);
 				$pdf->Cell(200,5,'BOURSE AUX LIVRES '. $annee_bourse ,0,1,'C');
 				$pdf->SetFont('Arial','',12);
@@ -294,7 +288,7 @@ class RapportControleur extends AbstractControleur {
 				$pdf->SetFont('Arial','',6);
 				$nblivresachete=0;
 				$couttotal=0;
-				for($j=0;$j<sizeof($exemplaires);$j++){
+		for($j=0;$j<sizeof($exemplaires);$j++){
 					$nblivresachete=$nblivresachete+1;
 					$placementvertical=$placementvertical+8;
 					$pdf->SetXY(10,$placementvertical);
@@ -332,7 +326,7 @@ class RapportControleur extends AbstractControleur {
 						$pdf->Cell(25,0,'?',0,0,'C',0);
 						break; 
 						}	
-					}
+                                        }
 					$pdf->SetFont('Arial','',8);
 					$pdf->SetXY(182,$placementvertical);
 					$codemanuel=$exemplaires[$j]->getAttr('code_manuel');
@@ -341,7 +335,7 @@ class RapportControleur extends AbstractControleur {
 					$pdf->Cell(10,0,$determine->getAttr('tarif')." €",0,0,'C',0);
 					$pdf->SetFont('Arial','',6);
 					$couttotal=$couttotal+$determine->getAttr('tarif');
-					if ($placementvertical>230){
+				if ($placementvertical>230){
 						$pdf->AddPage();
 						$placementvertical=10;
 					}
@@ -411,15 +405,47 @@ class RapportControleur extends AbstractControleur {
 					$pdf->Cell(10,0,'Aucun Reglement ',0,0,'C',0);
 				
 				}
-				$pdf->SetFont('Arial','',6);
-				$pdf->SetXY(10,265);
+		$pdf->SetFont('Arial','',6);
+		$pdf->SetXY(10,265);
 				//$pdf->Cell(0,0,'La bourse aux livres FCPE est organisée par des Parents d\'Elèves Bénévoles.Si vous constatez une erreur, merci de vous adresser aux organisateurs.',0,0,'C',0);
-				$pdf->Cell(0,0,$pied,0,0,'C',0);
-
-				$pdf->Output('./rapports/particuliers/facture_achat_particulier_famille_'.$dossier->getAttr('num_dossier_achat').'.pdf','F');
-			}
-		}
+		$pdf->Cell(0,0,$pied,0,0,'C',0);
+                $filename = 'facture_achat_particulier_famille_'.$dossier->getAttr('num_dossier_achat').'.pdf';
+		$pdf->Output('./rapports/particuliers/'.$filename,'F');
+                return $filename;
+                
+                }
+        
+        
+	
+	public function generer_facture_achat_particulier(){
 		
+		$oid = ($this->valeur!=null) ? $this->valeur : 0 ;
+		
+                if ($oid ==0) {
+                    $json= array("code"=>10);
+                    echo json_encode($json);
+                    return ;
+                }
+		
+		$famille = Famille::findById($oid);		
+		$dossier = $famille->getAttr("dossierDAchat");
+                if (is_null($dossier)){
+                    $json= array("code"=>11);
+                    echo json_encode($json);
+                    return ;
+                }
+                 /*
+                 * Génération du document pdf
+                 */
+                $filename = $this->creer_facture_particulier($famille, $dossier);
+                /*
+                 * retour des données vers le serveur
+                 */
+                $href='/ScolBoursePHP/rapports/particuliers/'.$filename;
+                 $json= array( "ref"=> $href, "code"=>0);
+                 echo json_encode($json);
+                 return ;
+		 /*
 				$html = "";	
 		$html .= "<div style='width:200; overflow:auto;'>";
 		$html .= "<h3>Resultat</h3><br/>";$html .= "<table align='left'>";
@@ -448,6 +474,8 @@ class RapportControleur extends AbstractControleur {
 		$html .= "</a></div>";
 		
 		echo $html;
+                  * 
+                  */
 	}
 	
 	public function generer_facture_achat(){

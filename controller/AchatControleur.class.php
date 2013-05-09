@@ -155,14 +155,14 @@ class AchatControleur extends AbstractControleur {
 				$r = $dossier->save();	
 				
 				// afficher le resultat
-				$message = "L'exemplaire a &eacute;t&eacute; rendr&eacute;e avec succ&egrave;s..."; 			
+				$message = "OK"; 			
 			}catch(Exception $e) {			
 				// Notifier l'erreur
-				$message = "L'exemplaire n'a pas pu &ecirc;tre rendr&eacute;e.<br/>S'il vous pla&icirc;t, v&eacute;rifiez les informations fournies.";
+				$message = "Erreur : suppression impossible du dossier achat";
 			}				
 		} else {
 			// Notifier l'erreur
-				$message = "L'exemplaire n'a pas pu &ecirc;tre rendr&eacute;e, car il n'est pas vendu.<br/>S'il vous pla&icirc;t, v&eacute;rifiez les informations fournies.";
+				$message = "Erreur : exemplaire non vendu - suppression impossible du dossier achat";
 		}		
 								
 		$view = new AchatView($message,"supprimer");

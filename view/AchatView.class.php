@@ -111,7 +111,7 @@ class AchatView {
 	}
 	
 	public function supprimerView() {
-		return $this->getAttr("achat");
+		return json_encode( array('message'=> $this->getAttr("achat")) );
 	}
 	
 	public function ajouterRegleView() {
