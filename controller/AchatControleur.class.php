@@ -58,7 +58,7 @@ class AchatControleur extends AbstractControleur {
 	public function ajouterAction() {				
 		if(count($this->valeur)!=2) {
 			// Erreur numero de parametres invalid!!!
-			$message = "L'exemplaire n'a pas pu &ecirc;tre ajout&eacute;.<br/>Veuillez v&eacute;rifier les informations fournies.";			
+			$message = "Erreur : echec de l'ajout.";			
 		} else {
 			// On obtient les parametres
 			$params = $this->valeur;
@@ -72,19 +72,19 @@ class AchatControleur extends AbstractControleur {
 			
 			// On fait tous les validations
 			if($famille==null) 
-				$message = "Le numero de dossier de dep&ocirc;t n'est pas valide.<br/>Veuillez v&eacute;rifier les informations fournies."; 			
+				$message = "Erreur : dossier depot inconnu."; 			
 			else if($exemplaire==null)
-				$message = "L'exemplaire n'existe pas dans la base.<br/>Veuillez v&eacute;rifier les informations fournies."; 	
+				$message = "Erreur : exemplaire inexistant dans la base."; 	
 			else if($exemplaire->getAttr("vendu")!=0)
-				$message = "L'exemplaire est d&eacute;j&agrave; vendu.<br/>Veuillez v&eacute;rifier les informations fournies."; 	
+				$message = "Erreur : exemplaire deja vendu."; 	
 			else {
 				$manuel = Manuel::findById($exemplaire->getAttr("code_manuel"));			
 				$etat = Etat::findById($exemplaire->getAttr("code_etat"));	
 				
 				if($manuel==null)
-					$message = "Le code du manuel n'est pas valide.<br/>Veuillez v&eacute;rifier les informations fournies."; 			
+					$message = "Erreur : code manuel invalide."; 			
 				else if($etat==null)
-					$message = "Le code etat n'est pas valide.<br/>Veuillez v&eacute;rifier les informations fournies."; 										
+					$message = "Erreur : code etat invalide."; 										
 				else {	
 					if($dossier==null) {
 						// Creer le dossier achat
@@ -119,10 +119,10 @@ class AchatControleur extends AbstractControleur {
 						$r = $dossier->save();						
 						
 						// afficher le resultat
-						$message = '{"message": "OK"}'; 			
+						$message = "OK"; 			
 					} catch(Exception $e) {			
 						// Notifier l'erreur
-						$message = "L'exemplaire n'a pas pu &ecirc;tre ajout&eacute;.<br/>Veuillez v&eacute;rifier les informations fournies.";
+						$message = "Echec de l'ajout exemplaire";
 					}				
 				}		
 			}	

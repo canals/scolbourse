@@ -2,27 +2,13 @@
 
 var idFam = "";
 
-function stateChanged() { 	
-	if ((xmlHttp.readyState == 4)&&(xmlHttp.status == 200)){ 		
-		var resp = xmlHttp.responseText;				
-		displayMessage(resp,800,350);						
-	} else {
-		var messageContent = ""; 
-		messageContent += "<div>"; 
-		messageContent += "	  <h3 style='text-decoration:blink;'>En charge...</h3><br/>";
-		messageContent += "	  <div align='center'>Veuillez patienter pendant la charge des donn&eacute;es !</div><br/>";
-		messageContent += "</div><br/>";					
-		displayMessage(messageContent,200,100);
-	}
+function retourRecherche(data_html) { 	
+				
+		displayMessage(data_html,800,350);						
+	
 }
 		
 function rechercher() {		
-	// Instanciation du Objet XMLHttpRequest 
-	xmlHttp = getXMLHttpRequestObject();		
-	if (xmlHttp==null) {
-		alert ("Votre navigateur n�est pas compatible avec AJAX!");
-		return;
-	} 
 	
 	var nomFam = document.getElementById("nomCh"); nomFam = nomFam.value;
 	var telFam = document.getElementById("telCh"); telFam = telFam.value;
@@ -32,40 +18,34 @@ function rechercher() {
 	if((numExe=="")&&(nomFam=="")&&(telFam=="")&&(numFam=="")) {
 		var messageContent = "<div>"; 
 		messageContent += "	<h3 style='text-decoration:blink;'>ERREUR: critere de recherche</h3><br/>";
-		messageContent += "	<div>Vous devez introduire un critere de recherche...</div><br/>";
+		messageContent += "	<div>Erreur : critere de recherche manquant</div><br/>";
 		messageContent += "	<div align='center'><a href='' onclick='closeMessage(); return false;'>";
 		messageContent += "	<font color='#131313'>Fermer</font>";
 		messageContent += "	</a></div>";
 		messageContent += "</div>";					
 		displayMessage(messageContent,255,110);
 		return;					
-	} else {
-		if((numExe.length<2)&&(nomFam.length<2)&&(telFam.length<2)&&(numFam.length<2)) {
-			var messageContent = "<div>"; 
-			messageContent += "	<h3 style='text-decoration:blink;'>ERREUR: critere de recherche</h3><br/>";
-			messageContent += "	<div>La valeur du critere doit avoir plus d'un caract&eagrave;re...</div><br/>";
-			messageContent += "	<div align='center'><a href='' onclick='closeMessage(); return false;'>";
-			messageContent += "	<font color='#131313'>Fermer</font>";
-			messageContent += "	</a></div>";
-			messageContent += "</div>";					
-			displayMessage(messageContent,255,110);
-			return;					
-		} else {
-			var url = "/ScolBoursePHP/index.php/";  	
-			if(nomFam!="")
-				url += "Famille/listeParNom/" + nomFam;
-			else if(telFam!="")
-				url += "Famille/listeParTel/" + telFam;
-			else if(numFam!="")
-				url += "Famille/listeParDossier/" + numFam;	
-			else if(numExe!="")
-				url += "Famille/listeParExemplaire/" + numExe;
-		}
-	}
+	} 
+	if((numExe.length<2)&&(nomFam.length<2)&&(telFam.length<2)&&(numFam.length<2)) {
+		var messageContent = "<div>"; 
+		messageContent += "	<h3 style='text-decoration:blink;'>ERREUR: critere de recherche</h3><br/>";
+		messageContent += "	<div>La valeur du critere doit avoir plus d'un caract&eagrave;re...</div><br/>";
+		messageContent += "	<div align='center'><a href='' onclick='closeMessage(); return false;'>";
+		messageContent += "	<font color='#131313'>Fermer</font>";
+		messageContent += "	</a></div>";
+		messageContent += "</div>";					
+		displayMessage(messageContent,255,110);
+		return;					
+	} 
+	var url = "/ScolBoursePHP/index.php/";  	
+	if(numFam!="")      url += "Famille/listeParDossier/" + numFam;
+        else if (nomFam!="")url += "Famille/listeParNom/" + nomFam;
+	else if (numExe!="")url += "Famille/listeParExemplaire/" + numExe;	
+	else if(telFam!="") url += "Famille/listeParTel/" + telFam;
+		
+   $.get(url, retourRecherche, "html");
 				
-	xmlHttp.onreadystatechange=stateChanged;
-	xmlHttp.open("GET",url,true);
-	xmlHttp.send(null);	
+
 }
 
 function nouvelleRecherche() {

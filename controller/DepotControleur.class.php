@@ -184,7 +184,7 @@ class DepotControleur extends AbstractControleur {
 			$message = "OK"; 			
 		}catch(Exception $e) {			
 			// Notifier l'erreur
-			$message = "Le dossier n'a pas pu &ecirc;tre mis &agrave; jour.<br/>Veuillez v&eacute;rifier les informations fournies.";
+			$message = "Erreur de mise a jour du dossier !";
 		}				
 							
 		$view = new DepotView($message,"maj");

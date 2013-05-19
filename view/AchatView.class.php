@@ -107,7 +107,7 @@ class AchatView {
 	}
 	
 	public function ajouterView() {
-		return $this->getAttr("achat");
+		return json_encode( array('message'=> $this->getAttr("achat")) );
 	}
 	
 	public function supprimerView() {

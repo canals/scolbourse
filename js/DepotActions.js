@@ -4,12 +4,7 @@ var idMan;
 var idExem;
 
 function voirManuel(idManuel) {
-	// Instanciation du Objet XMLHttpRequest 
-	xmlHttp = getXMLHttpRequestObject();		
-	if (xmlHttp==null) {
-		alert ("Votre navigateur n’est pas compatible avec AJAX!");
-		return;
-	} 						
+						
     var url = "/ScolBoursePHP/index.php/Manuel/voirDetail/" + idManuel;
 	idMan = idManuel;
 
@@ -200,24 +195,19 @@ function ajouterAction(data) {
 
 function miseAJourDepot(idDossierDepot, field) {
 	// Instanciation du Objet XMLHttpRequest 
-	xmlHttp = getXMLHttpRequestObject();		
-	if (xmlHttp==null) {
-		alert ("Votre navigateur n’est pas compatible avec AJAX!");
-		return;
-	} 						
+						
 		
 	var enlever = (field.checked)?"o":"n";
 	
     var url = "/ScolBoursePHP/index.php/Depot/fraisEnvoi/" + idDossierDepot + "/" + enlever;
-				
-	xmlHttp.onreadystatechange=miseAJourDepotAction;
-	xmlHttp.open("GET",url,true);
-	xmlHttp.send(null);	
+
+   
+   $.getJSON(url, miseAJourDepotAction);
+
 }
 
-function miseAJourDepotAction() { 	
-	if ((xmlHttp.readyState == 4)&&(xmlHttp.status == 200)){ 		
-		var data = $.parseJSON(xmlHttp.responseText);
+function miseAJourDepotAction(data) { 	
+	
 		if(data.message != "OK") {
 			var msg = "";
 			msg += "<div class='liste' style='padding:10px; text-align:left;'>";
@@ -236,133 +226,107 @@ function miseAJourDepotAction() {
 		} else {
 			window.location.reload(true); 			
 		}			
-	} 
+	 
 }
 
 function impprimerRecipisee(numFamille) {
-	// Instanciation du Objet XMLHttpRequest 
-	xmlHttp = getXMLHttpRequestObject();		
-	if (xmlHttp==null) {
-		alert ("Votre navigateur n’est pas compatible avec AJAX!");
-		return;
-	} 		
+		
 	
     var url = "/ScolBoursePHP/index.php/Rapport/recepisse_depot_particulier/" + numFamille;
 				
-	xmlHttp.onreadystatechange=impprimer;
-	xmlHttp.open("GET",url,true);
-	xmlHttp.send(null);	
+    $.getJSON(url, impprimer);
+	
 }
 
-function impprimer() { 	
-	if ((xmlHttp.readyState == 4)&&(xmlHttp.status == 200)){ 		
-		var msg = "";
-		msg += "<div class='liste' style='padding:10px; text-align:left;'>";		
-		msg += "<div align='left'>";
-		msg += xmlHttp.responseText;
-		msg += "</div>";	
-		msg += "</div>";	
-		displayMessage(msg,290,123);							
-	} else {
-		var messageContent = ""; 
-		messageContent += "<div>"; 
-		messageContent += "	  <h3 style='text-decoration:blink;'>En charge...</h3><br/>";
-		messageContent += "	  <div align='center'>Veuillez patienter pendant la charge des donn&eacute;es !</div><br/>";
-		messageContent += "</div><br/>";					
-		displayMessage(messageContent,200,100);
-	}
+function impprimer(data) { 	
+ var msg = "";
+        msg += "<div class='liste' style='padding:10px; text-align:left;'>";
+            msg += "<div align='left'>";
+            msg += "	<h3>Recepisse de depot : </h3>";
+  if (data.code !=0)    msg += "<p> probleme </p>";
+            msg += "</div>";	
+            msg += "<div align='left'>";
+  if (data.code == 10)          msg += "erreur numero de dossier";
+  if (data.code == 11)          msg += "pas de dossier Depot pour cette famille";
+  if ((data.code == 0) && (data.mode ==2))
+        msg += "nouveau recepisse pour ce dossier - ouvrir avec le lien ci-dessous";
+  if ((data.code == 0) && (data.mode ==1))
+        msg += "nouveau rapport invendus pour ce dossier - ouvrir avec le lien ci-dessous";
+
+            msg += "</div>";	
+            msg += "<div align='center'>";
+            msg += " <h3>&nbsp;</h3>";	
+      if (data.code==0) {
+            msg += "<a href=\""+ data.ref +"\" target=\"_blank\" onclick=\"window.location.reload(true); return true;\">";
+	    msg += "<font color='#E35F06'>Ouvrir</font></a>&nbsp;&nbsp;";
+      }          
+            msg += " <a href='' onclick='closeMessage(); return false;'><font color='#131313'>Fermer</font></a>&nbsp;&nbsp;";					
+            msg += "</div>";	
+            msg += "</div>";	
+        displayMessage(msg,290,123);	
 }
 
 
 function retourInvendus(numFamille) {
-	// Instanciation du Objet XMLHttpRequest 
-	xmlHttp = getXMLHttpRequestObject();		
-	if (xmlHttp==null) {
-		alert ("Votre navigateur n’est pas compatible avec AJAX!");
-		return;
-	} 		
-	
+
     var url = "/ScolBoursePHP/index.php/Depot/retourInvendus/" + numFamille;
-				
-	xmlHttp.onreadystatechange=invendus;
-	xmlHttp.open("GET",url,true);
-	xmlHttp.send(null);	
+
+    $.get(url, invendus, "html") ;
+
 }
 
-function invendus() { 	
-	if ((xmlHttp.readyState == 4)&&(xmlHttp.status == 200)){ 		
+function invendus(html_data) { 	
+		
 		var msg = "";
 		msg += "<div class='liste' style='padding:10px; text-align:left;'>";		
 		msg += "<div align='left'>";
-		msg += xmlHttp.responseText;
+		msg += html_data;
 		msg += "</div>";	
 		msg += "</div>";	
 		displayMessage(msg,800,350);							
-	} else {
-		var messageContent = ""; 
-		messageContent += "<div>"; 
-		messageContent += "	  <h3 style='text-decoration:blink;'>En charge...</h3><br/>";
-		messageContent += "	  <div align='center'>Veuillez patienter pendant la charge des donn&eacute;es !</div><br/>";
-		messageContent += "</div><br/>";					
-		displayMessage(messageContent,200,100);
-	}
+
 }
 
 
 function rapportInvendus(numFamille) {
-	// Instanciation du Objet XMLHttpRequest 
-	xmlHttp = getXMLHttpRequestObject();		
-	if (xmlHttp==null) {
-		alert ("Votre navigateur n’est pas compatible avec AJAX!");
-		return;
-	} 		
+		
 	
     var url = "/ScolBoursePHP/index.php/Rapport/retour_invendus_particulier/" + numFamille;
+
 				
-	xmlHttp.onreadystatechange=impprimer;
-	xmlHttp.open("GET",url,true);
-	xmlHttp.send(null);	
+    $.getJSON(url, impprimer);
 }
 
 
 function venduExemplaire(numDossi,codeExem){
-	// Instanciation du Objet XMLHttpRequest 
-	xmlHttp = getXMLHttpRequestObject();		
-	if (xmlHttp==null) {
-		alert ("Votre navigateur n’est pas compatible avec AJAX!");
-		return;
-	} 	
-				
+		
 	if( (isNaN(numDossi))|| (isNaN(codeExem)) ) {
 		var messageContent = "<div>"; 
 		messageContent += "	<h3 style='text-decoration:blink;'>ERREUR: Valeurs des champs</h3><br/>";
-		messageContent += "	<div>Les valeurs que vous avez introduites ne sont pas valides...</div><br/>";
+		messageContent += "	<div>Dossier ou exemplaire invalide</div><br/>";
 		messageContent += "	<div align='center'><a href='' onclick='closeMessage(); return false;'>";
 		messageContent += "	<font color='#131313'>Fermer</font>";
 		messageContent += "	</a></div>";
 		messageContent += "</div>";					
 		displayMessage(messageContent,255,110);
 		return;		
-	} else {
-		var url = "/ScolBoursePHP/index.php/Achat/ajouterExemplaire/" + numDossi + "/" + codeExem ;  			 		
-	}	
+	} 
+	var url = "/ScolBoursePHP/index.php/Achat/ajouterExemplaire/" + numDossi + "/" + codeExem ;  			 		
+		
 	
-	xmlHttp.onreadystatechange=vendu;
-	xmlHttp.open("GET",url,true);
-	xmlHttp.send(null);		
+	$.getJSON(url, vendu);	
 }
 
-function vendu() { 	
-	if ((xmlHttp.readyState == 4)&&(xmlHttp.status == 200)){ 										
-		var resp = xmlHttp.responseText;
-		if(resp!="OK") {
+function vendu(data) { 	
+
+	if(data.message!="OK") {
 			var msg = "";
 			msg += "<div class='liste' style='padding:10px; text-align:left;'>";
 			msg += "<div align='left'>";
-			msg += "	<h3>DEPOT: Passer en vendu exemplaire...</h3>";		
+			msg += "	<h3>DEPOT: forcer la vente de l'exemplaire...</h3>";		
 			msg += "</div>";	
 			msg += "<div align='left'>";
-			msg += resp;
+			msg += data.message;
 			msg += "</div>";	
 			msg += "<div align='center'>";
 			msg += " <h3>&nbsp;</h3>";			 
@@ -370,50 +334,35 @@ function vendu() {
 			msg += "</div>";	
 			msg += "</div>";	
 			displayMessage(msg,300,120);
-		} else {
-			window.location.reload(true); 
-		}
 	} else {
-		var messageContent = ""; 
-		messageContent += "<div>"; 
-		messageContent += "	  <h3 style='text-decoration:blink;'>DEPOT: Passer en vendu exemplaire...</h3><br/>";
-		messageContent += "	  <div align='center'>Veuillez patienter pendant la mise &agrave; jour des donn&eacute;es !</div><br/>";
-		messageContent += "</div><br/>";					
-		displayMessage(messageContent,200,100);
+            window.location.reload(true); 
 	}
+	
 }
 
 
 function rendreExemplaire(numDossi,codeExem){
-	// Instanciation du Objet XMLHttpRequest 
-	xmlHttp = getXMLHttpRequestObject();		
-	if (xmlHttp==null) {
-		alert ("Votre navigateur n’est pas compatible avec AJAX!");
-		return;
-	} 	
-				
-	if( (isNaN(numDossi))|| (isNaN(codeExem)) ) {
-		var messageContent = "<div>"; 
-		messageContent += "	<h3 style='text-decoration:blink;'>ERREUR: Valeurs des champs</h3><br/>";
-		messageContent += "	<div>Les valeurs que vous avez introduites ne sont pas valides...</div><br/>";
-		messageContent += "	<div align='center'><a href='' onclick='closeMessage(); return false;'>";
-		messageContent += "	<font color='#131313'>Fermer</font>";
-		messageContent += "	</a></div>";
-		messageContent += "</div>";					
-		displayMessage(messageContent,255,110);
-		return;		
-	} else {
-		var url = "/ScolBoursePHP/index.php/Depot/rendreExemplaire/" + numDossi + "/" + codeExem ;  			 		
-	}	
 	
-	xmlHttp.onreadystatechange=rendre;
-	xmlHttp.open("GET",url,true);
-	xmlHttp.send(null);		
+				
+if( (isNaN(numDossi))|| (isNaN(codeExem)) ) {
+	var messageContent = "<div>"; 
+	messageContent += "	<h3 style='text-decoration:blink;'>ERREUR: Valeurs des champs</h3><br/>";
+	messageContent += "	<div>Les valeurs que vous avez introduites ne sont pas valides...</div><br/>";
+	messageContent += "	<div align='center'><a href='' onclick='closeMessage(); return false;'>";
+	messageContent += "	<font color='#131313'>Fermer</font>";
+	messageContent += "	</a></div>";
+	messageContent += "</div>";					
+	displayMessage(messageContent,255,110);
+	return;		
+} 
+	var url = "/ScolBoursePHP/index.php/Depot/rendreExemplaire/" + numDossi + "/" + codeExem ;  			 		
+		
+	$.getJSON(url, rendre);
+			
 }
 
-function rendre() { 	
-	if ((xmlHttp.readyState == 4)&&(xmlHttp.status == 200)){ 										
-		var data = $.parseJSON(xmlHttp.responseText);
+function rendre(data) { 	
+	
 		if(data.message != "OK") {
 			var msg = "";
 			msg += "<div class='liste' style='padding:10px; text-align:left;'>";
@@ -432,12 +381,5 @@ function rendre() {
 		} else {
 			window.location.reload(true); 
 		}
-	} else {
-		var messageContent = ""; 
-		messageContent += "<div>"; 
-		messageContent += "	  <h3 style='text-decoration:blink;'>DEPOT: Rendre Exemplaire...</h3><br/>";
-		messageContent += "	  <div align='center'>Veuillez patienter pendant la mise &agrave; jour des donn&eacute;es !</div><br/>";
-		messageContent += "</div><br/>";					
-		displayMessage(messageContent,200,100);
-	}
+
 }

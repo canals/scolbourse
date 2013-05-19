@@ -445,37 +445,7 @@ class RapportControleur extends AbstractControleur {
                  $json= array( "ref"=> $href, "code"=>0);
                  echo json_encode($json);
                  return ;
-		 /*
-				$html = "";	
-		$html .= "<div style='width:200; overflow:auto;'>";
-		$html .= "<h3>Resultat</h3><br/>";$html .= "<table align='left'>";
-		if ($dossier!=null){
-			$html .= "<tr>";
-			$html .= "	<td  align='left'>Le rapport de la facture &agrave; bien &eacute;t&eacute; g&eacute;n&eacute;r&eacute;</td>";
-			$html .= "</tr>";
-			$html .= "<tr>";
-			$html .= "	<td  align='left'>Il est stock&eacute; dans le r&eacute;pertoire 'Rapports'</td>";
-			$html .= "</tr>";
-		}else{
-			$html .= "<tr>";
-			$html .= "	<td  align='left'>Erreur lors de la création du rapport, la famille n'a pas de dossier !!</td>";
-			$html .= "</tr>";
-		}
-		$html .= "</table>";
-		$html .= "</div>";
 
-		$html .= "<div align='center'>";
-		if ($dossier!=null){
-			$html .= "<a href='/ScolBoursePHP/rapports/particuliers/facture_achat_particulier_famille_".$dossier->getAttr('num_dossier_achat').".pdf' target='_blank' onclick='window.location.reload(); return true;'>";
-			$html .= "<font color='#E35F06'>Ouvrir</font></a>&nbsp;&nbsp;";
-		}
-		$html .= "<a href='' onclick='window.location.reload(); return true;'>";
-		$html .= "<font color='#131313'>Fermer</font>";
-		$html .= "</a></div>";
-		
-		echo $html;
-                  * 
-                  */
 	}
 	
 	public function generer_facture_achat(){
@@ -892,18 +862,12 @@ class RapportControleur extends AbstractControleur {
 		
 		echo $html;
 	}
-	public function generer_retour_invendus_particulier(){
-		include 'config/config.edit.php';
-		$oid = ($this->valeur!=null) ? $this->valeur : 0 ;
-		
-		if($oid!=0) {
-			$famille = Famille::findById($oid);		
-			$dossier = $famille->getAttr("dossierDeDepot"); 	
-			
-			$pdf=new FPDF('P','mm','A4');
-			
-			if ($dossier!=null){
-				$pdf->SetCreator('ScolBourse');
+        
+        
+        private function creer_retour_invendus_particulier($famille, $dossier){
+            include 'config/config.edit.php';
+            $pdf=new FPDF('P','mm','A4');
+            $pdf->SetCreator('ScolBourse');
 				$pdf->SetDisplayMode('real');
 				$pdf->AddPage();
 				$pdf->SetFont('Arial','B',17);
@@ -1086,54 +1050,53 @@ class RapportControleur extends AbstractControleur {
 					$pdf->SetXY(10,265);
 					$pdf->Cell(0,0,$pied,0,0,'C',0);
 				}
-			}
-			$pdf->Output('./rapports/particuliers/retour_invendus_famille_'.$dossier->getAttr('num_dossier_depot').'.pdf','F');
-		}
-		$html = "";	
-		$html .= "<div style='width:200; overflow:auto;'>";
-		$html .= "<h3>Resultat</h3><br/>";$html .= "<table align='left'>";
+			$filename='retour_invendus_famille_'.$dossier->getAttr('num_dossier_depot').'.pdf';
+			$pdf->Output('./rapports/particuliers/'.$filename,'F');
+                        return $filename ;
 		
-		if ($dossier!=null){
-			$html .= "<tr>";
-			$html .= "	<td  align='left'>Le rapport des invendus de la famille &agrave; bien &eacute;t&eacute; g&eacute;n&eacute;r&eacute;</td>";
-			$html .= "</tr>";
-			$html .= "<tr>";
-			$html .= "	<td  align='left'>Il est stock&eacute; dans le r&eacute;pertoire 'Rapports'</td>";
-			$html .= "</tr>";
-			}else{
-			$html .= "<tr>";
-			$html .= "	<td  align='left'>Une erreur est survenue lors de la génération du rapport, la famille n'a pas de dossier !!</td>";
-			$html .= "</tr>";
-			}
-		$html .= "</table>";
-		$html .= "</div>";
-
-		$html .= "<div align='center'>";
-		if ($dossier!=null){
-			$html .= "<a href='/ScolBoursePHP/rapports/particuliers/retour_invendus_famille_".$dossier->getAttr('num_dossier_depot').".pdf' target='_blank' onclick='window.location.reload(); return true;'>";
-			$html .= "<font color='#E35F06'>Ouvrir</font></a>&nbsp;&nbsp;";
-		}
-		$html .= "<a href='' onclick='window.location.reload(); return true;'>";
-		$html .= "<font color='#131313'>Fermer</font>";
-		$html .= "</a></div>";
+        }
+        
+        
+	public function generer_retour_invendus_particulier(){
+	 
+            $oid = ($this->valeur!=null) ? $this->valeur : 0 ;
+                
+                
+                if ($oid ==0) {
+                    $json= array("code"=>10);
+                    echo json_encode($json);
+                    return ;
+                }
 		
-		echo $html;
-	}
-	public function generer_recepisse_depot_particulier(){
-		
-		include 'config/config.edit.php';
+		$famille = Famille::findById($oid);		
+		$dossier = $famille->getAttr("dossierDeDepot");
+                if (is_null($dossier)){
+                    $json= array("code"=>11);
+                    echo json_encode($json);
+                    return ;
+                }
+                 /*
+                 * Génération du document pdf
+                 */
+                //$exemplaires = Exemplaire::findByNumDossierDepot($oid);
+                $filename = $this->creer_retour_invendus_particulier($famille, $dossier);
+                /*
+                 * retour des données vers le serveur
+                 */
+                $href='/ScolBoursePHP/rapports/particuliers/'.$filename;
+                 $json= array( "ref"=> $href, "code"=>0, "mode"=>1);
+                 echo json_encode($json);
+                 return ;
+        }
+        
+        private function creer_recepisse_depot_particulier( $famille, $dossier, $exemplaires ) {
+            
+                include 'config/config.edit.php';
 	
 		$pdf=new FPDF('P','mm','A4');
 		$pdf->SetCreator('ScolBourse');
-		
-		$oid = ($this->valeur!=null) ? $this->valeur : 0 ;
-		
-		if($oid!=0) {
-			$famille = Famille::findById($oid);		
-			$dossier = $famille->getAttr("dossierDeDepot"); 
-			$exemplaires = Exemplaire::findByNumDossierDepot($oid);
-			if ($dossier!=null){
-				$pdf->AddPage();
+            
+            	$pdf->AddPage();
 				$pdf->SetFont('Arial','B',17);
 				$pdf->Cell(200,5,'BOURSE AUX LIVRES '. $annee_bourse,0,1,'C');
 				$pdf->SetFont('Arial','',12);
@@ -1247,38 +1210,46 @@ class RapportControleur extends AbstractControleur {
 				$pdf->SetFont('Arial','',7);
 				$pdf->SetXY(10,265);
 				$pdf->Cell(0,0,$pied,0,0,'C',0);
-			}
-			$pdf->Output('./rapports/particuliers/recepisse_depot_famille_'.$dossier->getAttr('num_dossier_depot').'.pdf','F');
-		}
-		$html = "";	
-		$html .= "<div style='width:200; overflow:auto;'>";
-		$html .= "<h3>Resultat</h3><br/>";		
-		$html .= "<table align='left'>";
-		$html .= "<tr>";
-		if ($dossier!=null){
-		$html .= "	<td  align='left'>Le rapport du d&eacute;p&ocirc;t de la famille &agrave; bien &eacute;t&eacute; g&eacute;n&eacute;r&eacute;</td>";
-		$html .= "</tr>";
-		$html .= "<tr>";
-		$html .= "	<td  align='left'>Il est stock&eacute; dans le r&eacute;pertoire 'Rapports'</td>";
-		$html .= "</tr>";
-		}else{
-		$html .= "	<td  align='left'>Une Erreur est survenue lors de la création du rapport, la famille n'a pas encore de dossier !!</td>";
-		$html .= "</tr>";
-		}
-		$html .= "</table>";
-		$html .= "</div>";
+			$filename= 'recepisse_depot_famille_'.$dossier->getAttr('num_dossier_depot').'.pdf';
+			$pdf->Output('./rapports/particuliers/'.$filename,'F');
+                        return $filename;
+        
+        }
+        
+	public function generer_recepisse_depot_particulier(){
+		
+		
+		$oid = ($this->valeur!=null) ? $this->valeur : 0 ;
+                
+                
+                if ($oid ==0) {
+                    $json= array("code"=>10);
+                    echo json_encode($json);
+                    return ;
+                }
+		
+		$famille = Famille::findById($oid);		
+		$dossier = $famille->getAttr("dossierDeDepot");
+                if (is_null($dossier)){
+                    $json= array("code"=>11);
+                    echo json_encode($json);
+                    return ;
+                }
+                 /*
+                 * Génération du document pdf
+                 */
+                $exemplaires = Exemplaire::findByNumDossierDepot($oid);
+                $filename = $this->creer_recepisse_depot_particulier($famille, $dossier, $exemplaires);
+                /*
+                 * retour des données vers le serveur
+                 */
+                $href='/ScolBoursePHP/rapports/particuliers/'.$filename;
+                 $json= array( "ref"=> $href, "code"=>0, "mode"=>2);
+                 echo json_encode($json);
+                 return ;
 
-		$html .= "<div align='center'>";
 		
-		if ($dossier!=null){
-			$html .= "<a href='/ScolBoursePHP/rapports/particuliers/recepisse_depot_famille_".$dossier->getAttr('num_dossier_depot').".pdf' target='_blank' onclick='window.location.reload(); return true;'>";
-			$html .= "<font color='#E35F06'>Ouvrir</font></a>&nbsp;&nbsp;";
-		}
-		$html .= "<a href='' onclick='window.location.reload(); return true;'>";
-		$html .= "<font color='#131313'>Fermer</font>";
-		$html .= "</a></div>";
-		
-		echo $html;
+
 	}
 	
 	public function generer_recepisse_depot(){
