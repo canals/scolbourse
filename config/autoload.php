@@ -13,6 +13,8 @@ $installDir = $autoloadPath . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR;
 $systemIncludePath = get_include_path() ;
 set_include_path( $systemIncludePath . PATH_SEPARATOR . $installDir );
 
+error_reporting(E_ERROR|E_PARSE);
+
 //ini_set('output_buffering', 4096);
 
 /**

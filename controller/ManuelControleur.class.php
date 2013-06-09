@@ -339,6 +339,7 @@ class ManuelControleur extends AbstractControleur {
 	foreach ($lm as $m) {
 		$ordre = $m->getAttr('num_manuel_liste');
 		$manuel= Manuel::findById($m->getAttr('code_manuel'));
+                if (is_null($manuel)) continue;
 		$code = $manuel->getAttr('code_manuel');
 		$titre= $manuel->getAttr('titre_manuel');
 		$matiere=$manuel->getAttr('matiere_manuel');
