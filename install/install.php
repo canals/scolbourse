@@ -173,6 +173,7 @@ if(!isset($_REQUEST['frmConf_submit'])) {
 		$creatable = "checked";
                 $admin     = "admin" ;
                 $adpass    = "";
+                $ERROR_MSG="installation de scolBourse ...";
 		include("./support/frmConf.php");
 	} else {
 	$ERROR_MSG = null;
@@ -322,7 +323,7 @@ if(!isset($_REQUEST['frmConf_submit'])) {
 	if (! $ERROR_MSG) $ERROR_MSG = '<strong></strong>Installation de scolBoursePHP complete</strong><br/>';
 
 	// Definir le nom et l'adresse web de l'application
-	$nomApp = substr($dirApp, strrpos($dirApp , DIRECTORY_SEPARATOR)+1, strlen($dirApp));
+	//$nomApp = substr($dirApp, strrpos($dirApp , DIRECTORY_SEPARATOR)+1, strlen($dirApp));
 	$adresseWebApp = "http://" . $serverWeb . (($portWeb=="80")?"":(":".$portWeb)) . "/" . "ScolBoursePHP";
 
 	// Afficher le Resultats

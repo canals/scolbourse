@@ -57,7 +57,7 @@
 							<td>&nbsp;</td>
 						</tr>
 						<tr>
-							<td colspan="4"> <?php echo (($ERROR_MSG) ? $ERROR_MSG : 'yo'); ?></td>				
+                                                    <td colspan="4"> <?php echo ((isset($ERROR_MSG)) ? $ERROR_MSG : 'yo'); ?></td>				
 						</tr>
 						<tr>
 							<td>&nbsp;</td>
