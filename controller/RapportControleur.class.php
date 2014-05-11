@@ -53,6 +53,7 @@ class RapportControleur extends AbstractControleur {
 	}	
 		
 	public function generer_cheque(){
+            include 'config/config.edit.php';
 		$pdf=new FPDF('L','mm','A5');
 		$tableaulisteDepot= DossierDeDepot::findAllTrie();
 		$date = date("d-m-Y");
@@ -76,7 +77,7 @@ class RapportControleur extends AbstractControleur {
 			$pdf->SetXY(150,30);
 			$pdf->Cell(30,10,$dossier->getAttr('montant').'€',0,0,'C');
 			$pdf->SetXY(150,33);
-			$pdf->Cell(30,10,'Vandoeuvre',0,0,'C');
+			$pdf->Cell(30,10,$lieu,0,0,'C');
 			$pdf->SetXY(150,36);
 			$pdf->Cell(30,10,$date,0,0,'C');
 		}
@@ -105,6 +106,7 @@ class RapportControleur extends AbstractControleur {
 	}
 		
 	public function generer_enveloppe_paiement(){
+            include 'config/config.edit.php';
 		$pdf=new FPDF('L','mm','A5');
 		$pdf->SetDisplayMode('real');
 		$tableaulisteDepot= DossierDeDepot::findAllTrie();
@@ -112,10 +114,11 @@ class RapportControleur extends AbstractControleur {
 			$pdf->AddPage();	
 			$pdf->SetFont('Arial','B',14);
 			$pdf->SetXY(45,10);
-			$pdf->Cell(60,10,'Conseil Local FCPE - Lycée J. Callot Vandoeuvre',0,1,'C');
+			//$pdf->Cell(60,10,'Conseil Local FCPE - Lycée J. Callot Vandoeuvre',0,1,'C');
+			$pdf->Cell(60,10,$titre_bourse,0,1,'C');
 			$pdf->SetFont('Arial','',12);
 			$pdf->SetXY(45,15);
-			$pdf->Cell(30,10,'Bourse aux livres '.date("Y"),0,0,'C');
+			$pdf->Cell(30,10,'Bourse aux livres '.$annee_bourse,0,0,'C');
 			$pdf->SetXY(45,19);
 			$pdf->Cell(30,10,'N° de dossier : ',0,0,'C');
 			$pdf->SetXY(67,19);
@@ -152,14 +155,17 @@ class RapportControleur extends AbstractControleur {
 	}
 	
 	public function generer_dossier_non_soldes(){
+            include 'config/config.edit.php';
 		$tableaulisteAchat= DossierDAchat::findAllTrie();
 		$pdf=new FPDF('P','mm','A4');
 		$pdf->SetCreator('ScolBourse');
 		$pdf->SetDisplayMode('real');
 		$pdf->AddPage();		
-		$pdf->Image('./images/fcpe2.jpg',10,8,25,25);
+		//$pdf->Image('./images/fcpe2.jpg',10,8,25,25);
+		$pdf->Image($logo ,10,8,25,25);
 		$pdf->SetFont('Arial','B',18);
-		$pdf->Cell(140,10,'Bourse aux Livres FCPE '.date("Y"),0,1,'C');
+		//$pdf->Cell(140,10,'Bourse aux Livres FCPE '.$annee_bourse,0,1,'C');
+		$pdf->Cell(140,10,$titre_bourse2.$annee_bourse,0,1,'C');
 		$pdf->SetFont('Arial','',14);
 		$pdf->SetXY(85,20);
 		$pdf->Cell(30,10,'Dossiers non régularisés au :',0,0,'C');
@@ -307,23 +313,23 @@ class RapportControleur extends AbstractControleur {
 					$etat=$exemplaires[$j]->getAttr('code_etat');
 					switch ($etat) {		
 						case 1 : { 
-						$pdf->Cell(25,0,'1',0,0,'C',0);
+						$pdf->Cell(25,0,'Excellent',0,0,'C',0);
 						break; 
 						}
 						case 2 : { 
-						$pdf->Cell(25,0,'2',0,0,'C',0);
+						$pdf->Cell(25,0,'Bon',0,0,'C',0);
 						break; 
 						}		
 						case 3 : { 
-						$pdf->Cell(25,0,'3',0,0,'C',0); 
+						$pdf->Cell(25,0,'Moyen',0,0,'C',0); 
 						break; 
 						}		
 						case 4 : { 
-						$pdf->Cell(25,0,'4',0,0,'C',0);
+						$pdf->Cell(25,0,'Mauvais',0,0,'C',0);
 						break; 
 						}		
 						default :{
-						$pdf->Cell(25,0,'?',0,0,'C',0);
+						$pdf->Cell(25,0,'non défini',0,0,'C',0);
 						break; 
 						}	
                                         }
@@ -407,7 +413,7 @@ class RapportControleur extends AbstractControleur {
 				}
 		$pdf->SetFont('Arial','',6);
 		$pdf->SetXY(10,265);
-				//$pdf->Cell(0,0,'La bourse aux livres FCPE est organisée par des Parents d\'Elèves Bénévoles.Si vous constatez une erreur, merci de vous adresser aux organisateurs.',0,0,'C',0);
+		//$pdf->Cell(0,0,'La bourse aux livres FCPE est organisée par des Parents d\'Elèves Bénévoles.Si vous constatez une erreur, merci de vous adresser aux organisateurs.',0,0,'C',0);
 		$pdf->Cell(0,0,$pied,0,0,'C',0);
                 $filename = 'facture_achat_particulier_famille_'.$dossier->getAttr('num_dossier_achat').'.pdf';
 		$pdf->Output('./rapports/particuliers/'.$filename,'F');
@@ -418,6 +424,7 @@ class RapportControleur extends AbstractControleur {
         
 	
 	public function generer_facture_achat_particulier(){
+            include 'config/config.edit.php';
 		
 		$oid = ($this->valeur!=null) ? $this->valeur : 0 ;
 		
@@ -449,6 +456,7 @@ class RapportControleur extends AbstractControleur {
 	}
 	
 	public function generer_facture_achat(){
+            include 'config/config.edit.php';
 		$tableaulisteAchat= DossierDAchat::findAllTrie();
 		$pdf=new FPDF('P','mm','A4');
 		$pdf->SetCreator('ScolBourse');
@@ -456,13 +464,15 @@ class RapportControleur extends AbstractControleur {
 		for($i=0;$i< sizeof($tableaulisteAchat);$i++){ //boucle sur les personnes (dossier dachat)
 			$pdf->AddPage();
 			$pdf->SetFont('Arial','B',17);
-			$pdf->Cell(200,5,'BOURSE AUX LIVRES '.date("Y"),0,1,'C');
+			$pdf->Cell(200,5,'BOURSE AUX LIVRES '.$annee_bourse,0,1,'C');
 			$pdf->SetFont('Arial','',12);
-			$pdf->Cell(230,11,'Lycée Jacques Callot - Vandoeuvre',0,1,'C');
+			//$pdf->Cell(230,11,'Lycée Jacques Callot - Vandoeuvre',0,1,'C');
+			$pdf->Cell(230,11,$titre_bourse,0,1,'C');
 			$pdf->SetFont('Arial','B',18);
 			$pdf->Cell(210,8,'- Facture d\'achat -',0,1,'C');
 			$pdf->SetXY(500,50);
-			$pdf->Image('./images/fcpe2.jpg',10,8,25,25);
+			//$pdf->Image('./images/fcpe2.jpg',10,8,25,25);
+			$pdf->Image($logo ,10,8,25,25);
 			$pdf->SetXY(10,40);
 			$pdf->SetFont('Arial','',11);
 			$pdf->Rect(10,38,185,40);
@@ -614,7 +624,8 @@ class RapportControleur extends AbstractControleur {
 			}
 			$pdf->SetFont('Arial','',6);
 			$pdf->SetXY(10,265);
-			$pdf->Cell(0,0,'La bourse aux livres FCPE est organisée par des Parents d\'Elèves Bénévoles.Si vous constatez une erreur, merci de vous adresser aux organisateurs.',0,0,'C',0);
+			//$pdf->Cell(0,0,'La bourse aux livres FCPE est organisée par des Parents d\'Elèves Bénévoles.Si vous constatez une erreur, merci de vous adresser aux organisateurs.',0,0,'C',0);
+		$pdf->Cell(0,0,$pied,0,0,'C',0);
 		}
 		$pdf->Output('./rapports/general/facture_achat.pdf','F');
 		
@@ -641,13 +652,16 @@ class RapportControleur extends AbstractControleur {
 	}
 	
 	public function generer_invendus(){
+            include 'config/config.edit.php';
 		$pdf=new FPDF('P','mm','A4');
 		$pdf->SetDisplayMode('real');
 		$pdf->SetCreator('ScolBourse');
 		$pdf->AddPage();
-		$pdf->Image('./images/fcpe2.jpg',10,8,25,25);
+		//$pdf->Image('./images/fcpe2.jpg',10,8,25,25);
+		$pdf->Image($logo,10,8,25,25);
 		$pdf->SetFont('Arial','B',18);
-		$pdf->Cell(140,10,'Bourse aux Livres FCPE '.date("Y"),0,0,'C');
+		//$pdf->Cell(140,10,'Bourse aux Livres FCPE '.date("Y"),0,0,'C');
+		$pdf->Cell(140,10,$titre_bourse2.$annee_bourse,0,0,'C');
 		$pdf->SetFont('Arial','',13);
 		$pdf->SetXY(60,16);
 		$pdf->Cell(40,10,'Liste des livres invendus au',0,0,'C');
@@ -738,14 +752,17 @@ class RapportControleur extends AbstractControleur {
 	}
 	
 	public function generer_liste_manuel(){
+            include 'config/config.edit.php';
 		
 		$tableauliste= Liste::findAll();
 		$pdf=new FPDF('L','mm','A4');
 		$pdf->SetCreator('ScolBourse');
 		$pdf->AddPage();
-		$pdf->Image('./images/fcpe2.jpg',10,8,25,25);
+		//$pdf->Image('./images/fcpe2.jpg',10,8,25,25);
+		$pdf->Image($logo ,10,8,25,25);
 		$pdf->SetFont('Arial','B',18);
-		$pdf->Cell(140,10,'Bourse aux Livres FCPE '.date("Y"),0,1,'C');
+		//$pdf->Cell(140,10,'Bourse aux Livres FCPE '.date("Y"),0,1,'C');
+		$pdf->Cell(140,10,$titre_bourse2.$annee_bourse,0,1,'C');
 		$pdf->Cell(192,10,'Liste des Manuels disponibles en occasion',0,0,'C');
 		for($i=0;$i< sizeof($tableauliste);$i++){
 			if($i==0){ // si on est a la premiere page, on cré l'entete
@@ -939,24 +956,24 @@ class RapportControleur extends AbstractControleur {
 						$etat=$exemplaires[$j]->getAttr('code_etat');
 						switch ($etat) {		
 							case 1 : { 
-							$pdf->Cell(25,0,'1',0,0,'C',0);
+							$pdf->Cell(25,0,'Excellent',0,0,'C',0);
 							break; 
 							}
 							case 2 : { 
-							$pdf->Cell(25,0,'2',0,0,'C',0);
+							$pdf->Cell(25,0,'Bon',0,0,'C',0);
 							break; 
 							}		
 							case 3 : { 
-							$pdf->Cell(25,0,'3',0,0,'C',0); 
+							$pdf->Cell(25,0,'Moyen',0,0,'C',0); 
 							break; 
 							}		
 							case 4 : { 
-							$pdf->Cell(25,0,'4',0,0,'C',0);
+							$pdf->Cell(25,0,'Mauvais',0,0,'C',0);
 							break; 
 							}		
 							default :{
 							$pdf->Cell(25,0,'non défini',0,0,'C',0);
-							break; 
+							break;
 							}	
 						}
 						if ($placementvertical>230){
@@ -1058,7 +1075,9 @@ class RapportControleur extends AbstractControleur {
         
         
 	public function generer_retour_invendus_particulier(){
-	 
+
+
+            include 'config/config.edit.php';	 
             $oid = ($this->valeur!=null) ? $this->valeur : 0 ;
                 
                 
@@ -1173,24 +1192,24 @@ class RapportControleur extends AbstractControleur {
 					$etat=$exemplaires[$j]->getAttr('code_etat');
 					switch ($etat) {		
 						case 1 : { 
-						$pdf->Cell(10,0,'1',0,0,'L',0);
+						$pdf->Cell(25,0,'Excellent',0,0,'C',0);
 						break; 
 						}
 						case 2 : { 
-						$pdf->Cell(10,0,'2',0,0,'L',0);
+						$pdf->Cell(25,0,'Bon',0,0,'C',0);
 						break; 
 						}		
 						case 3 : { 
-						$pdf->Cell(10,0,'3',0,0,'L',0); 
+						$pdf->Cell(25,0,'Moyen',0,0,'C',0); 
 						break; 
 						}		
 						case 4 : { 
-						$pdf->Cell(10,0,'4',0,0,'L',0);
+						$pdf->Cell(25,0,'Mauvais',0,0,'C',0);
 						break; 
 						}		
 						default :{
-						$pdf->Cell(10,0,'?',0,0,'C',0);
-						break; 
+						$pdf->Cell(25,0,'non défini',0,0,'C',0);
+						break;
 						}	
 					}
 					$pdf->SetXY(185,$placementvertical);
@@ -1218,7 +1237,8 @@ class RapportControleur extends AbstractControleur {
         
 	public function generer_recepisse_depot_particulier(){
 		
-		
+		include 'config/config.edit.php';
+
 		$oid = ($this->valeur!=null) ? $this->valeur : 0 ;
                 
                 
@@ -1253,19 +1273,24 @@ class RapportControleur extends AbstractControleur {
 	}
 	
 	public function generer_recepisse_depot(){
+
+            include 'config/config.edit.php';
+
 		$tableaulisteDepot= DossierDeDepot::findAllTrie();
 		$pdf=new FPDF('P','mm','A4');
 		$pdf->SetCreator('ScolBourse');
 		for($i=0;$i< sizeof($tableaulisteDepot);$i++){
 			$pdf->AddPage();
 			$pdf->SetFont('Arial','B',17);
-			$pdf->Cell(200,5,'BOURSE AUX LIVRES '.date("Y"),0,1,'C');
+			$pdf->Cell(200,5,'BOURSE AUX LIVRES '.$annee_bourse,0,1,'C');
 			$pdf->SetFont('Arial','',12);
-			$pdf->Cell(230,11,'Lycée Jacques Callot - Vandoeuvre',0,1,'C');
+			//$pdf->Cell(230,11,'Lycée Jacques Callot - Vandoeuvre',0,1,'C');
+			$pdf->Cell(230,11,$titre_bourse,0,1,'C');
 			$pdf->SetFont('Arial','B',18);
 			$pdf->Cell(210,8,'- Récépissé de dépôt -',0,1,'C');
 			$pdf->SetXY(500,50);
-			$pdf->Image('./images/fcpe2.jpg',10,8,25,25);
+			//$pdf->Image('./images/fcpe2.jpg',10,8,25,25);
+			$pdf->Image($logo ,10,8,25,25);
 			$pdf->SetXY(10,40);
 			$pdf->SetFont('Arial','',11);
 			$pdf->Rect(10,38,185,40);
@@ -1339,7 +1364,8 @@ class RapportControleur extends AbstractControleur {
 			}
 			$pdf->SetFont('Arial','',7);
 			$pdf->SetXY(10,265);
-			$pdf->Cell(0,0,'La bourse aux livres FCPE est organisée par des Parents d\'Elèves Bénévoles.Si vous constatez une erreur, merci de vous adresser aux organisateurs.',0,0,'C',0);
+			//$pdf->Cell(0,0,'La bourse aux livres FCPE est organisée par des Parents d\'Elèves Bénévoles.Si vous constatez une erreur, merci de vous adresser aux organisateurs.',0,0,'C',0);
+			$pdf->Cell(0,0,$pied,0,0,'C',0);
 			
 		}
 		
@@ -1366,6 +1392,9 @@ class RapportControleur extends AbstractControleur {
 		echo $html;
 	}
 	public function generer_retour_invendus(){
+
+            include 'config/config.edit.php';
+
 		$tableaulisteDepot= DossierDeDepot::findAllTrie();
 		$pdf=new FPDF('P','mm','A4');
 		$pdf->SetCreator('ScolBourse');
@@ -1373,13 +1402,15 @@ class RapportControleur extends AbstractControleur {
 		for($i=0;$i< sizeof($tableaulisteDepot);$i++){ //boucle sur les personnes (dossier de dépot)
 			$pdf->AddPage();
 			$pdf->SetFont('Arial','B',17);
-			$pdf->Cell(200,5,'BOURSE AUX LIVRES '.date("Y"),0,1,'C');
+			$pdf->Cell(200,5,'BOURSE AUX LIVRES '.$annee_bourse,0,1,'C');
 			$pdf->SetFont('Arial','',12);
-			$pdf->Cell(230,11,'Lycée Jacques Callot - Vandoeuvre',0,1,'C');
+			//$pdf->Cell(230,11,'Lycée Jacques Callot - Vandoeuvre',0,1,'C');
+			$pdf->Cell(230,11,$titre_bourse,0,1,'C');
 			$pdf->SetFont('Arial','B',18);
 			$pdf->Cell(210,8,'- Récapitulatif des ventes -',0,1,'C');
 			$pdf->SetXY(500,50);
-			$pdf->Image('./images/fcpe2.jpg',10,8,25,25);
+			//$pdf->Image('./images/fcpe2.jpg',10,8,25,25);
+			$pdf->Image($logo ,10,8,25,25);
 			$pdf->SetXY(10,40);
 			$pdf->SetFont('Arial','',11);
 			$pdf->Rect(10,38,185,40);
@@ -1552,7 +1583,8 @@ class RapportControleur extends AbstractControleur {
 			}
 			$pdf->SetFont('Arial','',6);
 			$pdf->SetXY(10,265);
-			$pdf->Cell(0,0,'La bourse aux livres FCPE est organisée par des Parents d\'Elèves Bénévoles.Si vous constatez une erreur, merci de vous adresser aux organisateurs.',0,0,'C',0);
+			//$pdf->Cell(0,0,'La bourse aux livres FCPE est organisée par des Parents d\'Elèves Bénévoles.Si vous constatez une erreur, merci de vous adresser aux organisateurs.',0,0,'C',0);
+			$pdf->Cell(0,0,$pied,0,0,'C',0);
 			
 		}
 		
