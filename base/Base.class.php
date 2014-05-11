@@ -77,7 +77,7 @@ class Base {
     $user=$config['db_user']; $pass=$config['db_password']; 
     try {
         $dsn="$dbtype:host=$host;dbname=$dbname";
-        $db = new PDO($dsn, $user,$pass, array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES \'UTF8\'',
+        $db = new PDO($dsn, $user,$pass, array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES \'latin1\'',
                                                PDO::ERRMODE_EXCEPTION=>true,
                                                PDO::ATTR_PERSISTENT=>true));
     } catch(PDOException $e) {

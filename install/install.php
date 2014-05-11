@@ -211,7 +211,7 @@ if(!isset($_REQUEST['frmConf_submit'])) {
         */
         try {
         $dsn="$dbtype:host=$host;dbname=$dbname";
-        $db = new PDO($dsn, $user,$pass, array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES \'UTF8\'',
+        $db = new PDO($dsn, $user,$pass, array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES \'latin1\'',
                                                PDO::ERRMODE_EXCEPTION=>true,
                                                PDO::ATTR_PERSISTENT=>true));
         } catch (PDOException $e) {
@@ -277,7 +277,7 @@ if(!isset($_REQUEST['frmConf_submit'])) {
             
         try {
         $dsn="$dbtype:host=$host;dbname=$dbname";
-        $db = new PDO($dsn, $user,$pass, array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES \'UTF8\'',
+        $db = new PDO($dsn, $user,$pass, array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES \'latin1\'',
                                                PDO::ERRMODE_EXCEPTION=>true,
                                             PDO::ATTR_PERSISTENT=>true));
         $db->beginTransaction();
