@@ -254,10 +254,10 @@ if(!isset($_REQUEST['frmConf_submit'])) {
 
 	// Mise à jour le fichier de configuration: CONFIG.PHP
 	$repApp = '/ScolBoursePHP';
-	$file_name = $configdir.DIRECTORY_SEPARATOR.CONFIG_FILE_NAME;
+	$ConfigFileName = $configdir.DIRECTORY_SEPARATOR.CONFIG_FILE_NAME;
 
 	//configFile($file_name, $repApp, $dbtype, $user, $pass, $host, $port, $dbname) ;
-        writeIniFile($file_name, $repApp, $dbtype, $user, $pass, $host, $port, $dbname) ;
+        writeIniFile($ConfigFileName, $repApp, $dbtype, $user, $pass, $host, $port, $dbname) ;
 	//
 	//echo "créer les tables : $creatable <br/>";
 

@@ -78,7 +78,7 @@
 						<tr>
 						  <td>&nbsp;</td>
 						  <td>Chemin d'installation: </td>
-						  <td colspan="2"><strong><?=$repDestin?></strong></td>
+						  <td colspan="2"><strong><?=$ConfigFileName?></strong></td>
 						  
 					  </tr>
 						<tr>
