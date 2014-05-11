@@ -1,0 +1,643 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<package packagerversion="1.5.4" version="2.0" xmlns="http://pear.php.net/dtd/package-2.0" xmlns:tasks="http://pear.php.net/dtd/tasks-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0     http://pear.php.net/dtd/tasks-1.0.xsd     http://pear.php.net/dtd/package-2.0     http://pear.php.net/dtd/package-2.0.xsd">
+ <name>patTemplate</name>
+ <channel>pear.php-tools.net</channel>
+ <summary>Powerful templating engine.</summary>
+ <description>patTemplate is a powerful, non-compiling templating engine, that uses XML tags to divide a document into different parts.
+It provides different template types to emulate if/else and switch/case constructs, variable modifiers,
+input- and output filters and several more useful features.</description>
+ <lead>
+  <name>Stephan Schmidt</name>
+  <user>schst</user>
+  <email>schst@php-tools.net</email>
+  <active>yes</active>
+ </lead>
+ <developer>
+  <name>Andrew Eddie</name>
+  <user>eddieajau</user>
+  <email>mamboblue@gmail.com</email>
+  <active>yes</active>
+ </developer>
+ <contributor>
+  <name>Sebastian Mordziol</name>
+  <user>argh</user>
+  <email>argh@php-tools.net</email>
+  <active>yes</active>
+ </contributor>
+ <contributor>
+  <name>gERD Schaufelberger</name>
+  <user>gerd</user>
+  <email>gerd@php-tools.net</email>
+  <active>yes</active>
+ </contributor>
+ <date>2007-06-02</date>
+ <time>17:27:45</time>
+ <version>
+  <release>3.1.0</release>
+  <api>3.1.0</api>
+ </version>
+ <stability>
+  <release>stable</release>
+  <api>stable</api>
+ </stability>
+ <license uri="http://www.gnu.org/copyleft/lesser.txt">LGPL</license>
+ <notes>Changes since 3.0.x:
+- allowed more than one namespace
+- added defaultFunction option, to define a function that is called for unknown functions
+- added new built-in condition __single
+- allow quoting variables using \{FOO\}
+- implemented autoload in Call function
+- added new system variable: {PAT_ROW_TYPE} = odd|even
+- added &quot;rowOffset&quot; attribute that determines the starting point of PAT_ROW_VAR
+- allow usage of $self in the return values of the expression modifier (by Andrew Eddie of Mambo)
+- added &quot;relative&quot; attribute to load templates relative to the current template (request #89)
+- the varscope attribute now supports a list of templates
+- in the requiredvars attribute of a simple condition template it is now possible to specify the exact value of a variable via requiredvars=&quot;var=value&quot; (request #93)
+- added clearVar(), clearVars(), clearGlobalVar() and clearGlobalVars() (request #91)
+- added fourth parameter to addObject() to hide private properties
+- addObject() now checks, whether an object implements a getVars() method
+- added experimental XUL dump using PEAR::XML_XUL (needs a lot of love)
+- added TemplateCaches for MMCache and eAccelerator (contributed by Mike Valstar)
+- added placeholderExists() method (request #100)
+- added Truncate Modifier (contributed by Rafa Couto)
+- StripComments Input Filter now also strips Javascript multiline comments (Tim-Patrick M�rk)
+- Allow output filters for single templates (using the OutputFilter=&quot;...&quot; attribute and applyOutputFilter()) (Request #114)
+- Add default variable modifiers for a template (Request #92)
+- Added OutputFilter to highlight PHP code
+- File Reader: Allow array containing several root directories as template root
+
+Changes since 3.1.0a1:
+- Allow the use of a variable in conditions (&lt;pat:sub condition=&quot;{FOO}&quot;/&gt;)
+- Added new custom function Highlight that is able to apply syntax highlighting to your code (requires PEAR::Text_Highlighter)
+- Added new custom function Img to create HTML images (contributed by Jens Strobel)
+- Fixed notice in File reader (argh)
+- Added parameter for TemplateCache_File to set the filemode (request #127)
+- Added InputFilter that allows you to use the short variable modifier syntax of Smarty (schst, Axel Stettner) (request #136)
+- Fixed bug with condition __empty that was used instead of condition 0 (bug #132)
+- Fixed bug in Dateformat modifier
+- Fixed bug with condition templates that have __single and __empty defined (bug #138)
+- Bugfixes and new features in Translate function (bugs #68 and #73) (argh)
+- Can now set a preconfigured patBBCode object for the BBCode output filter, and added some documentation (argh)
+- Fixed the module file search that would not go through all defined folders (argh)
+- Added patch to translate function to allow combining of the translationFile and translationUseFolders options (argh)
+- Fixed bug #144: StripWhitespace output filter breaks UTF-8 encoded data (schst)
+- Added DB reader to read templates from any database supported by PEAR::DB (schst)
+- Fixed bug #74: Attributes &quot;maxloop&quot; and &quot;conditions&quot; causes PHP crash (schst)
+- Fixed an issue when using clearTemplate() on a template that does not exist (argh)
+- Fixed bug #150: Notice when enabling the template cache (schst)
+- Fixed bug #151: Invalid filemode in template cache (patch by Frank Kleine)
+- Fixed bug #153: pdflatex stops on errors (patch by p_ansell &lt;at&gt; yahoo [dot] com)
+- Fixed bug with variables that contain only one character (slerman)
+
+Changes since 3.1.0a2:
+- Fixed bug #152 (__single breaks first) (schst)
+- Allow multiple modifiers per variable (schst)
+- Implemented request #154: functions as defaults for variables (schst)
+- Add support for varscope __parent in variable modifier (gERD)
+- Add support for varscope __parent in variable tag (gERD)
+- Fixed bug #155: Automatically handle nested objects (schst)
+
+Changes since 3.1.0b1:
+- Fixed problem with condition templates and global variables (gERD)
+- Added placeholders for variable modifiers (gERD)
+
+Changes since 3.1.0b2:
+- Fixed bug #164: ShortModifiers filter does not work if copyFrom and additional attributes are used (eddieajau)
+- Fixed bug #165: ShortModifiers filter is not character set safe  (eddieajau)
+- Added multibyte support to Truncate modifier (gERD)
+- Added possibility to return UNIX timestamp to DateFormat modifier (gERD)
+- Fixed a bug when using an __autoload() function in combination with external modules (argh)</notes>
+ <contents>
+  <dir baseinstalldir="pat" name="/">
+   <file baseinstalldir="pat" md5sum="c2f0a49929a50198156570f9e1e8fd67" name="docs/bc-break.txt" role="doc" />
+   <file baseinstalldir="pat" md5sum="7f8410a609189d63bfec8be26f9e0754" name="docs/extending-pattemplate.txt" role="doc" />
+   <file baseinstalldir="pat" md5sum="cf3ff4789fc2778539ccf1c2fc2159aa" name="docs/news.txt" role="doc" />
+   <file baseinstalldir="pat" md5sum="f94c42e17302561e3eb21a5e76214b02" name="docs/notes.txt" role="doc" />
+   <file baseinstalldir="pat" md5sum="fa16f39abb9c904c2fd49b1d9df32321" name="docs/reserved-variables.txt" role="doc" />
+   <file baseinstalldir="pat" md5sum="de8f12e3bb8dedf86a2b36d1d3a917f7" name="docs/what-is-what.txt" role="doc" />
+   <file baseinstalldir="pat" md5sum="3fd28a9e6348a627868f131f4b60da44" name="examples/BBCode/Filters/Date/_folder.txt" role="doc" />
+   <file baseinstalldir="pat" md5sum="976f1ff448fd10d9ed331bbdab61a0f8" name="examples/BBCode/Filters/Emoticon/Text/Beard.bbt" role="doc" />
+   <file baseinstalldir="pat" md5sum="92c24384e9af9e253ad50ffeb815c6fd" name="examples/BBCode/Filters/Emoticon/Text/Crying.bbt" role="doc" />
+   <file baseinstalldir="pat" md5sum="c6f95333ed5bef60b032caa29404c0c9" name="examples/BBCode/Filters/Emoticon/Text/Diving.bbt" role="doc" />
+   <file baseinstalldir="pat" md5sum="50585be4e3159a71c874c590d2ba12ec" name="examples/BBCode/Filters/Emoticon/Text/Happy.bbt" role="doc" />
+   <file baseinstalldir="pat" md5sum="83d0c92a0c4a8f1d689b98e1266d4b97" name="examples/BBCode/Filters/Emoticon/Text/Ouch.bbt" role="doc" />
+   <file baseinstalldir="pat" md5sum="c791de4ca2175e70264c116e29534e89" name="examples/BBCode/Filters/Emoticon/Text/Think.bbt" role="doc" />
+   <file baseinstalldir="pat" md5sum="8004064b17546e4380ce83d1be75b50d" name="examples/BBCode/Filters/Emoticon/Text/Tongue.bbt" role="doc" />
+   <file baseinstalldir="pat" md5sum="68d81a969b8743c618420bffe307a9c5" name="examples/BBCode/Filters/Emoticon/Text/Vampire.bbt" role="doc" />
+   <file baseinstalldir="pat" md5sum="88185ac3dd6327cd64d0a9749b4fe9c9" name="examples/BBCode/Filters/Link/Inline.bbt" role="doc" />
+   <file baseinstalldir="pat" md5sum="972f58b94995c7a57333c283b2e89a07" name="examples/BBCode/Filters/Link/Standalone.bbt" role="doc" />
+   <file baseinstalldir="pat" md5sum="3fd28a9e6348a627868f131f4b60da44" name="examples/BBCode/Filters/Php/_folder.txt" role="doc" />
+   <file baseinstalldir="pat" md5sum="9ce29e456d914afea818b1ebaa910d81" name="examples/BBCode/Tagtemplates/b.bbt" role="doc" />
+   <file baseinstalldir="pat" md5sum="9039450fb67fb8056e940a1e173fdf51" name="examples/BBCode/Tagtemplates/br.bbt" role="doc" />
+   <file baseinstalldir="pat" md5sum="216e6c685e3afc4b30ba20a73a2dd4d2" name="examples/BBCode/Tagtemplates/em.bbt" role="doc" />
+   <file baseinstalldir="pat" md5sum="71098345d6c4a5a104f186e594b1af8d" name="examples/BBCode/Tagtemplates/head.bbt" role="doc" />
+   <file baseinstalldir="pat" md5sum="c6ede216fb52f657b620c16cdffbb465" name="examples/BBCode/Tagtemplates/p.bbt" role="doc" />
+   <file baseinstalldir="pat" md5sum="efcd9d492f02b4afde7c61c7dfb29976" name="examples/BBCode/Tagtemplates/quote.bbt" role="doc" />
+   <file baseinstalldir="pat" md5sum="1de6b55656629b47f290d93baaa329c1" name="examples/data/example_function_translate.tmpl-de.ini" role="doc" />
+   <file baseinstalldir="pat" md5sum="71477b946a79ca7caa0920a986b00e3f" name="examples/data/example_function_translate.tmpl-default.ini" role="doc" />
+   <file baseinstalldir="pat" md5sum="cde7c07340aaf0cecb2843b428b683bc" name="examples/data/example_function_translate2.tmpl-de.ini" role="doc" />
+   <file baseinstalldir="pat" md5sum="e0e579dd1913f0fb180fdb3403f47453" name="examples/data/example_function_translate2.tmpl-default.ini" role="doc" />
+   <file baseinstalldir="pat" md5sum="813442cf7af491f218e444b6d9b48eb8" name="examples/img/pb_pattemplate.gif" role="doc" />
+   <file baseinstalldir="pat" md5sum="3f929e7927abe1e86e8bdcc40df3830c" name="examples/sql/templates.sql" role="doc" />
+   <file baseinstalldir="pat" md5sum="0e8dd5ff8c419a26146478882bea9984" name="examples/templates/components/hint.tmpl" role="doc" />
+   <file baseinstalldir="pat" md5sum="95435e9aee11ae47948f683da5e70f71" name="examples/templates/components/news.tmpl" role="doc" />
+   <file baseinstalldir="pat" md5sum="d95db7a71abc4deb9e0c775ee9ef340e" name="examples/templates/relative/example_attributes_relative.tmpl" role="doc" />
+   <file baseinstalldir="pat" md5sum="1baffb10db2446af51386660de4d4651" name="examples/templates/relative/example_attributes_relative_footer.tmpl" role="doc" />
+   <file baseinstalldir="pat" md5sum="87f8ed4c47c0108a161dd582285745bc" name="examples/templates/relative/example_attributes_relative_header.tmpl" role="doc" />
+   <file baseinstalldir="pat" md5sum="d8ac130e941c9c64ddfc8b7b07d382b4" name="examples/templates/relative/example_attributes_relative_main.tmpl" role="doc" />
+   <file baseinstalldir="pat" md5sum="b24c6613349081ab76c8b4cae03fcbcb" name="examples/templates/relative/example_attributes_relative_main2.tmpl" role="doc" />
+   <file baseinstalldir="pat" md5sum="d01c9a8b25666f1cacb347e7e2764fc2" name="examples/templates/example_api_addglobalvar.tmpl" role="doc" />
+   <file baseinstalldir="pat" md5sum="5c9700c088329085cc15a69fcdc6b3d3" name="examples/templates/example_api_addobject.tmpl" role="doc" />
+   <file baseinstalldir="pat" md5sum="391add0f9883461165dad60290ffe817" name="examples/templates/example_api_addvar.tmpl" role="doc" />
+   <file baseinstalldir="pat" md5sum="b597660e54cb63de88bf4c8e1ad91f63" name="examples/templates/example_api_cleartemplate.tmpl" role="doc" />
+   <file baseinstalldir="pat" md5sum="5571309242facda325acd47f78a57a35" name="examples/templates/example_api_displayparsedtemplate.tmpl" role="doc" />
+   <file baseinstalldir="pat" md5sum="6db2e01a01ba20da66df3e09225b6dbe" name="examples/templates/example_api_displayparsedtemplate2.tmpl" role="doc" />
+   <file baseinstalldir="pat" md5sum="6265a33e9352176c1846e296292045d9" name="examples/templates/example_api_freetemplate.tmpl" role="doc" />
+   <file baseinstalldir="pat" md5sum="65c017c5af22b0866e74dde1f37c2139" name="examples/templates/example_api_loadtemplate.tmpl" role="doc" />
+   <file baseinstalldir="pat" md5sum="bb43027aa63e408fa5d7991b22419c06" name="examples/templates/example_api_loadtemplate_main.tmpl" role="doc" />
+   <file baseinstalldir="pat" md5sum="b8bd7b408e60d121986b23d352e252d7" name="examples/templates/example_api_parseintovar.tmpl" role="doc" />
+   <file baseinstalldir="pat" md5sum="26803a0a2e5a59172e4f1c3564e5074b" name="examples/templates/example_api_placeholderexists.tmpl" role="doc" />
+   <file baseinstalldir="pat" md5sum="099c06c4326e5d3ac1657fe0a4f5f484" name="examples/templates/example_api_readtemplatesfrominput.tmpl" role="doc" />
+   <file baseinstalldir="pat" md5sum="cc19c2aeafd8db453a451313130c3ada" name="examples/templates/example_api_setattribute.tmpl" role="doc" />
+   <file baseinstalldir="pat" md5sum="6469855edc33ea2a7852ace98b5c048e" name="examples/templates/example_attributes_addsystemvars.tmpl" role="doc" />
+   <file baseinstalldir="pat" md5sum="29e4a8215c31f4bd97a218cff768c01d" name="examples/templates/example_attributes_limit.tmpl" role="doc" />
+   <file baseinstalldir="pat" md5sum="25c461b2df95266c20dd84dc0448fef6" name="examples/templates/example_attributes_loop.tmpl" role="doc" />
+   <file baseinstalldir="pat" md5sum="b757eb11561622a23bcce82c8c40d8bf" name="examples/templates/example_attributes_rowoffset.tmpl" role="doc" />
+   <file baseinstalldir="pat" md5sum="41f99d759312fea6d1215c9729e68eeb" name="examples/templates/example_attributes_src.tmpl" role="doc" />
+   <file baseinstalldir="pat" md5sum="e242fe539379547506116605fd6ecc15" name="examples/templates/example_attributes_src_footer.tmpl" role="doc" />
+   <file baseinstalldir="pat" md5sum="8df8c72807ce1bf39669bc5179f9d7ae" name="examples/templates/example_attributes_src_header.tmpl" role="doc" />
+   <file baseinstalldir="pat" md5sum="f80ff4ef01a006994af944da661cb14d" name="examples/templates/example_attributes_src_main.tmpl" role="doc" />
+   <file baseinstalldir="pat" md5sum="928ba603ebc4630abbf43b8ce9f5aeb2" name="examples/templates/example_attributes_unusedvars.tmpl" role="doc" />
+   <file baseinstalldir="pat" md5sum="71d653935beec4931557509944f8ea58" name="examples/templates/example_attributes_useglobals.tmpl" role="doc" />
+   <file baseinstalldir="pat" md5sum="179f42cef40a09d538236d10ef37fba6" name="examples/templates/example_attributes_varscope.tmpl" role="doc" />
+   <file baseinstalldir="pat" md5sum="169e54142224ef17af2b87cdf6d4d99f" name="examples/templates/example_attributes_varscope_multiple.tmpl" role="doc" />
+   <file baseinstalldir="pat" md5sum="a27a6f6f8a75ead31ac71ebe8c83a588" name="examples/templates/example_attributes_whitespace.tmpl" role="doc" />
+   <file baseinstalldir="pat" md5sum="d872470dd9a50766c2ed57cf73c8dd60" name="examples/templates/example_cache_template_file.tmpl" role="doc" />
+   <file baseinstalldir="pat" md5sum="b0da6304961ddf3a6badc9edfa928075" name="examples/templates/example_compiler_display.tmpl" role="doc" />
+   <file baseinstalldir="pat" md5sum="11cc69caca3f2afcea9249a80de13218" name="examples/templates/example_dump_dhtml.tmpl" role="doc" />
+   <file baseinstalldir="pat" md5sum="9607ab65427c20045ef06a0eb194fb4e" name="examples/templates/example_filter_input_stripcomments.tmpl" role="doc" />
+   <file baseinstalldir="pat" md5sum="76bd5bcf3d4abdf77b6a32da17187d84" name="examples/templates/example_filter_output_bbcode.tmpl" role="doc" />
+   <file baseinstalldir="pat" md5sum="0907f564399444a8eb8759186445cd47" name="examples/templates/example_filter_output_multiple.tmpl" role="doc" />
+   <file baseinstalldir="pat" md5sum="52b2109ad669623f0e448cde01dcfa0d" name="examples/templates/example_filter_output_per_template.tmpl" role="doc" />
+   <file baseinstalldir="pat" md5sum="5975ffcf24c6b3cd000bf679ca89197f" name="examples/templates/example_filter_output_tidy.tmpl" role="doc" />
+   <file baseinstalldir="pat" md5sum="2acbc7642e8ed8356ead45837c292caf" name="examples/templates/example_function_aliases.tmpl" role="doc" />
+   <file baseinstalldir="pat" md5sum="27d06efeb2b236230e37ac656271f737" name="examples/templates/example_function_attribute.tmpl" role="doc" />
+   <file baseinstalldir="pat" md5sum="10d16d50b816aca86cec87b439c997ba" name="examples/templates/example_function_call.tmpl" role="doc" />
+   <file baseinstalldir="pat" md5sum="7c32908b23a10e574f6ed759365f797b" name="examples/templates/example_function_default.tmpl" role="doc" />
+   <file baseinstalldir="pat" md5sum="78e47a1f6b684ff1da8ed1dbd11d4034" name="examples/templates/example_function_highlight.tmpl" role="doc" />
+   <file baseinstalldir="pat" md5sum="74e13f152d5897c06a59ee77e562e725" name="examples/templates/example_function_phphighlight.tmpl" role="doc" />
+   <file baseinstalldir="pat" md5sum="ac509fa7689d0fd7d9194f477c15ebe3" name="examples/templates/example_function_strip.tmpl" role="doc" />
+   <file baseinstalldir="pat" md5sum="66121a3ee529ebe4dd6329f0f0944412" name="examples/templates/example_function_time.tmpl" role="doc" />
+   <file baseinstalldir="pat" md5sum="abb4ac35bee9b657859f7bfb954693a4" name="examples/templates/example_function_translate.tmpl" role="doc" />
+   <file baseinstalldir="pat" md5sum="e5a669bb700c648a52ddc22fe4d6cdfe" name="examples/templates/example_function_translate2.tmpl" role="doc" />
+   <file baseinstalldir="pat" md5sum="edf6bfe6d52b30c7eacd532e5c17dd90" name="examples/templates/example_misc_autonaming.tmpl" role="doc" />
+   <file baseinstalldir="pat" md5sum="6c63ed971fbca63fabe3173cdd89ca1f" name="examples/templates/example_misc_dotsyntax.tmpl" role="doc" />
+   <file baseinstalldir="pat" md5sum="9e3a0cf174a1dd44b32d117130cd852f" name="examples/templates/example_misc_maintainbc.tmpl" role="doc" />
+   <file baseinstalldir="pat" md5sum="84e31a964abc1ed94611d3a35863f578" name="examples/templates/example_misc_namespace.tmpl" role="doc" />
+   <file baseinstalldir="pat" md5sum="c990d009b5a4fdd8701926b29eb97446" name="examples/templates/example_misc_quote.tmpl" role="doc" />
+   <file baseinstalldir="pat" md5sum="03cb5c5743102899e509e42bf993c05f" name="examples/templates/example_reader_file_multiple.tmpl" role="doc" />
+   <file baseinstalldir="pat" md5sum="9580f968dfd7e439e7db59b908858675" name="examples/templates/example_reader_it.tmpl" role="doc" />
+   <file baseinstalldir="pat" md5sum="a3a0ad9b45526433d0546b8897d4a066" name="examples/templates/example_realworld_changesource.tmpl" role="doc" />
+   <file baseinstalldir="pat" md5sum="7d92fb1aa7920d08a73bda65cf256d6b" name="examples/templates/example_realworld_changesource_home.tmpl" role="doc" />
+   <file baseinstalldir="pat" md5sum="c074e13f2e13e4a904bb95df3275014e" name="examples/templates/example_realworld_expression.tmpl" role="doc" />
+   <file baseinstalldir="pat" md5sum="7059cad367a6e7aab607d7ec2c41acfb" name="examples/templates/example_realworld_hiddenvar.tmpl" role="doc" />
+   <file baseinstalldir="pat" md5sum="28544f54e07f9038674dcfde545612a1" name="examples/templates/example_realworld_img.tmpl" role="doc" />
+   <file baseinstalldir="pat" md5sum="fec7c9dd2703ebd652825114ed353841" name="examples/templates/example_realworld_list.tmpl" role="doc" />
+   <file baseinstalldir="pat" md5sum="62db9d03b3fc7eaf52c9dcbe15c9a0b1" name="examples/templates/example_realworld_nestedvars.tmpl" role="doc" />
+   <file baseinstalldir="pat" md5sum="286279aa4501e93c29399f97bd83236a" name="examples/templates/example_realworld_paginate.tmpl" role="doc" />
+   <file baseinstalldir="pat" md5sum="bcb6c594740c3c7b02ee75cd51d78d8c" name="examples/templates/example_realworld_table.tmpl" role="doc" />
+   <file baseinstalldir="pat" md5sum="7c43e4935a5cf7e648ce526087b21c71" name="examples/templates/example_realworld_table_from_list.tmpl" role="doc" />
+   <file baseinstalldir="pat" md5sum="7bec109f6445ea099769a1c7c60c1417" name="examples/templates/example_realworld_varscopeparent.tmpl" role="doc" />
+   <file baseinstalldir="pat" md5sum="e8bb89c1617acc2497b1892b728f9329" name="examples/templates/example_tags_comment.tmpl" role="doc" />
+   <file baseinstalldir="pat" md5sum="baebbb2aebe854885a99edaa39639fac" name="examples/templates/example_tags_link.tmpl" role="doc" />
+   <file baseinstalldir="pat" md5sum="88e7d446e53c4c15fa8206801a65baf7" name="examples/templates/example_tags_sub.tmpl" role="doc" />
+   <file baseinstalldir="pat" md5sum="e178e95c63f150f52c27b2107e360ed2" name="examples/templates/example_tags_tmpl.tmpl" role="doc" />
+   <file baseinstalldir="pat" md5sum="d2eaabdadd28cd2b76c6d1974104c3c6" name="examples/templates/example_tags_var.tmpl" role="doc" />
+   <file baseinstalldir="pat" md5sum="9f10058799789c95b690276d8077fba0" name="examples/templates/example_type_condition.tmpl" role="doc" />
+   <file baseinstalldir="pat" md5sum="60493f8a50693959c56b212d6c3dc44e" name="examples/templates/example_type_condition_variable.tmpl" role="doc" />
+   <file baseinstalldir="pat" md5sum="4d1b8125177097576f5270684d2d7161" name="examples/templates/example_type_modulo.tmpl" role="doc" />
+   <file baseinstalldir="pat" md5sum="4c706e60e7fc4665b93d4ecf0ca4f37e" name="examples/templates/example_type_modulo_empty.tmpl" role="doc" />
+   <file baseinstalldir="pat" md5sum="579a25a944e48215bc02e8191abd5d93" name="examples/templates/example_type_modulo_single.tmpl" role="doc" />
+   <file baseinstalldir="pat" md5sum="fe1dfb90fe5b92620a342f4228985ad5" name="examples/templates/example_type_oddeven.tmpl" role="doc" />
+   <file baseinstalldir="pat" md5sum="27b324e038176f1731b4715dcfea9be8" name="examples/templates/example_type_simplecondition.tmpl" role="doc" />
+   <file baseinstalldir="pat" md5sum="3b180818eb07a7662c534ab46bf98cff" name="examples/templates/example_type_standard.tmpl" role="doc" />
+   <file baseinstalldir="pat" md5sum="15c179cc0c2086d80d4e3a86c3fb7554" name="examples/templates/example_var_copyfrom.tmpl" role="doc" />
+   <file baseinstalldir="pat" md5sum="87fdf89ab83155b56484d88e72baf304" name="examples/templates/example_var_default_function.tmpl" role="doc" />
+   <file baseinstalldir="pat" md5sum="eae54940f65591c7137a49b29fe82e2b" name="examples/templates/example_var_global.tmpl" role="doc" />
+   <file baseinstalldir="pat" md5sum="93b4875b1da1fef4fc6801d1900fae0a" name="examples/templates/example_var_modifier.tmpl" role="doc" />
+   <file baseinstalldir="pat" md5sum="afc262cfdc79fe694545795a2d9a1af2" name="examples/templates/example_var_modifier_default.tmpl" role="doc" />
+   <file baseinstalldir="pat" md5sum="1601c53c3ea94b6cd073dd500c87af7d" name="examples/templates/example_var_modifier_multiple.tmpl" role="doc" />
+   <file baseinstalldir="pat" md5sum="ab2e37abaa1ed85d6300b9ec4df92f2c" name="examples/templates/example_var_modifier_placeholder.tmpl" role="doc" />
+   <file baseinstalldir="pat" md5sum="ebb1a2c731ce2b497ffb119cc87697ff" name="examples/templates/example_var_modifier_short.tmpl" role="doc" />
+   <file baseinstalldir="pat" md5sum="1e9a7dff9b055a31d0bc1c7aff210ca6" name="examples/templates/example_var_modifier_varscope.tmpl" role="doc" />
+   <file baseinstalldir="pat" md5sum="d54f08a6d7683243fc21c4836223460b" name="examples/templates-2/example_reader_file_multiple2.tmpl" role="doc" />
+   <file baseinstalldir="pat" md5sum="005763bc503db842c4ba5730880965e1" name="examples/tmplCache/readme.txt" role="doc" />
+   <file baseinstalldir="pat" md5sum="cab10a10dfeb7d496a9ea268feb1cab4" name="examples/example_api_addglobalvar.php" role="doc" />
+   <file baseinstalldir="pat" md5sum="21e59ac87d886c240974bc52514aff26" name="examples/example_api_addobject.php" role="doc" />
+   <file baseinstalldir="pat" md5sum="522c221808cb6f7896a9e18cd8621fe2" name="examples/example_api_addvar.php" role="doc" />
+   <file baseinstalldir="pat" md5sum="bea76716247836babd8c4f62cf5a286b" name="examples/example_api_cleartemplate.php" role="doc" />
+   <file baseinstalldir="pat" md5sum="2309719afdfc57996840cc10b58d6925" name="examples/example_api_displayparsedtemplate.php" role="doc" />
+   <file baseinstalldir="pat" md5sum="4e6cc643dbd9f86afc54e9cf3a5c4bb2" name="examples/example_api_freetemplate.php" role="doc" />
+   <file baseinstalldir="pat" md5sum="ecc907b65741e3a67c1fa2d712148184" name="examples/example_api_loadtemplate.php" role="doc" />
+   <file baseinstalldir="pat" md5sum="ae703803d2046357551773eb2a303f98" name="examples/example_api_parseintovar.php" role="doc" />
+   <file baseinstalldir="pat" md5sum="d73a6d1152cc6422307624aa69056a29" name="examples/example_api_placeholderexists.php" role="doc" />
+   <file baseinstalldir="pat" md5sum="18febdd084e5077c146fe8e81dea499e" name="examples/example_api_readtemplatesfrominput.php" role="doc" />
+   <file baseinstalldir="pat" md5sum="8051a1021dbf91c0ef34bce98f6faecf" name="examples/example_api_setattribute.php" role="doc" />
+   <file baseinstalldir="pat" md5sum="9bdc56d96db27b94ff54f19475b8ae18" name="examples/example_attributes_addsystemvars.php" role="doc" />
+   <file baseinstalldir="pat" md5sum="5ff71fb3176f793dbdbd79ee413c5c8a" name="examples/example_attributes_limit.php" role="doc" />
+   <file baseinstalldir="pat" md5sum="5226d2f86a9b90a865f04df6ab430526" name="examples/example_attributes_loop.php" role="doc" />
+   <file baseinstalldir="pat" md5sum="5dc1fb4a8830e5ffa76688d539030782" name="examples/example_attributes_relative.php" role="doc" />
+   <file baseinstalldir="pat" md5sum="b80ea1772a90017ee21bad0248ed09ca" name="examples/example_attributes_rowoffset.php" role="doc" />
+   <file baseinstalldir="pat" md5sum="68b7da1c31ca99a7c9f3852cc544b9aa" name="examples/example_attributes_src.php" role="doc" />
+   <file baseinstalldir="pat" md5sum="3271ddd5456cfd4526959c4986ab8e1e" name="examples/example_attributes_unusedvars.php" role="doc" />
+   <file baseinstalldir="pat" md5sum="8d3be377b4f33124062b4f2966cbbdd7" name="examples/example_attributes_useglobals.php" role="doc" />
+   <file baseinstalldir="pat" md5sum="4af4b4e57a740b86a13e98ba0981fc5c" name="examples/example_attributes_varscope.php" role="doc" />
+   <file baseinstalldir="pat" md5sum="8dec496c0b7fdb71e08469dd122928c7" name="examples/example_attributes_varscope_multiple.php" role="doc" />
+   <file baseinstalldir="pat" md5sum="72e70b8c47528f271c3693da74efbbe2" name="examples/example_attributes_whitespace.php" role="doc" />
+   <file baseinstalldir="pat" md5sum="9bbe8e84f2a80956126127ba8d53004e" name="examples/example_cache_template_file.php" role="doc" />
+   <file baseinstalldir="pat" md5sum="d72395d9f9999a65f762aac315a190e8" name="examples/example_compiler_display.php" role="doc" />
+   <file baseinstalldir="pat" md5sum="0b3832702bb9addd5993e38d9cfb1d0e" name="examples/example_condition_basic.php" role="doc" />
+   <file baseinstalldir="pat" md5sum="323969c34a14a740f07a944a64e01489" name="examples/example_dump_dhtml.php" role="doc" />
+   <file baseinstalldir="pat" md5sum="83ae3283ae800c48f0defe829774193b" name="examples/example_dump_xul.php" role="doc" />
+   <file baseinstalldir="pat" md5sum="e293ac034c7c376d2dca18bd9709ec87" name="examples/example_filter_input_stripcomments.php" role="doc" />
+   <file baseinstalldir="pat" md5sum="ab3b4728c52d2905365cb717dfeeaa15" name="examples/example_filter_output_bbcode.php" role="doc" />
+   <file baseinstalldir="pat" md5sum="3003005f540295de489b5854e6bb5724" name="examples/example_filter_output_multiple.php" role="doc" />
+   <file baseinstalldir="pat" md5sum="97d4c1d40af10a844cc91bc7a8bbf354" name="examples/example_filter_output_per_template.php" role="doc" />
+   <file baseinstalldir="pat" md5sum="59897a316f79aac2650955b8f8864609" name="examples/example_filter_output_tidy.php" role="doc" />
+   <file baseinstalldir="pat" md5sum="585e214c8ebf5ff0dc135771bb18f78c" name="examples/example_function_aliases.php" role="doc" />
+   <file baseinstalldir="pat" md5sum="8764acafe797c2bb98f4164f6ffe1353" name="examples/example_function_attribute.php" role="doc" />
+   <file baseinstalldir="pat" md5sum="1af3cef1e6d3e12c769b42e832dba4c8" name="examples/example_function_call.php" role="doc" />
+   <file baseinstalldir="pat" md5sum="49a8c961ffe774cf11547ca3ea8e5531" name="examples/example_function_call_autoload.php" role="doc" />
+   <file baseinstalldir="pat" md5sum="79cf888654bf3f61f60b7bc72f2ce039" name="examples/example_function_default.php" role="doc" />
+   <file baseinstalldir="pat" md5sum="c23b9ca26378cf5b5420edb6d4105649" name="examples/example_function_highlight.php" role="doc" />
+   <file baseinstalldir="pat" md5sum="5632e45cd3741463680398259b512d93" name="examples/example_function_phphighlight.php" role="doc" />
+   <file baseinstalldir="pat" md5sum="85b451939d6df180ae153ced2e42b00f" name="examples/example_function_strip.php" role="doc" />
+   <file baseinstalldir="pat" md5sum="acd53ee0c2d5bf61ed23511197556cd8" name="examples/example_function_time.php" role="doc" />
+   <file baseinstalldir="pat" md5sum="4a9df14de2e65e679c4b8abb6f980a06" name="examples/example_function_translate.php" role="doc" />
+   <file baseinstalldir="pat" md5sum="5041c9c2e538c33faa8f3793ecdf8a03" name="examples/example_misc_autonaming.php" role="doc" />
+   <file baseinstalldir="pat" md5sum="8f010cab4ec6af15d39cb5d0e28f3653" name="examples/example_misc_dotsyntax.php" role="doc" />
+   <file baseinstalldir="pat" md5sum="f902e6e4ec1a3939e3839eeba891d2a0" name="examples/example_misc_maintainbc.php" role="doc" />
+   <file baseinstalldir="pat" md5sum="a52264963c0cb79ed628bb3919b1f746" name="examples/example_misc_namespace.php" role="doc" />
+   <file baseinstalldir="pat" md5sum="280c2fc16c4042b61ed22eb9d56dc5dc" name="examples/example_misc_quote.php" role="doc" />
+   <file baseinstalldir="pat" md5sum="40b165ef6a1af54312c736a5d6b3b2b7" name="examples/example_reader_combined.php" role="doc" />
+   <file baseinstalldir="pat" md5sum="7f09e7bc8bc1bbdbc8e3280d781adea2" name="examples/example_reader_db.php" role="doc" />
+   <file baseinstalldir="pat" md5sum="c0e51a7c6c200af4cf3a72ee6c89af3b" name="examples/example_reader_file_multiple.php" role="doc" />
+   <file baseinstalldir="pat" md5sum="d9c495f9b7c65e11d36f692502ca2a29" name="examples/example_reader_it.php" role="doc" />
+   <file baseinstalldir="pat" md5sum="8bc4f299d069105af4606346b8ed2462" name="examples/example_reader_string.php" role="doc" />
+   <file baseinstalldir="pat" md5sum="b2f4286b785dab136a58ef1bcdccf686" name="examples/example_realworld_changesource.php" role="doc" />
+   <file baseinstalldir="pat" md5sum="ebfd1af2fa57fbe04cdcf6a771e4033c" name="examples/example_realworld_expression.php" role="doc" />
+   <file baseinstalldir="pat" md5sum="709549a658a377a51a32afcb77debc10" name="examples/example_realworld_hiddenvar.php" role="doc" />
+   <file baseinstalldir="pat" md5sum="416593bd8cec64581fff4b00e81cb79b" name="examples/example_realworld_img.php" role="doc" />
+   <file baseinstalldir="pat" md5sum="970e5a7d2fb2bd3209036eadd2585ea4" name="examples/example_realworld_list.php" role="doc" />
+   <file baseinstalldir="pat" md5sum="2ffc7c4236b77cbe73421521dc2c4a95" name="examples/example_realworld_nestedvars.php" role="doc" />
+   <file baseinstalldir="pat" md5sum="aebd68e63ff4faecd73a7473454c62d8" name="examples/example_realworld_paginate.php" role="doc" />
+   <file baseinstalldir="pat" md5sum="99e55ae10506d652396247a7fc1cd45a" name="examples/example_realworld_table.php" role="doc" />
+   <file baseinstalldir="pat" md5sum="164b01a5369a807e6d41abcde55f6efa" name="examples/example_realworld_table_from_list.php" role="doc" />
+   <file baseinstalldir="pat" md5sum="6faadac969841dc81d6b3de7030c8918" name="examples/example_realworld_varscopeparent.php" role="doc" />
+   <file baseinstalldir="pat" md5sum="7d593082dacc571c6815946a98ee36ee" name="examples/example_tags_comment.php" role="doc" />
+   <file baseinstalldir="pat" md5sum="2d1a35e347000019cda8c830566d516b" name="examples/example_tags_link.php" role="doc" />
+   <file baseinstalldir="pat" md5sum="7fac9e2e45ee36b1345221870059beba" name="examples/example_tags_sub.php" role="doc" />
+   <file baseinstalldir="pat" md5sum="41da1df38398cd8c354fe497d5017d43" name="examples/example_tags_tmpl.php" role="doc" />
+   <file baseinstalldir="pat" md5sum="4a512f0ebafbe9110908ef8c53def2d2" name="examples/example_tags_var.php" role="doc" />
+   <file baseinstalldir="pat" md5sum="7f96328d4a5441d8c6149d9c9db0e652" name="examples/example_type_condition.php" role="doc" />
+   <file baseinstalldir="pat" md5sum="7bcfa48aa305bbc6a375ff02e033ad3d" name="examples/example_type_condition_variable.php" role="doc" />
+   <file baseinstalldir="pat" md5sum="f6545c55950efed06bf1793c183f7036" name="examples/example_type_modulo.php" role="doc" />
+   <file baseinstalldir="pat" md5sum="da1f9b2d43d2dc6567120106430a4ab1" name="examples/example_type_modulo_empty.php" role="doc" />
+   <file baseinstalldir="pat" md5sum="051254a16a0c01ed8b04f605ec482bd2" name="examples/example_type_modulo_single.php" role="doc" />
+   <file baseinstalldir="pat" md5sum="cb4f368be241ca8a4200478cea96beff" name="examples/example_type_oddeven.php" role="doc" />
+   <file baseinstalldir="pat" md5sum="ed08330f2732c420dcb0ecd9fa06d709" name="examples/example_type_simplecondition.php" role="doc" />
+   <file baseinstalldir="pat" md5sum="b5ae4f8083bb19ce5c6e70e4ac0f5fb6" name="examples/example_type_standard.php" role="doc" />
+   <file baseinstalldir="pat" md5sum="160db968bf300d10420faf09762b443b" name="examples/example_var_copyfrom.php" role="doc" />
+   <file baseinstalldir="pat" md5sum="66f8a4b4e42266638040fedea52beea8" name="examples/example_var_default_function.php" role="doc" />
+   <file baseinstalldir="pat" md5sum="60395cadabfa3abb6b376f36e6dc02bd" name="examples/example_var_global.php" role="doc" />
+   <file baseinstalldir="pat" md5sum="d179a309df6a899f8a5d14befdb673ef" name="examples/example_var_modifier.php" role="doc" />
+   <file baseinstalldir="pat" md5sum="7a00ab175e1f533bff2f9b3844061bc0" name="examples/example_var_modifier_default.php" role="doc" />
+   <file baseinstalldir="pat" md5sum="bc58c62a6d0c7279c27338f034fc486b" name="examples/example_var_modifier_multiple.php" role="doc" />
+   <file baseinstalldir="pat" md5sum="76a273d746edc5744339856a0518248e" name="examples/example_var_modifier_placeholder.php" role="doc" />
+   <file baseinstalldir="pat" md5sum="3e6369bfb799c75fb9597f34875c97d7" name="examples/example_var_modifier_short.php" role="doc" />
+   <file baseinstalldir="pat" md5sum="e86ef39c16122c4f7e64abb96dc1d9ff" name="examples/example_var_modifier_varscope.php" role="doc" />
+   <file baseinstalldir="pat" md5sum="3766ef6a6706859a93db792af05c86db" name="examples/index.php" role="doc" />
+   <file baseinstalldir="pat" md5sum="95e916629a5a165e36aa38b65ccf0b2d" name="examples/index_main.php" role="doc" />
+   <file baseinstalldir="pat" md5sum="b961423bed04e0ba09778f55cf8a9899" name="examples/index_nav.php" role="doc" />
+   <file baseinstalldir="pat" md5sum="4b3970d21765d6a5456a0e88251e455c" name="examples/index_sections.php" role="doc" />
+   <file baseinstalldir="pat" md5sum="2c940717b1aa86b6e24d79d7b34c930b" name="examples/_dumpTemplate.php" role="doc" />
+   <file baseinstalldir="pat" md5sum="daeb821cc7b6e69f397f0a87ef3fd6fd" name="examples/_styles.css" role="doc" />
+   <file baseinstalldir="pat" md5sum="d21fe9823b77b62c66d3291e06fc34e0" name="examples/_viewExample.php" role="doc" />
+   <file baseinstalldir="pat" md5sum="9182f6173a8090d19753ce63d4eb649d" name="patTemplate/Dump/Html.php" role="php" />
+   <file baseinstalldir="pat" md5sum="89b4b7adfe3bebfd64d6d6056fd98d53" name="patTemplate/Dump/XUL.php" role="php" />
+   <file baseinstalldir="pat" md5sum="295e6a68bcb26fc42995c40cf810cce5" name="patTemplate/Function/Alias.php" role="php" />
+   <file baseinstalldir="pat" md5sum="6f0e198d3899de0d8647bf8457c0620a" name="patTemplate/Function/Attribute.php" role="php" />
+   <file baseinstalldir="pat" md5sum="b881867c396247748fcb8d410f50913a" name="patTemplate/Function/Call.php" role="php" />
+   <file baseinstalldir="pat" md5sum="be9f54652cd2eca8aaa7da8e7b0187e4" name="patTemplate/Function/Globalvar.php" role="php" />
+   <file baseinstalldir="pat" md5sum="b21df2b298840a9b149c81ff6b8ea4fe" name="patTemplate/Function/Highlight.php" role="php" />
+   <file baseinstalldir="pat" md5sum="3b6784e3c261fca60d241ca342b4c8d7" name="patTemplate/Function/Img.php" role="php" />
+   <file baseinstalldir="pat" md5sum="b4057d153a24aca4a4de5d6f5eb44b90" name="patTemplate/Function/Phphighlight.php" role="php" />
+   <file baseinstalldir="pat" md5sum="5c477a5ec1d5f0adc2c5bf87aadb49c8" name="patTemplate/Function/Strip.php" role="php" />
+   <file baseinstalldir="pat" md5sum="bda3c6b1ff158677b059cc187368d941" name="patTemplate/Function/Time.php" role="php" />
+   <file baseinstalldir="pat" md5sum="673722a83f12ba2b387942e0f82ec453" name="patTemplate/Function/Translate.php" role="php" />
+   <file baseinstalldir="pat" md5sum="6c354b705244db2b2b502d852f32d947" name="patTemplate/InputFilter/ShortModifiers.php" role="php" />
+   <file baseinstalldir="pat" md5sum="0b6ce710c9981d4ee3e386b44e65f5da" name="patTemplate/InputFilter/StripComments.php" role="php" />
+   <file baseinstalldir="pat" md5sum="2ed4d9658f46991cf6c8a7a2df4036c7" name="patTemplate/Modifier/HTML/Img.php" role="php" />
+   <file baseinstalldir="pat" md5sum="19e6297d884e6e7c87e8c8848b72b0ce" name="patTemplate/Modifier/Dateformat.php" role="php" />
+   <file baseinstalldir="pat" md5sum="296670ded1e587430dcfa346b3171497" name="patTemplate/Modifier/Expression.php" role="php" />
+   <file baseinstalldir="pat" md5sum="842437a4409e39c46e5061f31d2ef370" name="patTemplate/Modifier/Numberformat.php" role="php" />
+   <file baseinstalldir="pat" md5sum="d0edf4ceeae9424286de9317280efdb8" name="patTemplate/Modifier/QuoteLatex.php" role="php" />
+   <file baseinstalldir="pat" md5sum="76322f0f6fe90049717338408b37f0d5" name="patTemplate/Modifier/Surround.php" role="php" />
+   <file baseinstalldir="pat" md5sum="3c022139f249313b11f325cb10d95e71" name="patTemplate/Modifier/Truncate.php" role="php" />
+   <file baseinstalldir="pat" md5sum="30cf2cadecb3b4ca44e69623f1bb8d88" name="patTemplate/Modifier/Wordwrapper.php" role="php" />
+   <file baseinstalldir="pat" md5sum="52beb530aeeced965a8b014d839da145" name="patTemplate/OutputFilter/BBCode.php" role="php" />
+   <file baseinstalldir="pat" md5sum="5d00b4af9efdd9b8992b05a19f5f5442" name="patTemplate/OutputFilter/Gzip.php" role="php" />
+   <file baseinstalldir="pat" md5sum="32f573a50e02f86fd7a7deb3fd5b6c19" name="patTemplate/OutputFilter/HighlightPhp.php" role="php" />
+   <file baseinstalldir="pat" md5sum="ae6e2d034a0dc3a31d5f1398fb1069c9" name="patTemplate/OutputFilter/PdfLatex.php" role="php" />
+   <file baseinstalldir="pat" md5sum="8036e351a81c36bd2e3fa6c343f125c1" name="patTemplate/OutputFilter/StripWhitespace.php" role="php" />
+   <file baseinstalldir="pat" md5sum="db7b35547cf90b597bd83da7cf4773d6" name="patTemplate/OutputFilter/Tidy.php" role="php" />
+   <file baseinstalldir="pat" md5sum="d284712ee5a0e94c69180a22ae5bd8b6" name="patTemplate/Reader/DB.php" role="php" />
+   <file baseinstalldir="pat" md5sum="31736727b104982c51987ba1c42cdc66" name="patTemplate/Reader/File.php" role="php" />
+   <file baseinstalldir="pat" md5sum="379e96bebe728e2f624c2128ae851714" name="patTemplate/Reader/IT.php" role="php" />
+   <file baseinstalldir="pat" md5sum="4daae216a30e88c3b8011c59365abe78" name="patTemplate/Reader/String.php" role="php" />
+   <file baseinstalldir="pat" md5sum="60b864d20f92bc8a3fffa00e3c48ee4d" name="patTemplate/Stat/File.php" role="php" />
+   <file baseinstalldir="pat" md5sum="b3891493e24660418f13f651ab097273" name="patTemplate/TemplateCache/eAccelerator.php" role="php" />
+   <file baseinstalldir="pat" md5sum="3b24bb2032fe87bf15be63d016fae81e" name="patTemplate/TemplateCache/File.php" role="php" />
+   <file baseinstalldir="pat" md5sum="929f5a3a4ccc921358ed7bfc30ec0085" name="patTemplate/TemplateCache/MMCache.php" role="php" />
+   <file baseinstalldir="pat" md5sum="438fe6ca3add827411e9a7846f9f1438" name="patTemplate/Compiler.php" role="php" />
+   <file baseinstalldir="pat" md5sum="032d0cbb166c1093a206ca1ec10125e3" name="patTemplate/Dump.php" role="php" />
+   <file baseinstalldir="pat" md5sum="24fff3dd00694cce39a8dc0dc5f0f53a" name="patTemplate/Function.php" role="php" />
+   <file baseinstalldir="pat" md5sum="70ac56d6774c787b4b8d9cfe8ff3fd22" name="patTemplate/InputFilter.php" role="php" />
+   <file baseinstalldir="pat" md5sum="da8d093b85f007196c7193e6d28655a4" name="patTemplate/Modifier.php" role="php" />
+   <file baseinstalldir="pat" md5sum="188b68b07df410814502353e50267666" name="patTemplate/Module.php" role="php" />
+   <file baseinstalldir="pat" md5sum="9d28aa4e53e3638e22704cbbd15e2515" name="patTemplate/OutputCache.php" role="php" />
+   <file baseinstalldir="pat" md5sum="1512ae272a8999f463d453ded2957061" name="patTemplate/OutputFilter.php" role="php" />
+   <file baseinstalldir="pat" md5sum="01523b3417af941a4ce4cea05815a35a" name="patTemplate/Reader.php" role="php" />
+   <file baseinstalldir="pat" md5sum="0e042f78ed9fb595bc997d9ce7a5a823" name="patTemplate/Stat.php" role="php" />
+   <file baseinstalldir="pat" md5sum="9c46092bad98bb8958ef69b544b431ab" name="patTemplate/TemplateCache.php" role="php" />
+   <file baseinstalldir="pat" md5sum="5a615bb372287361f3b6e7065b1c23ba" name="tests/templates/components/header.tmpl" role="test" />
+   <file baseinstalldir="pat" md5sum="f52aa43cd36198473bdbdc4ca3d3cdba" name="tests/templates/pages/bug141.tmpl" role="test" />
+   <file baseinstalldir="pat" md5sum="915a7a21bed72413a932a8f6173dcf33" name="tests/templates/bug74.tmpl" role="test" />
+   <file baseinstalldir="pat" md5sum="f39245e17ed8b73637e1a36b23d57df1" name="tests/templates/bug138.tmpl" role="test" />
+   <file baseinstalldir="pat" md5sum="eb214818654938dc0fafd6f1e0ed6b8a" name="tests/templates/bug144.tmpl" role="test" />
+   <file baseinstalldir="pat" md5sum="b15df64ba14b6d42c41aa227e9e93e20" name="tests/templates/bug145.tmpl" role="test" />
+   <file baseinstalldir="pat" md5sum="da4f77c250bc23d461e4a6122aa7f675" name="tests/templates/bug145_2.tmpl" role="test" />
+   <file baseinstalldir="pat" md5sum="3cb097e52b02d2a102895168709b1d58" name="tests/templates/bug152.tmpl" role="test" />
+   <file baseinstalldir="pat" md5sum="bb9d20ba6fcc0e28466c9c87eb67074c" name="tests/templates/bug155.tmpl" role="test" />
+   <file baseinstalldir="pat" md5sum="30f2cb027a7654aeb49fe6e1071ab9c3" name="tests/benchmark_sprintf.php" role="test" />
+   <file baseinstalldir="pat" md5sum="5f5756f3030ef754217a2f0bac46adb6" name="tests/bug74.php" role="test" />
+   <file baseinstalldir="pat" md5sum="bec18c727980418af981a97196542f08" name="tests/bug138.php" role="test" />
+   <file baseinstalldir="pat" md5sum="33a2ee0104bb187722dcf53866a30b7b" name="tests/bug141.php" role="test" />
+   <file baseinstalldir="pat" md5sum="cb8dd6e813fefab960b0a5ee2d075d70" name="tests/bug144.php" role="test" />
+   <file baseinstalldir="pat" md5sum="482b4f4f20216c3e9238837db8b25750" name="tests/bug145.php" role="test" />
+   <file baseinstalldir="pat" md5sum="cd273929ab8b2f878efacf2f0e0f6078" name="tests/bug152.php" role="test" />
+   <file baseinstalldir="pat" md5sum="bfef05ce8aee1701d7b960bb13496203" name="tests/bug155.php" role="test" />
+   <file baseinstalldir="pat" md5sum="427211fb7f6e3c8d910b22aa982bfd13" name="tests/readme.txt" role="test" />
+   <file baseinstalldir="pat" md5sum="4d9a7db5958d5be2a4cc787301ce2cfa" name="patTemplate.php" role="php" />
+  </dir>
+ </contents>
+ <dependencies>
+  <required>
+   <php>
+    <min>4.2.0</min>
+   </php>
+   <pearinstaller>
+    <min>1.4.0</min>
+   </pearinstaller>
+   <package>
+    <name>patError</name>
+    <channel>pear.php-tools.net</channel>
+    <min>1.1.0</min>
+   </package>
+  </required>
+  <optional>
+   <package>
+    <name>patBBCode</name>
+    <channel>pear.php-tools.net</channel>
+   </package>
+   <package>
+    <name>XML_XUL</name>
+    <channel>pear.php.net</channel>
+    <min>0.8.1</min>
+   </package>
+   <package>
+    <name>Text_Highlighter</name>
+    <channel>pear.php.net</channel>
+   </package>
+  </optional>
+ </dependencies>
+ <phprelease />
+ <changelog>
+  <release>
+   <version>
+    <release>3.1.0b1</release>
+    <api>3.1.0</api>
+   </version>
+   <stability>
+    <release>beta</release>
+    <api>stable</api>
+   </stability>
+   <date>2006-08-20</date>
+   <license uri="http://www.gnu.org/copyleft/lesser.txt">LGPL</license>
+   <notes>Changes since 3.0.x:
+- allowed more than one namespace
+- added defaultFunction option, to define a function that is called for unknown functions
+- added new built-in condition __single
+- allow quoting variables using {FOO\}
+- implemented autoload in Call function
+- added new system variable: {PAT_ROW_TYPE} = odd|even
+- added &quot;rowOffset&quot; attribute that determines the starting point of PAT_ROW_VAR
+- allow usage of $self in the return values of the expression modifier (by Andrew Eddie of Mambo)
+- added &quot;relative&quot; attribute to load templates relative to the current template (request #89)
+- the varscope attribute now supports a list of templates
+- in the requiredvars attribute of a simple condition template it is now possible to specify the exact value of a variable via requiredvars=&quot;var=value&quot; (request #93)
+- added clearVar(), clearVars(), clearGlobalVar() and clearGlobalVars() (request #91)
+- added fourth parameter to addObject() to hide private properties
+- addObject() now checks, whether an object implements a getVars() method
+- added experimental XUL dump using PEAR::XML_XUL (needs a lot of love)
+- added TemplateCaches for MMCache and eAccelerator (contributed by Mike Valstar)
+- added placeholderExists() method (request #100)
+- added Truncate Modifier (contributed by Rafa Couto)
+- StripComments Input Filter now also strips Javascript multiline comments (Tim-Patrick M�rk)
+- Allow output filters for single templates (using the OutputFilter=&quot;...&quot; attribute and applyOutputFilter()) (Request #114)
+- Add default variable modifiers for a template (Request #92)
+- Added OutputFilter to highlight PHP code
+- File Reader: Allow array containing several root directories as template root
+
+Changes since 3.1.0a1:
+- Allow the use of a variable in conditions (&lt;pat:sub condition=&quot;{FOO}&quot;/&gt;)
+- Added new custom function Highlight that is able to apply syntax highlighting to your code (requires PEAR::Text_Highlighter)
+- Added new custom function Img to create HTML images (contributed by Jens Strobel)
+- Fixed notice in File reader (argh)
+- Added parameter for TemplateCache_File to set the filemode (request #127)
+- Added InputFilter that allows you to use the short variable modifier syntax of Smarty (schst, Axel Stettner) (request #136)
+- Fixed bug with condition __empty that was used instead of condition 0 (bug #132)
+- Fixed bug in Dateformat modifier
+- Fixed bug with condition templates that have __single and __empty defined (bug #138)
+- Bugfixes and new features in Translate function (bugs #68 and #73) (argh)
+- Can now set a preconfigured patBBCode object for the BBCode output filter, and added some documentation (argh)
+- Fixed the module file search that would not go through all defined folders (argh)
+- Added patch to translate function to allow combining of the translationFile and translationUseFolders options (argh)
+- Fixed bug #144: StripWhitespace output filter breaks UTF-8 encoded data (schst)
+- Added DB reader to read templates from any database supported by PEAR::DB (schst)
+- Fixed bug #74: Attributes &quot;maxloop&quot; and &quot;conditions&quot; causes PHP crash (schst)
+- Fixed an issue when using clearTemplate() on a template that does not exist (argh)
+- Fixed bug #150: Notice when enabling the template cache (schst)
+- Fixed bug #151: Invalid filemode in template cache (patch by Frank Kleine)
+- Fixed bug #153: pdflatex stops on errors (patch by p_ansell &lt;at&gt; yahoo [dot] com)
+- Fixed bug with variables that contain only one character (slerman)
+
+Changes since 3.1.0a2:
+- Fixed bug #152 (__single breaks first) (schst)
+- Allow multiple modifiers per variable (schst)
+- Implemented request #154: functions as defaults for variables (schst)
+- Add support for varscope __parent in variable modifier (gERD)
+- Add support for varscope __parent in variable tag (gERD)
+- Fixed bug #155: Automatically handle nested objects (schst)</notes>
+  </release>
+  <release>
+   <version>
+    <release>3.1.0b2</release>
+    <api>3.1.0</api>
+   </version>
+   <stability>
+    <release>beta</release>
+    <api>stable</api>
+   </stability>
+   <date>2006-11-21</date>
+   <license uri="http://www.gnu.org/copyleft/lesser.txt">LGPL</license>
+   <notes>Changes since 3.0.x:
+- allowed more than one namespace
+- added defaultFunction option, to define a function that is called for unknown functions
+- added new built-in condition __single
+- allow quoting variables using \{FOO\}
+- implemented autoload in Call function
+- added new system variable: {PAT_ROW_TYPE} = odd|even
+- added &quot;rowOffset&quot; attribute that determines the starting point of PAT_ROW_VAR
+- allow usage of $self in the return values of the expression modifier (by Andrew Eddie of Mambo)
+- added &quot;relative&quot; attribute to load templates relative to the current template (request #89)
+- the varscope attribute now supports a list of templates
+- in the requiredvars attribute of a simple condition template it is now possible to specify the exact value of a variable via requiredvars=&quot;var=value&quot; (request #93)
+- added clearVar(), clearVars(), clearGlobalVar() and clearGlobalVars() (request #91)
+- added fourth parameter to addObject() to hide private properties
+- addObject() now checks, whether an object implements a getVars() method
+- added experimental XUL dump using PEAR::XML_XUL (needs a lot of love)
+- added TemplateCaches for MMCache and eAccelerator (contributed by Mike Valstar)
+- added placeholderExists() method (request #100)
+- added Truncate Modifier (contributed by Rafa Couto)
+- StripComments Input Filter now also strips Javascript multiline comments (Tim-Patrick M�rk)
+- Allow output filters for single templates (using the OutputFilter=&quot;...&quot; attribute and applyOutputFilter()) (Request #114)
+- Add default variable modifiers for a template (Request #92)
+- Added OutputFilter to highlight PHP code
+- File Reader: Allow array containing several root directories as template root
+
+Changes since 3.1.0a1:
+- Allow the use of a variable in conditions (&lt;pat:sub condition=&quot;{FOO}&quot;/&gt;)
+- Added new custom function Highlight that is able to apply syntax highlighting to your code (requires PEAR::Text_Highlighter)
+- Added new custom function Img to create HTML images (contributed by Jens Strobel)
+- Fixed notice in File reader (argh)
+- Added parameter for TemplateCache_File to set the filemode (request #127)
+- Added InputFilter that allows you to use the short variable modifier syntax of Smarty (schst, Axel Stettner) (request #136)
+- Fixed bug with condition __empty that was used instead of condition 0 (bug #132)
+- Fixed bug in Dateformat modifier
+- Fixed bug with condition templates that have __single and __empty defined (bug #138)
+- Bugfixes and new features in Translate function (bugs #68 and #73) (argh)
+- Can now set a preconfigured patBBCode object for the BBCode output filter, and added some documentation (argh)
+- Fixed the module file search that would not go through all defined folders (argh)
+- Added patch to translate function to allow combining of the translationFile and translationUseFolders options (argh)
+- Fixed bug #144: StripWhitespace output filter breaks UTF-8 encoded data (schst)
+- Added DB reader to read templates from any database supported by PEAR::DB (schst)
+- Fixed bug #74: Attributes &quot;maxloop&quot; and &quot;conditions&quot; causes PHP crash (schst)
+- Fixed an issue when using clearTemplate() on a template that does not exist (argh)
+- Fixed bug #150: Notice when enabling the template cache (schst)
+- Fixed bug #151: Invalid filemode in template cache (patch by Frank Kleine)
+- Fixed bug #153: pdflatex stops on errors (patch by p_ansell &lt;at&gt; yahoo [dot] com)
+- Fixed bug with variables that contain only one character (slerman)
+
+Changes since 3.1.0a2:
+- Fixed bug #152 (__single breaks first) (schst)
+- Allow multiple modifiers per variable (schst)
+- Implemented request #154: functions as defaults for variables (schst)
+- Add support for varscope __parent in variable modifier (gERD)
+- Add support for varscope __parent in variable tag (gERD)
+- Fixed bug #155: Automatically handle nested objects (schst)
+
+Changes since 3.1.0b1:
+- Fixed problem with condition templates and global variables (gERD)
+- Added placeholders for variable modifiers (gERD)</notes>
+  </release>
+  <release>
+   <version>
+    <release>3.1.0</release>
+    <api>3.1.0</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <date>2007-06-02</date>
+   <license uri="http://www.gnu.org/copyleft/lesser.txt">LGPL</license>
+   <notes>Changes since 3.0.x:
+- allowed more than one namespace
+- added defaultFunction option, to define a function that is called for unknown functions
+- added new built-in condition __single
+- allow quoting variables using \{FOO\}
+- implemented autoload in Call function
+- added new system variable: {PAT_ROW_TYPE} = odd|even
+- added &quot;rowOffset&quot; attribute that determines the starting point of PAT_ROW_VAR
+- allow usage of $self in the return values of the expression modifier (by Andrew Eddie of Mambo)
+- added &quot;relative&quot; attribute to load templates relative to the current template (request #89)
+- the varscope attribute now supports a list of templates
+- in the requiredvars attribute of a simple condition template it is now possible to specify the exact value of a variable via requiredvars=&quot;var=value&quot; (request #93)
+- added clearVar(), clearVars(), clearGlobalVar() and clearGlobalVars() (request #91)
+- added fourth parameter to addObject() to hide private properties
+- addObject() now checks, whether an object implements a getVars() method
+- added experimental XUL dump using PEAR::XML_XUL (needs a lot of love)
+- added TemplateCaches for MMCache and eAccelerator (contributed by Mike Valstar)
+- added placeholderExists() method (request #100)
+- added Truncate Modifier (contributed by Rafa Couto)
+- StripComments Input Filter now also strips Javascript multiline comments (Tim-Patrick M�rk)
+- Allow output filters for single templates (using the OutputFilter=&quot;...&quot; attribute and applyOutputFilter()) (Request #114)
+- Add default variable modifiers for a template (Request #92)
+- Added OutputFilter to highlight PHP code
+- File Reader: Allow array containing several root directories as template root
+
+Changes since 3.1.0a1:
+- Allow the use of a variable in conditions (&lt;pat:sub condition=&quot;{FOO}&quot;/&gt;)
+- Added new custom function Highlight that is able to apply syntax highlighting to your code (requires PEAR::Text_Highlighter)
+- Added new custom function Img to create HTML images (contributed by Jens Strobel)
+- Fixed notice in File reader (argh)
+- Added parameter for TemplateCache_File to set the filemode (request #127)
+- Added InputFilter that allows you to use the short variable modifier syntax of Smarty (schst, Axel Stettner) (request #136)
+- Fixed bug with condition __empty that was used instead of condition 0 (bug #132)
+- Fixed bug in Dateformat modifier
+- Fixed bug with condition templates that have __single and __empty defined (bug #138)
+- Bugfixes and new features in Translate function (bugs #68 and #73) (argh)
+- Can now set a preconfigured patBBCode object for the BBCode output filter, and added some documentation (argh)
+- Fixed the module file search that would not go through all defined folders (argh)
+- Added patch to translate function to allow combining of the translationFile and translationUseFolders options (argh)
+- Fixed bug #144: StripWhitespace output filter breaks UTF-8 encoded data (schst)
+- Added DB reader to read templates from any database supported by PEAR::DB (schst)
+- Fixed bug #74: Attributes &quot;maxloop&quot; and &quot;conditions&quot; causes PHP crash (schst)
+- Fixed an issue when using clearTemplate() on a template that does not exist (argh)
+- Fixed bug #150: Notice when enabling the template cache (schst)
+- Fixed bug #151: Invalid filemode in template cache (patch by Frank Kleine)
+- Fixed bug #153: pdflatex stops on errors (patch by p_ansell &lt;at&gt; yahoo [dot] com)
+- Fixed bug with variables that contain only one character (slerman)
+
+Changes since 3.1.0a2:
+- Fixed bug #152 (__single breaks first) (schst)
+- Allow multiple modifiers per variable (schst)
+- Implemented request #154: functions as defaults for variables (schst)
+- Add support for varscope __parent in variable modifier (gERD)
+- Add support for varscope __parent in variable tag (gERD)
+- Fixed bug #155: Automatically handle nested objects (schst)
+
+Changes since 3.1.0b1:
+- Fixed problem with condition templates and global variables (gERD)
+- Added placeholders for variable modifiers (gERD)
+
+Changes since 3.1.0b2:
+- Fixed bug #164: ShortModifiers filter does not work if copyFrom and additional attributes are used (eddieajau)
+- Fixed bug #165: ShortModifiers filter is not character set safe  (eddieajau)
+- Added multibyte support to Truncate modifier (gERD)
+- Added possibility to return UNIX timestamp to DateFormat modifier (gERD)
+- Fixed a bug when using an __autoload() function in combination with external modules (argh)</notes>
+  </release>
+ </changelog>
+</package>

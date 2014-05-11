@@ -1,0 +1,207 @@
+<patTemplate:tmpl name="AchatTmpl">
+
+<link type="text/css" rel="stylesheet" href="/ScolBoursePHP/css/main.css" />
+<script type="text/javascript" language="javascript" src="/ScolBoursePHP/js/jquery.js"></script> 
+<script type="text/javascript" language="javascript" src="/ScolBoursePHP/js/AchatActions.js"></script>
+
+<script type="text/javascript" language="javascript" >
+	function handleDernierEnterAchat (field, event) {
+	var keyCode = event.keyCode ? event.keyCode : event.which ? event.which : event.charCode;
+	if ((keyCode == 9)||(keyCode == 13)) {
+		acheterExemplaire();
+		return false;
+	} 
+	else
+		return true;
+} 
+</script>
+
+<div>
+	<h3>2� Entrez les livres choisis</h3><br/>		
+	<div style="font-size:75%; border:#9F9F9F solid thin; background:#EFEFEF;" align="center">
+		<form>
+		<table width="100%" border="0" cellspacing="0" style="padding:5px">
+			<tr>				
+				<td width="32%">
+					<table border="0" cellspacing="0" cellpadding="0">
+						<tr>
+							<td width="40%">Code Exemplaire:</td>
+							<td width="60%" align="left">
+								<input name="codeExemplaireA" type="text" id="codeExemplaireA" maxlength="20" size="21" {ACTCHER} onkeypress="return handleDernierEnterAchat(this, event);"/>
+							</td>
+						</tr>
+					</table>
+				</td>
+				<td width="68%">
+					<table border="0" cellspacing="0" cellpadding="0">
+						<tr>
+							<td align="left">
+								<input name="numDossierAchat" type="hidden" id="numDossierAchat" value="{NUM_FAMILLE}"/>
+								<input name="btnAchat" type="button" id="btnAchat" value="Ajouter" onclick="acheterExemplaire();" {ACTCHER}/>								
+							</td>							
+						</tr>
+					</table>
+				</td>
+			</tr>	
+		</table>
+		</form>
+	</div>
+	<br/>
+	
+	<div class="liste">
+	<table align="left" width="100%" style="background-color:#EFEFEF;"> 
+		<tr>
+			<th width="10px"><div align="right"></div></th>			
+			<th width="100px"><div align="left">Exemplaire No</div></th>
+			<th><div align="left">Titre</div></th>
+			<th><div align="left">Mati&egrave;re</div></th>
+			<th><div align="center">Etat</div></th>
+			<th><div align="right">Tarif</div></th>
+		</tr>	
+		
+		<patTemplate:tmpl name="detailAchat" type="condition" conditionvar="SELECT">
+			
+			<patTemplate:sub condition="empty">
+				<tr>		
+					<td align="center" colspan="8">Il n'y a pas d'exemplaires dans le dossier !</td>													
+				</tr>	
+			</patTemplate:sub>	
+			
+			<patTemplate:sub condition="default">
+				<patTemplate:tmpl name="ligneAchat">		
+					<tr class="{CLASS}" style="font-size:80%;" onmouseover="javascript:soulignerRow(this, 'hiliterows'); return false;" onmouseout="javascript:soulignerRow(this, '{CLASS}'); return false;">									
+						<td align="right" width="10px">{NRO}.</td>							
+						<td align="left"  width="100px">
+							<a href="javascript:SupprimerAchat({CODE_EXEMPLAIRE})">{CODE_EXEMPLAIRE}</a>
+						</td>			
+						<td align="left"><i>{TITRE}<i></td>			
+						<td align="left">{MATIERE}</td>			
+						<td align="center"><strong>{ETAT}</strong></td>			
+						<td align="right"><strong>{TARIF} &euro;</strong></td>						
+					</tr>
+				</patTemplate:tmpl>	
+				<tr>		
+					<td align="right" colspan="5">Sub-Total:</td>								
+					<td align="right"><strong>{MONTANT_LIVRE} &euro;</strong></td>						
+				</tr>	
+			</patTemplate:sub>
+		</patTemplate:tmpl>			
+											
+	</table>
+		<div style="text-align:left; clear:both; font-style:italic;"><br/>
+			Il est possible de retourner un exemplaire en le selectionnant dans le tableau. 
+		</div>
+	</div>	
+	<br />
+		
+	
+	<h3>3� Effectuez le paiement</h3><br />				
+	<table width="100%"  border="0" cellspacing="0" cellpadding="3">
+		<tr>
+			<td width="35%">Paiement(s):</td>
+			<td width="25%">&nbsp;</td>
+			<td width="25%"><div align="center"></div></td>	
+		</tr>
+		<tr>
+			<td>				
+				<div style="font-size:75%; border:#9F9F9F solid thin; background:#EFEFEF;" align="center">
+				<form>
+				<table width="100%" border="0" cellspacing="0" style="padding:5px">
+					<tr>				
+						<td>
+							<table border="0" cellspacing="0" cellpadding="0">
+								<tr>										
+									<td align="left">{REGLEMENTS}</td>
+								</tr>
+							</table>
+						</td>
+						<td>
+							<table border="0" cellspacing="0" cellpadding="0">
+								<tr>
+									<td width="40%">Montant:</td>
+									<td width="60%" align="left">
+										<input name="montPai" type="text" id="montPai" maxlength="7" size="7" {ACTCHERR} onkeypress="return handleEnter(this, event)"/>
+									</td>
+								</tr>
+							</table>
+						</td>				
+						<td>
+							<table border="0" cellspacing="0" cellpadding="0">
+								<tr>
+									<td width="40%">Cheque:</td>
+									<td width="60%" align="left">
+										<input name="cheque" type="text" id="cheque" maxlength="7" size="7" {ACTCHERR} onkeypress="return handleEnter(this, event)"/>
+									</td>
+								</tr>
+							</table>
+						</td>	
+						<td>
+							<table border="0" cellspacing="0" cellpadding="0">
+								<tr>										
+									<td align="center">
+										<input name="btnPai" type="button" id="btnPai" value="Payer" {ACTCHERR} onclick="ajouterPaiment();"/>
+									</td>
+								</tr>
+							</table>
+						</td>			
+					</tr>	
+				</table>
+				</form>
+			</div>
+			<br/>
+											
+			<div class="liste">
+			<table align="left" width="100%" style="background-color:#EFEFEF;"> 
+				<tr>
+					<th><div align="center">&nbsp;</div></th>
+					<th><div align="center">Date</div></th>
+					<th><div align="center">Mode</div></th>
+					<th><div align="center">Montant</div></th>
+					<th><div align="center">N&deg; ch&egrave;que | Info.</div></th>	
+				</tr>
+				<patTemplate:tmpl name="ligneRegle">	
+				<tr class="{CLASS}" style="font-size:80%;" onmouseover="javascript:soulignerRow(this, 'hiliterows'); return false;" onmouseout="javascript:soulignerRow(this, '{CLASS}'); return false;">
+					<td><div align="center">
+						<a href="javascript:SupprimerRegle({NUM_REGLE})" onclick="return window.confirm('supprimer reglement ?')">{NUM}</a>						
+					</div></td>
+					<td>{DATE_PAIMENT}</td>
+					<td>&nbsp;&laquo;&nbsp;{MODE_PAIMENT}&nbsp;&raquo;&nbsp;</td>
+					<td><div align="right"><strong>{MONTANT} &euro;</strong></div></td>
+					<td><div align="right"><i>{CHEQUE_INFO}</i></div></td>
+				</tr>
+				</patTemplate:tmpl> 	
+				<tr>
+					<td colspan="4"><div align="right">Total pay&eacute; par la famille :&nbsp;<strong>{TOTAL_PAYEE} &euro;</strong></div></td>
+					<td><div align="center">&nbsp;</div></td>					
+				</tr>
+			</table>			
+			</div>
+			</td>
+			<td>&nbsp;</td>
+			<td>
+				<div align="right" style="border:#9F9F9F solid thin; background:#EFEFEF; padding:5px;">
+					Total:&nbsp;<strong>{MONTANT_LIVRE} &euro;</strong><br/>
+					Frais:&nbsp;<strong>{FRAIS_DOSSIER} &euro;</strong><br/>
+					<hr/>
+					Total &agrave; payer:&nbsp;<strong>{TOTAL_PAYER} &euro;</strong>						
+				</div>
+				<br/><br/>
+				<div style="font-size:75%; border:#9F9F9F solid thin; background:#EFEFEF; padding:5px;" align="center">
+					<strong><i>RESTANT A PAYER: {DIFFERENCE} &euro;</i></strong>					
+				</div>
+			</td>	
+		</tr>
+		<tr>
+			<td colspan="3">&nbsp;</td>
+		</tr>
+		<tr>			
+			<td colspan="3">
+				<div align="center">													
+					<input type="submit" name="Submit4" value="Imprimer Facture" {ACTCHER} onclick="impprimerFacture({NUM_FAMILLE}); return true;"/>
+				</div>
+			</td>			
+		</tr>
+	</table>
+</div>	
+				
+</patTemplate:tmpl>

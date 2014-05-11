@@ -1,0 +1,30 @@
+<patTemplate:tmpl name="ManuelListeSelect">
+
+<link type="text/css" rel="stylesheet" href="/ScolBoursePHP/css/main.css" /> 
+
+<div class="liste">
+	<table align="left" width="99%" style="background-color:#EFEFEF;">	
+		<patTemplate:tmpl name="ligne">		
+		<tr class="{CLASS}" style="font-size:80%;" onmouseover="javascript:soulignerRow(this, 'hiliterows'); return false;" onmouseout="javascript:soulignerRow(this, '{CLASS}'); return false;">						
+			<td width="2%"  align="right">
+				<a href="javascript:selectManuel{ID})">{NRO}.</a>
+			</td>
+			<td width="40%" align="left">
+				<a href="javascript:selectManuel({ID})">{NOM_MAN}</a>
+			</td>
+			<td width="10%" align="left">
+				<a href="javascript:selectManuel({ID})">{CLASSE_MAN}</a>
+			</td>
+			<td width="30%" align="left">
+				<a href="javascript:selectManuel({ID})">{MAT_MAN}</a>
+			</td>
+			<td width="18%" align="left">
+				<a href="javascript:selectManuel({ID})">{EDIT_MAN}</a>			
+			</td>			
+		</tr>
+		</patTemplate:tmpl>	
+	</table>
+	<br/>		
+</div> 
+
+</patTemplate:tmpl>

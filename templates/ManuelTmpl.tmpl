@@ -1,0 +1,23 @@
+<patTemplate:tmpl name="ManuelTmpl">
+<script type='text/javascript' language='javascript' src='/ScolBoursePHP/js/ManuelAdmin.js'></script>
+<div>		
+	<!-- Liste Manuel Section //-->
+	<div>
+		<br/><h3 style="margin-left:1%">Gestion des listes de manuels</h3>
+		<patTemplate:tmpl src="ListeManuelListe.tmpl" parse="on"/><br/><br/><br/>
+	</div>
+	
+	<!-- Importer/Exporter Manuel Section //-->
+	<div>
+		<h3 style="margin-left:1%">Importer/Exporter des manuels</h3>
+		<patTemplate:tmpl src="ImpExpManuel.tmpl" parse="on"/><br/><br/><br/>
+	</div>
+	
+	<!-- Gestion Manuel Section //-->
+	<div>
+		<h3 style="margin-left:1%">Gestion des manuels</h3><br/>
+		<patTemplate:tmpl src="ManuelSelect.tmpl" parse="on"/><br/>
+	</div>
+		
+</div>	
+</patTemplate:tmpl>

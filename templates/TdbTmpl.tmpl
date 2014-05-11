@@ -1,0 +1,77 @@
+<patTemplate:tmpl name="TdbTmpl">
+<div>	
+<table>
+<tr>
+	<td width=45%>
+	<!-- Section Dépots & stock //-->
+	<div>
+		<br/><h3 style="margin-left:1%">Depots et Stocks</h3>
+		<table><patTemplate:tmpl name="TdbTmpl1">
+		<tr>
+		<td width=70%><h4 align="right">{LABEL}</h4></td>
+		<td width=5%>&nbsp;</td>
+		<td width=25%><h4 align="left">{VALUE}</h4></td>
+		</tr></patTemplate:tmpl> 
+		</table>
+	</div>
+	</td>    <td width=10%>&nbsp;</td>
+	<td width=45%>
+	<!-- Section  Famille et dossiers//-->
+	<div>
+		<h3 style="margin-left:1%">Dossiers et familles</h3>
+		<table><patTemplate:tmpl name="TdbTmpl2">
+		<tr>
+		<td width=70%><h4 align="right">{LABEL}</h4></td>
+		<td width=5%>&nbsp;</td>
+		<td width=25%><h4 align="left">{VALUE}</h4></td>
+		</tr></patTemplate:tmpl> 
+		</table>
+	</div>
+	</td>
+</tr>	
+<tr>	
+    <td width=45%>
+	<!-- Section ventes et paiements//-->
+	<div>
+		<h3 style="margin-left:1%">montants sur les dossiers depots</h3><br/>
+		<table><patTemplate:tmpl name="TdbTmpl3">
+		<tr>
+		<td width=75%><h4 align="right">{LABEL}</h4></td>
+		<td width=2%>&nbsp;</td>
+		<td width=23%><h4 align="left">{VALUE}</h4></td>
+		</tr></patTemplate:tmpl> 
+		</table>
+	</div>
+	</td>    <td width=10%>&nbsp;</td>
+	<td width=45%>
+	<!-- Section  Famille et dossiers//-->
+	<div>
+		<h3 style="margin-left:1%">montants sur les dossiers achats</h3>
+		<table><patTemplate:tmpl name="TdbTmpl4">
+		<tr>
+		<td width=75%><h4 align="right">{LABEL}</h4></td>
+		<td width=2%>&nbsp;</td>
+		<td width=23%><h4 align="left">{VALUE}</h4></td>
+		</tr></patTemplate:tmpl> 
+		</table>
+	</div>
+	</td>
+</tr>	
+<tr>
+ <td colspan="3">
+ <div>
+		<h3 style="margin-left:1%">Paiements</h3>
+		<table><patTemplate:tmpl name="TdbTmpl5">
+		<tr>
+		<td width=70%><h4 align="right">{LABEL}</h4></td>
+		<td width=5%>&nbsp;</td>
+		<td width=25%><h4 align="left">{VALUE}</h4></td>
+		</tr></patTemplate:tmpl> 
+		</table>
+	</div>
+ 
+  </td>
+</tr>
+</table>		
+</div>	
+</patTemplate:tmpl>

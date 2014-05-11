@@ -1,0 +1,19 @@
+<patTemplate:tmpl name="UtilisateurDetail">
+ 
+ <div class="liste">
+	 <h2>Detail de l'utilisateur</h2><br/>
+	 <div align="left">
+		 <b>Nom:</b> <i>{NOM}</i><br/>
+		 <b>Prenom:</b> <i>{PRENOM}</i><br/>
+		 <b>Login:</b> <i>{LOGIN}</i><br/>
+		 <b>Type d'utilisateur:</b> {TYPE}<br/>
+	 </div>
+	 <br/>
+	 <div>
+		<a href="/ScolBoursePHP/index.php/Utilisateur/voirProfil/{ID}">Modifier</a>
+		&nbsp;&nbsp;
+		<a href="#" onclick="closeMessage();return false;">Fermer</a>
+	 </div>
+</div> 
+	 
+</patTemplate:tmpl>

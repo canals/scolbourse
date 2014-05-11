@@ -1,0 +1,51 @@
+<patTemplate:tmpl name="BourseAdmin">
+<script type='text/javascript' language='javascript' src='/ScolBoursePHP/js/Bourse.js'></script>
+<div style="margin:0px 30px 0px 5px;">		
+			
+	<br/><h3>Ouvrir la bourse</h3><br/>
+	<form name="form1" method="post" action="/ScolBoursePHP/index.php/Bourse/ouvrir">	
+		&nbsp;&nbsp;En appuyant sur ce bouton, vous allez remettre les tables &agrave; vide <br/>
+		&nbsp;&nbsp;et mettre &agrave; jour les tables avec les derniers fichiers sauvegard&eacute;s.
+		<input type="button" name="ok" value="Ouvrir Bourse" onclick="Ouvrir();return false;">
+	</form>	
+	
+	
+	<br/><h3>Fermer la bourse</h3><br/>	
+	<form name="form1" method="post" action="/ScolBoursePHP/index.php/Bourse/fermer">	
+		&nbsp;&nbsp;En appuyant sur ce bouton, vous allez fermer <br/>
+		&nbsp;&nbsp;la bourse et donc sauvegarder les tables de la base de donn&eacute;es.
+		<input type="button" name="ok" value="Fermer Bourse" onclick="Fermer();return false;"/>
+	</form>	
+	
+	
+	<br/><h3>Autres actions</h3>
+	<div style="margin:25px;">
+		
+		<h4>- Vider la base de don&eacute;es</h4>
+		<form name="form1" method="post" action="/ScolBoursePHP/index.php/Bourse/structure">	
+			&nbsp;&nbsp;Attention, en appuyant sur ce bouton vous allez remettre les tables &agrave; vide. 
+			<input type="button" name="ok" value="Mettre à vide" onclick="Structure();return false;"/>
+		</form><br/>	
+		
+		<h4>- Importer un fichier avec les donn&eacute;es sauvegard&eacute;es</h4>
+		<form name="form1" method="post" enctype="multipart/form-data" action="/ScolBoursePHP/index.php/Bourse/donnees">	
+			&nbsp;&nbsp;Vous pouvez ici, t&eacute;lecharger un fichier de sauvegarde des donn&eacute;es.
+			<input type="file" name="fichier">&nbsp;&nbsp;<input type="button" name="ok" value="Telecharger" onclick="Donnees();return false;"/>
+		</form><br/>	
+		
+		<h4>- Importer toutes les donn&eacute;es sauvegard&eacute;es</h4>
+		<form name="form1" method="post" action="/ScolBoursePHP/index.php/Bourse/donneesSauvegarde">	
+			&nbsp;&nbsp;En appuyant sur ce bouton, vous allez charger les derniers fichiers de sauvegarde de donn&eacute;es.
+			<input type="button" name="ok" value="Charger Données Sauvegardées" onclick="donneesSauvegarde();return false;"/>
+		</form><br/>	
+		
+		<h4>- Exporter toutes les donn&eacute;es</h4>
+		<form name="form1" method="post" action="/ScolBoursePHP/index.php/Bourse/exportDonnees">	
+			&nbsp;&nbsp;Attention, en appuyant sur ce bouton vous sauvegarder les donn&eacute;es <br/>
+			&nbsp;&nbsp;de la base en l'etat actuel et en &eacute;crasant des anciens fichiers de sauvegarde.
+			<input type="submit" name="ok" value="Exporter Données" onclick="exportDonnees();return false;"/>
+		</form>
+	<div>
+
+</div>	
+</patTemplate:tmpl>

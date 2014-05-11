@@ -1,0 +1,190 @@
+<patTemplate:tmpl name="ManuelSelect">
+
+<script type="text/javascript" language="javascript" src="{JVS}"></script>
+
+<script type="text/javascript" language="javascript" >
+	function handleDernierEnterMan(field, event) {
+		var keyCode = event.keyCode ? event.keyCode : event.which ? event.which : event.charCode;
+		if ((keyCode == 9)||(keyCode == 13)) {
+			ManuelChercher();	
+		} 
+		else
+			return true;	
+	} 
+</script>
+
+<div style="font-size:75%; border:#999999 solid thin; background:#E1E1E1; margin:0% 2% 0% 1%" align="center">
+<table width="100%" border="0" cellspacing="0" style="border-bottom:#999999 solid thin; padding:10px">
+	<tr>
+		<td width="20%">
+			<table border="0" cellspacing="0" cellpadding="0">
+				<tr>
+					<td width="40%">Code Manuel :</td>
+					<td width="60%" align="left"><input name="codCh" type="text" id="codCh" size="10" {ACTCHER} onkeypress="handleDernierEnterMan(this, event);"/></td>
+				</tr>
+			</table>
+		</td>
+		<td width="20%">
+			<table border="0" cellspacing="0" cellpadding="0">
+				<tr>
+					<td width="35%">Nom Manuel :</td>
+					<td width="65%" align="left"><input name="nomCh" type="text" id="nomCh" size="10" {ACTCHER} onkeypress="handleDernierEnterMan(this, event);"/></td>
+				</tr>
+			</table>
+		</td>
+		<td width="20%">
+			<table border="0" cellspacing="0" cellpadding="0">
+				<tr>
+					<td width="40%">Matiere :</td>
+					<td width="60%" align="left"><input name="matCh" type="text" id="matCh" maxlength="14" size="10" {ACTCHER} onkeypress="handleDernierEnterMan(this, event);"/></td>
+				</tr>
+			</table>
+		</td>		
+		<td width="20%">
+			<table border="0" cellspacing="0" cellpadding="0">
+				<tr>
+					<td width="45%">Editeur :</td>
+					<td width="55%" align="left"><input name="editCh" type="text" id="editCh" size="10" {ACTCHER} onkeypress="handleDernierEnterMan(this, event);"/></td>
+				</tr>
+			</table>
+		</td>
+		<td width="20%">
+			<table border="0" cellspacing="0" cellpadding="0">
+				<tr>
+					<td width="35%">
+						<input name="btnCh"  type="button" id="btnCh"  value="Chercher" {ACTCHER} onclick="ManuelChercher();return false;"/>
+					</td>
+					<td width="65%">
+						<input name="btnNCh" type="button" id="btnNCh" value="Nouv. recherche" {ACTMOD} onclick="nouvelleRecherche();return false;"/>
+					</td>
+				</tr>
+			</table>
+		</td>
+	</tr>	
+</table>
+
+<!-- Detail du Manuel //-->
+<form id="frmManuel" name="frmManuel" method="POST" action="/ScolBoursePHP/index.php/Manuel/creer">
+<table width="100%" border="0" cellspacing="1px" style="padding:5px">
+	<tr>
+		<td width="20%">
+			<table border="0" cellspacing="0" cellpadding="0">
+				<tr>
+					<td width="35%">CODE:</td>
+					<td width="65%" align="left">
+						<input name="code_manuel" type="text" id="code_manuel" value="{ID}" size="20" {ACTINS}/>
+					</td>
+				</tr>
+			</table>
+		</td>
+		<td width="20%">
+			<table border="0" cellspacing="0" cellpadding="0">
+				<tr>
+					<td width="35%">NOM:</td>
+					<td width="65%" align="left">
+						<input name="titre_manuel" type="text" id="titre_manuel" value="{NOM_MAN}" size="15" {ACTCHAM}/>
+					</td>
+				</tr>
+			</table>
+		</td>
+		<td width="20%">
+			<table border="0" cellspacing="0" cellpadding="0">
+				<tr>
+					<td width="35%">Classe:</td>
+					<td width="65%" align="left">
+						<input name="classe_manuel" type="text" id="classe_manuel" size="15" value="{CLASSE_MAN}" {ACTCHAM}/>
+					</td>
+				</tr>
+			</table>
+		</td>
+		<td width="20%">
+			<table border="0" cellspacing="0" cellpadding="0">
+				<tr>
+					<td width="40%">Matiere:</td>
+					<td width="60%" align="left">
+					<input name="matiere_manuel" type="text" id="matiere_manuel" size="15" value="{MAT_MAN}" {ACTCHAM}/>
+					</td>
+				</tr>
+			</table>
+		</td>
+		<td width="20%">
+			<table border="0" cellspacing="0" cellpadding="0">
+				<tr>
+					<td width="35%">Editeur:</td>
+					<td width="65%" align="left">
+						<input name="editeur_manuel" type="text" id="editeur_manuel" size="15" value="{EDIT_MAN}" {ACTCHAM}/>
+					</td>
+				</tr>
+			</table>
+		</td>
+	</tr>
+	<tr>
+		<td width="20%">
+			<table border="0" cellspacing="0" cellpadding="0">
+				<tr>
+					<td width="55%">Annee edition :</td>
+					<td width="55%" align="left">
+  			   			<input name="date_edition_manuel" type="text" id="date_edition_manuel" size="15" value="{AN_MAN}" {ACTCHAM}/>
+					</td>
+				</tr>
+			</table>
+		</td>
+		<td width="20%">
+			<table border="0" cellspacing="0" cellpadding="0">
+				<tr>
+					<td width="35%">Tarif neuf:</td>
+					<td width="65%" align="left">
+						<input name="tarif_neuf_manuel" type="text" id="tarif_neuf_manuel" size="15" value="{TARIF_MAN}" {ACTCHAM}/>
+					</td>
+				</tr>
+			</table>
+		</td>
+		<td width="40%" colspan="2">
+			<table border="0" cellspacing="0" cellpadding="0">
+				<tr>
+					<td width="35%" align="right">Liste:</td>
+					<td width="65%" align="right">{LISTE_MAN}</td>
+				</tr>
+			</table>
+		</td>
+		<td width="20%">
+			<table border="0" cellspacing="0" cellpadding="0">
+				<tr>
+					<td colspan="2">
+						&nbsp;
+					</td>
+				</tr>
+			</table>
+		</td>
+		<td width="20%">
+			<table border="0" cellspacing="0" cellpadding="0">
+				<tr>
+					<td colspan="2">&nbsp;</td>						
+				</tr>
+			</table>
+		</td>
+	</tr>
+	<tr> <td>
+	  <table border="0" cellspacing="0" cellpadding="0">
+	  <patTemplate:tmpl name="TarifManuel">
+	    <tr > <td align=left>Etat {ETAT}  </td><td> : <bf>{TARIF}</bf> </td></tr>
+	  </patTemplate:tmpl>
+	  </table> </td>
+	</tr>
+</table>
+<table width="100%" border="0" cellspacing="3px" style="padding:10px">
+	<tr>
+		<td width="50%" align="left">
+			<input name="btnNouvelle" type="button" id="btnNouvelle" value="Nouveau manuel" {ACTCHER} onclick="javascript:activerFormulaire(); return false;"/>
+			<input name="btnModifier" type="button" id="btnModifier" value="Modifier" {ACTMOD} onclick="javascript:activerFormulaire(); return false;"/>
+			<input name="btnValider"  type="submit" id="btnValider"  value="Valider" {ACTCHAM}/>
+		</td>
+		<td width="50%" align="right">
+			<input name="btnAnnuler" type="button"  id="btnAnnuler" value="Annuler" {ACTCHAM} onclick="javascript:annulerFormulaire()(); return false;"/>
+		</td>
+	</tr>
+</table>
+</form>
+</div>
+
+</patTemplate:tmpl>

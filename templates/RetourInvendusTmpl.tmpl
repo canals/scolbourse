@@ -1,0 +1,63 @@
+<patTemplate:tmpl name="RetourInvendusTmpl">
+
+<link type="text/css" rel="stylesheet" href="/ScolBoursePHP/css/main.css" /> 
+<script type="text/javascript" language="javascript" src="/ScolBoursePHP/js/DepotActions.js"></script>
+
+<div>
+	<h3>Table des livres invendus</h3><br/>		
+	<div style="font-size:75%; border:#9F9F9F solid thin; background:#EFEFEF;" align="center">		
+	<div class="liste">
+		<table align="left" width="100%" style="background-color:#EFEFEF;"> 
+			<tr>			
+				<th width="85px"><div align="left">Exemplaire N°</div></th>
+				<th><div align="left">Titre</div></th>
+				<th><div align="left">Mati&egrave;re</div></th>
+				<th><div align="center">Etat</div></th>
+				<th width="40px"><div align="right">Tarif</div></th>
+				<th><div align="center">&nbsp;&nbsp;&nbsp;</div></th>
+				<th width="10px"><div align="right"></div></th>
+			</tr>		
+			
+			<patTemplate:tmpl name="detailInvendus" type="condition" conditionvar="SELECT">
+				
+				<patTemplate:sub condition="empty">
+					<tr>		
+						<td align="center" colspan="8">Il n'y a pas des exemplaires invendus dans le dossier</td>													
+					</tr>	
+				</patTemplate:sub>			
+				
+				<patTemplate:sub condition="default">
+					<patTemplate:tmpl name="ligneListe">		
+					<tr class="{CLASS}" style="font-size:80%;" onmouseover="javascript:soulignerRow(this, 'hiliterows'); return false;" onmouseout="javascript:soulignerRow(this, '{CLASS}'); return false;">																					
+						<td align="left"  width="85px">{CODE_EXEMPLAIRE}</td>			
+						<td align="left"><i>{TITRE}<i></td>			
+						<td align="left">{MATIERE}</td>			
+						<td align="center"><strong>{ETAT}</strong></td>			
+						<td align="right" width="40px"><strong>{TARIF} &euro;</strong></td>			
+						<td align="center"> 
+							<input type="button" name="btnRendre" value="Rendre" onclick="javascript:rendreExemplaire({NUM_FAMILLE},{CODE_EXEMPLAIRE});"/>
+						</td>						
+						<td align="right" width="10px"> 
+							<input type="button" name="btnVendu" value="Passer en vendu" onclick="javascript:venduExemplaire({DOSSIER_ACHAT},{CODE_EXEMPLAIRE});"/>						
+						</td>			
+					</tr>
+					</patTemplate:tmpl>
+					<tr>		
+						<td align="right" colspan="8">&nbsp;</td>					
+					</tr>	
+				</patTemplate:sub>	
+			</patTemplate:tmpl>														
+		</table>						
+	</div>	 		
+</div>	
+<div style="text-align:left; clear:both; font-size:98%;">
+	- Il est possible de <strong><i>rendre un exemplaire</i></strong> en le selectionnant dans le tableau.<br/>
+	- Il est possible aussi de <strong><i>passer en vendu un exemplaire</i></strong> en le selectionnant dans le tableau.
+</div>	
+<div align='center'>	
+	<h3>&nbsp;</h3>	
+	<br/>
+	<input type="button" name="btnAnnuler" value="Annuler" onclick="closeMessage(); return false;"/>&nbsp;&nbsp;&nbsp;&nbsp;
+	<input type="button" name="btnImprimmer" value="Rapport d'invendus" onclick="rapportInvendus({NUM_FAMILLE}); return true;"/>							
+</div>					
+</patTemplate:tmpl>

@@ -1,0 +1,20 @@
+<patTemplate:tmpl name="ExporterTmpl">	
+	<div style='width:200; overflow:auto;'>
+		<table align='left'>
+			<tr>
+				<td  align='left'>{MESSAGE}</td>
+			</tr>
+			<tr>
+				<td  align='left'>Il est stock&eacute; dans le fichier {FICHIER} </td>
+			</tr>
+		</table>
+	</div>
+	<div align='center'>
+		<a href='{FICHIER}' target='_blank' onclick='closeMessage(); return true;'>
+			<font color='#E35F06'>Ouvrir</font>
+		</a>&nbsp;&nbsp;
+		<a href='{RETOUR}' onclick='closeMessage(); return false;'>
+			<font color='#131313'>Fermer</font>
+		</a>
+	</div>
+</patTemplate:tmpl>

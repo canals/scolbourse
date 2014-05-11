@@ -1,0 +1,42 @@
+<patTemplate:tmpl name="authTmpl">
+
+<script type="text/javascript" language="javascript" >
+	function handleDernierEnterAuth (field, event) {
+	var keyCode = event.keyCode ? event.keyCode : event.which ? event.which : event.charCode;
+	if ((keyCode == 9)||(keyCode == 13)) {
+		logIn();
+		return false;
+	} 
+	else
+		return true;
+} 
+</script>
+
+	<div id='forms'>
+	<script type='text/javascript' src='/ScolBoursePHP/js/login.js'></script>
+	<form name='frmLogin' id='frmLogin' method='get' action='#'>
+		<table width='35%'  border='0' align='center' cellpadding='5' cellspacing='2px'>
+			<tr>
+				<td colspan='2'><div id='msgErreur'></div></td>
+			</tr>
+			<tr>
+				<td width='35%' class='frmLabel'>Login : </td>
+				<td width='65%'><input id='login' name='login' type='text' id='login' size='20' onkeypress='return handleEnter(this, event)'/></td>
+			</tr>
+			<tr>
+				<td width='35%' class='frmLabel'>Mot de passe : </td>
+				<td width='65%'><input id='passw' name='passw' type='password' id='passw' size='20' onkeypress='return handleDernierEnterAuth(this, event)'/></td>
+			</tr>
+			<tr>
+				<td colspan='2'>
+					<div align='center'>
+						<input type='button' name='submit' value='Valider' onclick='javascript:logIn()'/>
+						<input type='reset' name='reset' value='Effacer' />
+					</div>
+				</td>
+			</tr>
+		</table>
+	</form>
+	</div>	
+	
+</patTemplate:tmpl>

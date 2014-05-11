@@ -1,0 +1,77 @@
+<patTemplate:tmpl name="MainView">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+	<title>{TITRE_SUP}</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+	
+	<!-- Feuilles des Style CSS //-->		
+		<link type="text/css" rel="stylesheet" href="/ScolBoursePHP/css/modalMessage.css" >
+		<link type="text/css" rel="stylesheet" href="/ScolBoursePHP/css/main.css" />
+	<!-- fin des feuilles des Style CSS //-->
+
+	<!-- Libraries JavaScript //-->
+		<script type="text/javascript" language="javascript" src="/ScolBoursePHP/js/currentTime.js" runat="server"></script>		
+		<script type="text/javascript" language="javascript" src="/ScolBoursePHP/libs/ajax.js"></script>
+		<script type="text/javascript" language="javascript" src="/ScolBoursePHP/libs/ajax-dynamic-content.js"></script>
+		<script type="text/javascript" language="javascript" src="/ScolBoursePHP/libs/modal-message.js"></script>
+		<script type="text/javascript" language="javascript" src="/ScolBoursePHP/js/jquery.js"></script> 
+		<script type="text/javascript" language="javascript" src="/ScolBoursePHP/js/main.js"></script>
+				
+	<!-- fin de libraries JavaScript //-->
+	
+</head>
+
+<body onload="setInterval('getCurrentTime()', 1000);">
+
+	<!-- Contains the site in a table like thing //-->
+	<div id="holder">	
+		<!-- header //-->
+		<div id="header">
+			<div id="logo"></div> 
+		</div>
+		<!-- fin header //-->
+		
+		<!-- Menu //-->
+		<div id="menu">	
+			{MENU}
+		</div>
+		<!-- fin menu //-->
+		
+		<!-- pointless bars and should not really be in 2 div"s-->
+		<div style="border: 0px; border-bottom: 1px solid #ccc; height: 16px; 
+		background-image: url(/ScolboursePHP/images/shad2.png);"></div>
+		<div style="border: 0px; border-bottom: 1px solid #ccc; height: 16px; 
+		background-image: url(/ScolboursePHP/images/shad3.png);"></div>
+		<!-- fin pointless bar-->
+		
+		<!-- content -->		
+		<div id="corp">				
+			<h1>
+				<!-- Identification de l"utilisateur //-->
+				{UTILITAIRES}						
+				<!-- Afficher le titre de la page //-->
+				{TITRE}
+			</h1>
+			<br/>
+			<!-- Afficher le contenu //-->
+			<div id="contenu">
+				{CONTENU}
+			</div>		
+		</div>
+		<!-- fin du corp //-->
+		
+		<!-- pie de page //-->
+		<div id="footer">
+			<span id="footTime" class="footTime"></span>
+			<strong>&copy;2007-2008.</strong> <i>IUT Nancy2 - Charlemagne</i> &nbsp;&nbsp;
+			&middot; <a onclick='ouvrircredit();' onmouseover='this.style.cursor="pointer"'><u>Voir les credits</u></a> &middot;
+		</div>
+		<!-- fin pie //-->
+		
+	</div>
+	<!-- fin holder //-->
+</body>
+</html>
+</patTemplate:tmpl>

@@ -1,0 +1,219 @@
+<patTemplate:tmpl name="FamilleSelect">
+
+<script type="text/javascript" language="javascript" src="{JVS}"></script>
+
+<script type="text/javascript" language="javascript" >
+	function handleDernierEnterFam (field, event) {
+		var keyCode = event.keyCode ? event.keyCode : event.which ? event.which : event.charCode;
+		if ((keyCode == 9)||(keyCode == 13)) {
+			rechercher();	
+		} 
+		else
+			return true;	
+	} 
+</script>
+
+<div style="font-size:75%; border:#999999 solid thin; background:#E1E1E1; margin:0% 2% 0% 1%" align="center">
+<table width="100%" border="0" cellspacing="0" style="border-bottom:#999999 solid thin; padding:10px">
+	<tr>
+		<td width="20%">
+			<table border="0" cellspacing="0" cellpadding="0">
+				<tr>
+					<td width="35%">Nom :</td>
+					<td width="65%" align="left"><input name="nomCh" type="text" id="nomCh" size="10" {ACTCHER} onkeypress="handleDernierEnterFam(this, event);"/></td>
+				</tr>
+			</table>
+		</td>
+		<td width="20%">
+			<table border="0" cellspacing="0" cellpadding="0">
+				<tr>
+					<td width="40%">T&eacute;l&eacute;phone:</td>
+					<td width="60%" align="left"><input name="telCh" type="text" id="telCh" maxlength="14" size="10" {ACTCHER} onkeypress="handleDernierEnterFam(this, event);"/></td>
+				</tr>
+			</table>
+		</td>
+		<td width="20%">
+			<table border="0" cellspacing="0" cellpadding="0">
+				<tr>
+					<td width="40%">Dossier N�:</td>
+					<td width="60%" align="left"><input name="numCh" type="text" id="numCh" size="10" {ACTCHER} onkeypress="handleDernierEnterFam(this, event);"/></td>
+				</tr>
+			</table>
+		</td>
+		<td width="20%">
+			<table border="0" cellspacing="0" cellpadding="0">
+				<tr>
+					<td width="45%">Exemplaire N�:</td>
+					<td width="55%" align="left"><input name="exeCh" type="text" id="exeCh" size="10" {ACTCHER} onkeypress="handleDernierEnterFam(this, event);"/></td>
+				</tr>
+			</table>
+		</td>
+		<td width="20%">
+			<table border="0" cellspacing="0" cellpadding="0">
+				<tr>
+					<td width="35%">
+						<input name="btnCh"  type="button" id="btnCh"  value="Chercher" {ACTCHER} onclick="rechercher();return false;"/>
+					</td>
+					<td width="65%">
+						<input name="btnNCh" type="button" id="btnNCh" value="Nouv. recherche" {ACTMOD} onclick="nouvelleRecherche();return false;"/>
+					</td>
+				</tr>
+			</table>
+		</td>
+	</tr>	
+</table>
+
+<!-- Detail de la Famille //-->
+<form id="frmFamille" name="frmFamille" method="POST" action="/ScolBoursePHP/index.php/Famille/creer">
+<table width="100%" border="0" cellspacing="1px" style="padding:5px">
+        <tr>
+        <td colspan=3> <strong> Nom et adresse pour contact et paiement  (ordre et envoi) : </td>
+        </tr>
+	<tr>
+		<td width="20%">
+			<table border="0" cellspacing="0" cellpadding="0">
+				<tr>
+					<td width="35%">NOM:</td>
+					<td width="65%" align="left">
+						<input name="num_famille" type="hidden" id="num_famille" value="{NUM}"/>
+						<input name="nom_famille" type="text"   id="nom_famille" value="{NOM}" size="15" {ACTCHAM} onkeypress="return handleEnter(this, event)"/>
+					</td>
+				</tr>
+			</table>
+		</td>
+		<td width="20%">
+			<table border="0" cellspacing="0" cellpadding="0">
+				<tr>
+					<td width="35%">Prenom:</td>
+					<td width="65%" align="left">
+						<input name="prenom_famille" type="text" id="prenom_famille" size="15" value="{PRENOM}" {ACTCHAM} onkeypress="return handleEnter(this, event)"/>
+					</td>
+				</tr>
+			</table>
+		</td>
+		<td width="20%">
+			<table border="0" cellspacing="0" cellpadding="0">
+				<tr>
+					<td width="40%">T&eacute;l&eacute;phone:</td>
+					<td width="60%" align="left">
+					<input name="num_tel_famille" type="text" id="num_tel_famille" size="15" value="{TELEPH}" {ACTCHAM} onkeypress="return handleEnter(this, event)"/>
+					</td>
+				</tr>
+			</table>
+		</td>
+		<td width="20%">
+			<table border="0" cellspacing="0" cellpadding="0">
+				<tr>
+					<td width="35%">Ville:</td>
+					<td width="65%" align="left">
+						<input name="ville_famille" type="text" id="ville_famille" size="15" value="{VILLE}" {ACTCHAM} onkeypress="return handleEnter(this, event)"/>
+					</td>
+				</tr>
+			</table>
+		</td>
+		<td width="20%">
+			<table border="0" cellspacing="0" cellpadding="0">
+				<tr>
+					<td width="40%">Code postal:</td>
+					<td width="60%" align="left">
+  			   			<input name="code_postal_famille" type="text" id="code_postal_famille" size="15" value="{CODEPO}" {ACTCHAM} onkeypress="return handleEnter(this, event)"/>
+					</td>
+				</tr>
+			</table>
+		</td>
+	</tr>
+	<tr>
+
+<!-- 		<td width="20%"> -->
+                <td colspan="2">
+			<table border="0" cellspacing="0" cellpadding="0">
+				<tr>
+					<td width="35%">Adresse1:</td>
+					<td width="65%" align="left">
+						<input name="adresse1_famille" type="text" id="adresse1_famille" size="43" value="{ADRES1}" {ACTCHAM} onkeypress="return handleEnter(this, event)"/>
+					</td>
+				</tr>
+			</table>
+		</td>
+		<td width="20%">
+			<table border="0" cellspacing="0" cellpadding="0">
+				<tr>
+					<td width="35%">Adresse2:</td>
+					<td width="65%" align="left">
+						<input name="adresse2_famille" type="text" id="adresse2_famille" size="15" value="{ADRES2}" {ACTCHAM} onkeypress="return handleEnter(this, event)"/>
+					</td>
+				</tr>
+			</table>
+		</td>
+		<td width="20%">
+			<table border="0" cellspacing="0" cellpadding="0">
+				<tr>
+					<td colspan="2">
+						Adh&eacute;rent <input name="adherent_association" type="checkbox" id="adherent_association" size="15" {ADHERE} 
+						{ACTCHAM}/> 
+					</td>
+				</tr>
+			</table>
+		</td>
+		<td width="20%">
+			<table border="0" cellspacing="0" cellpadding="0">
+				<tr>
+					<td colspan="2">
+						Pas de frais <input name="enlevettfrais" type="checkbox" id="enlevettfrais" size="15" {ENLEVE} {ACTCHAM}/>
+						
+					</td>
+				</tr>
+			</table>
+		</td>
+<!--		<td width="20%">  -->
+<!--			<table border="0" cellspacing="0" cellpadding="0"> -->
+<!--				<tr>  -->
+<!--					<td colspan="2">&nbsp;</td> -->
+<!--				</tr>  -->
+<!--			</table>  -->
+<!--		</td>  -->
+	</tr>
+        <tr>
+
+<!-- 		<td width="20%"> -->
+                <td colspan="2">
+			<table border="0" cellspacing="0" cellpadding="0">
+				<tr>
+					<td width="35%">mail :</td>
+					<td width="65%" align="left">
+						<input name="mail_famille" type="text" id="mail_famille" size="43" value="{MAIL}" {ACTCHAM} onkeypress="return handleEnter(this, event)"/>
+					</td>
+				</tr>
+			</table>
+		</td>
+        </tr>
+	<tr>
+		<td colspan="5">
+			<table border="0" cellspacing="0" cellpadding="0">
+				<tr>
+					<td width="20%">Notes:</td>
+					<td width="80%" align="left">
+						<textarea name="indication_famille" id="indication_famille" rows="2" cols="96%" {ACTCHAM}/>{NOTES}</textarea>
+					</td>
+				</tr>
+			</table>
+		</td>		
+	</tr>
+</table>
+<table width="100%" border="0" cellspacing="3px" style="padding:10px">
+	<tr>
+		<td width="40%" align="left">
+			<input name="btnNouvelle" type="button" id="btnNouvelle" value="Nouvelle famille" {ACTCHER} onclick="javascript:activerFormulaireFamille(); return false;"/>
+			<input name="btnModifier" type="button" id="btnModifier" value="Modifier" {ACTMOD} onclick="javascript:activerFormulaireFamille(); return false;"/>
+			<input name="btnValider"  type="submit" id="btnValider"  value="Valider" {ACTCHAM}/>
+		</td>
+                <td width="30%" align="right"> <h1> Num Famille : {NUM}</h1></td>
+		<td width="30%" align="right">
+			<input name="btnAnnuler" type="button"  id="btnAnnuler" value="Annuler" {ACTCHAM} onclick="javascript:annulerFormulaireFamille(); return false;"/>
+		</td>
+	</tr>
+</table>
+</form>
+</div>
+
+</patTemplate:tmpl>

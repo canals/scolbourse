@@ -1,0 +1,40 @@
+<patTemplate:tmpl name="ImpExpManuel">
+<table>
+	<tr>
+		<td width=45%><h4>Importer les listes de manuels</h4></td>
+		<td width=10%>&nbsp;</td>
+		<td width=45%><h4>Exporter les listes de manuels</h4></td>
+	</tr>
+	
+	<tr>
+		<td>			
+			<form name="formManuel" method="post" enctype="multipart/form-data" action="/ScolBoursePHP/index.php/Manuel/import">	
+				Importer un fichier de manuels au format <i>CSV</i>   <br/><br/>
+				liste : {IMP_LISTE} <br/><br/>
+				fichier: <input type="file" name="fichier">&nbsp;&nbsp;<input type="submit" name="ok" value="importer" {ATCHAM}>
+			</form>
+		</td>
+		<td>
+			&nbsp;
+		</td>
+		<td>						
+			<form name="expManuel" method=post action="/ScolBoursePHP/index.php/Manuel/export/csv">	
+				Exporter une liste en format <i>CSV</i> <br/><br/>
+<!--				<input type="radio" name="format" value="csv"/>CSV&nbsp;&nbsp;
+				<input type="radio" name="format" value="sql" checked/>SQL</i><br/><br/>
+-->
+	            liste : {EXP_LISTE} 
+<!--				<input type="button" name="ok" value="Exporter" onclick="exporter(this.form.format);return false;">
+-->
+				<input type="submit" name="ok" value="exporter" align="right">
+			</form>
+		</td>
+	</tr>
+	<tr>
+		<td><h4>Calculer les tarifs occasion : <A HREF="/ScolBoursePHP/index.php/Manuel/calculerTarifs">calcul</A></h4>
+		 </td>
+		<td>&nbsp;</td>
+		<td> </td>
+	</tr>
+</table>
+</patTemplate:tmpl>

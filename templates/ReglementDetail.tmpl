@@ -1,0 +1,17 @@
+<patTemplate:tmpl name="ReglementDetail">
+ 
+ <div class="liste">
+	 <h2>Detail du paiement</h2><br/>
+	 <div align="left">
+		 <b>Code &eacute;tat:</b> <i>{CODE_PAIEMENT}</i><br/>
+		 <b>Libell&eacute;:</b> <i>{LIBELLE_PAIEMENT}</i><br/>
+	 </div>
+	 <br/>
+	 <div>
+		<a href="/ScolBoursePHP/index.php/Parametrage/supprimer/paiement/{CODE_PAIEMENT}" style="color:red">Supprimer</a>
+		&nbsp;&nbsp;
+		<a href="#" onclick="closeMessage();return false;">Fermer</a>
+	 </div>
+</div> 
+	 
+</patTemplate:tmpl>
