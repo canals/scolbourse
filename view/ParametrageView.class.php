@@ -80,22 +80,22 @@ class ParametrageView {
 			} break;
 			
 			case "liste": {
-				$titre = "Liste des parametrages"; 
+				$titre = "Liste des paramétrages"; 
 				$content = $this->listeView();
 			} break;							
 			
 			case "frmCreer" : { 
-				$titre = "Créer parametrage"; 
+				$titre = "Créer paramétrage"; 
 				$content = $this->formulaireView(); 
 			} break;
 			
 			case "save" : { 
-				$titre = "Modifier parametrage"; 
+				$titre = "Modifier paramétrage"; 
 				$content = $this->formulaireView(); 
 			} break;
 			
 			default: {
-				$titre = "Parametrages"; 
+				$titre = "Paramétrages"; 
 				$content = $this->defaultView(); 
 			} break;
 		}

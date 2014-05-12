@@ -2,23 +2,23 @@
  *
  ****************************************************************************
   ScolBourse : Application pour la gestion d'une bourse aux livres scolaires
-  fonctionnant en mode d√©pot-vente
-  Copyright (C) 2007-2008-2009 - No√©mie Jarnoux ; Luis Sustaita ; 
+  fonctionnant en mode dÈpot-vente
+  Copyright (C) 2007-2008-2009 - NoÈmie Jarnoux ; Luis Sustaita ; 
                                  Guillaume Courtois ; Ronel Rivas ; 
-								 G√©r√¥me Canals ‚Äî Tous droits r√©serv√©s.
+								 GÈrÙme Canals - Tous droits rÈservÈs.
   
   Ce programme est un logiciel libre ; vous pouvez le redistribuer ou le
-  modifier suivant les termes de la ‚ÄúGNU General Public License‚Äù telle que
-  publi√©e par la Free Software Foundation : soit la version 3 de cette
-  licence, soit (√† votre gr√©) toute version ult√©rieure.
+  modifier suivant les termes de la "GNU General Public License" telle que
+  publiÈe par la Free Software Foundation : soit la version 3 de cette
+  licence, soit (‡ votre grÈ) toute version ultÈrieure.
   
-  Ce programme est distribu√© dans l‚Äôespoir qu‚Äôil vous sera utile, mais SANS
-  AUCUNE GARANTIE : sans m√™me la garantie implicite de COMMERCIALISABILIT√â
-  ni d‚ÄôAD√âQUATION √Ä UN OBJECTIF PARTICULIER. Consultez la Licence G√©n√©rale
-  Publique GNU pour plus de d√©tails.
+  Ce programme est distribuÈ dans l'espoir qu'il vous sera utile, mais SANS
+  AUCUNE GARANTIE : sans mÍme la garantie implicite de COMMERCIALISABILIT…
+  ni d'AD…QUATION ¿ UN OBJECTIF PARTICULIER. Consultez la Licence GÈnÈrale
+  Publique GNU pour plus de dÈtails.
   
-  Vous devriez avoir re√ßu une copie de la Licence G√©n√©rale Publique GNU avec
-  ce programme ; si ce n‚Äôest pas le cas, consultez :
+  Vous devriez avoir reÁu une copie de la Licence GÈnÈrale Publique GNU avec
+  ce programme ; si ce n'est pas le cas, consultez :
   <http://www.gnu.org/licenses/>.
   ***************************************************************************
   *

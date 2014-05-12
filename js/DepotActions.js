@@ -242,14 +242,14 @@ function impprimer(data) {
  var msg = "";
         msg += "<div class='liste' style='padding:10px; text-align:left;'>";
             msg += "<div align='left'>";
-            msg += "	<h3>Recepisse de depot : </h3>";
-  if (data.code !=0)    msg += "<p> probleme </p>";
+            msg += "	<h3>R&eacute;c&eacute;piss&eacute; de d&eacute;pôt : </h3>";
+  if (data.code !=0)    msg += "<p> problème </p>";
             msg += "</div>";	
             msg += "<div align='left'>";
   if (data.code == 10)          msg += "erreur numero de dossier";
-  if (data.code == 11)          msg += "pas de dossier Depot pour cette famille";
+  if (data.code == 11)          msg += "pas de dossier Dépôt pour cette famille";
   if ((data.code == 0) && (data.mode ==2))
-        msg += "nouveau recepisse pour ce dossier - ouvrir avec le lien ci-dessous";
+        msg += "nouveau r&eacute;c&eacute;piss&eacute; pour ce dossier - ouvrir avec le lien ci-dessous";
   if ((data.code == 0) && (data.mode ==1))
         msg += "nouveau rapport invendus pour ce dossier - ouvrir avec le lien ci-dessous";
 

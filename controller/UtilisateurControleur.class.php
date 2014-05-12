@@ -94,7 +94,7 @@ class UtilisateurControleur extends AbstractControleur {
 		
 		$items[] = new FormItem("Coordon&eacute;es de l'utilisateur","", "titre", "",  false, "", "", "");
 		$items[] = new FormItem("Nom","nom", "text", $user->getAttr("nom"),  true, "", "", "");
-		$items[] = new FormItem("Prenom","prenom", "text", $user->getAttr("prenom"),  true, "", "", "");		
+		$items[] = new FormItem("Pr&eacute;nom","prenom", "text", $user->getAttr("prenom"),  true, "", "", "");		
 		
 		/** Type d'utilisateur **/
 		// B&eacute;n&eacute;vole

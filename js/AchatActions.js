@@ -188,7 +188,7 @@ function retourAjout(data, where) {
             msg += "<div class='liste' style='padding:10px; text-align:left;'>";
             msg += "<div align='left'>";
             msg += "	<h3>ACHAT: Ajouter "+where+" </h3>";
-            msg += "	<p> probleme </p>";
+            msg += "	<p> probl&egrave;me </p>";
             msg += "</div>";	
             msg += "<div align='left'>";
             msg += data.message;
@@ -227,7 +227,7 @@ function retourSupp(data,where) {
             msg += "<div class='liste' style='padding:10px; text-align:left;'>";
             msg += "<div align='left'>";
             msg += "	<h3>ACHAT: supprimer "+where+" </h3>";
-            msg += "	<p> probleme </p>";
+            msg += "	<p> probl&egrave;me </p>";
             msg += "</div>";	
             msg += "<div align='left'>";
             msg += data.message;
@@ -268,7 +268,7 @@ function facture(data) {
         msg += "<div class='liste' style='padding:10px; text-align:left;'>";
             msg += "<div align='left'>";
             msg += "	<h3>Facture achat: </h3>";
-  if (data.code !=0)    msg += "<p> probleme </p>";
+  if (data.code !=0)    msg += "<p> probl&egrave;me </p>";
             msg += "</div>";	
             msg += "<div align='left'>";
   if (data.code == 10)          msg += "erreur numero de dossier";

@@ -63,14 +63,14 @@ class TDBView {
 		$exv= Exemplaire::findAll(Exemplaire::VENDU);
 		$exr= Exemplaire::findAll(Exemplaire::RENDRE);
 		$exs= Exemplaire::findAll(Exemplaire::INVENDU); $exst = ($ex['count'] - $exv['count']) - $exr['count'];
-		//$content .= "Exemplaires deposes : ". $ex['count']." <br>";
+		//$content .= "Exemplaires déposés : ". $ex['count']." <br>";
 		//$content .= " Vendus : ".$exv['count']." ; Rendus : ".$exr['count'] ."; Stock : ".$exs['count']." (controle : $exst) <br>";
 
 		$st = new patTemplate();
 		$st->setRoot("templates");			
 		$st->readTemplatesFromInput("TdbTmpl.tmpl");
 		
-		$st->addVar("TdbTmpl1", "LABEL", "Exemplaires deposes :");
+		$st->addVar("TdbTmpl1", "LABEL", "Exemplaires déposés :");
 		$st->addVar("TdbTmpl1", "VALUE", $ex['count']);
 		$st->parseTemplate("TdbTmpl1", 'a');
 		$st->addVar("TdbTmpl1", "LABEL", "Vendus :");
@@ -88,7 +88,7 @@ class TDBView {
 		$st->addVar("TdbTmpl2", "LABEL", "Familles dans la base :");
 		$st->addVar("TdbTmpl2", "VALUE", count($f));
 		$st->parseTemplate("TdbTmpl2", 'a');
-		$st->addVar("TdbTmpl2", "LABEL", "dossiers depot :");
+		$st->addVar("TdbTmpl2", "LABEL", "dossiers dépôt :");
 		$st->addVar("TdbTmpl2", "VALUE", $dd['count']);
 		$st->parseTemplate("TdbTmpl2", 'a');
 		$st->addVar("TdbTmpl2", "LABEL", "dossiers achat :");
@@ -99,13 +99,13 @@ class TDBView {
 		$st->parseTemplate("TdbTmpl2", 'a');
 		
 		$montants_depots = DossierDeDepot::montantTDB();
-		$st->addVar("TdbTmpl3", "LABEL", "Valeur des livres deposes :");
+		$st->addVar("TdbTmpl3", "LABEL", "Valeur des livres déposés :");
 		$st->addVar("TdbTmpl3", "VALUE", $montants_depots['dsum']);
 		$st->parseTemplate("TdbTmpl3", 'a');
-		$st->addVar("TdbTmpl3", "LABEL", "Valeur des livres deposes vendus :");
+		$st->addVar("TdbTmpl3", "LABEL", "Valeur des livres déposés vendus :");
 		$st->addVar("TdbTmpl3", "VALUE", $montants_depots['vsum']);
 		$st->parseTemplate("TdbTmpl3", 'a');
-		$st->addVar("TdbTmpl3", "LABEL", "frais de dossiers sur les depots :");
+		$st->addVar("TdbTmpl3", "LABEL", "frais de dossiers sur les dépôts :");
 		$st->addVar("TdbTmpl3", "VALUE", $montants_depots['fsum']);
 		$st->parseTemplate("TdbTmpl3", 'a');
 		
@@ -121,7 +121,7 @@ class TDBView {
 		$st->parseTemplate("TdbTmpl4", 'a');
 		
 		$montants_regles= Regle::montantTDB();
-		$st->addVar("TdbTmpl5", "LABEL", "Total des reglements :");
+		$st->addVar("TdbTmpl5", "LABEL", "Total des règlements :");
 		$st->addVar("TdbTmpl5", "VALUE", $montants_regles['rsum']);
 		$st->parseTemplate("TdbTmpl5", 'a');
 		foreach ($montants_regles['msum'] as $code=>$montant) {

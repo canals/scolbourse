@@ -139,9 +139,9 @@ class ParametrageControleur extends AbstractControleur {
 				$script="";													
 				
 				// Items du formulaire
-				$items[] = new FormItem("Reglement", "", "titre", "",  false, "", "", "");
-				$items[] = new FormItem("Code reglement","c", "text", (Base::getLastId('reglement', 'code_reglement') + 1),  false, "disabled", "", "");
-				$items[] = new FormItem("Mode reglement","mode", "text", "",  true, "", "", "");
+				$items[] = new FormItem("Règlement", "", "titre", "",  false, "", "", "");
+				$items[] = new FormItem("Code règlement","c", "text", (Base::getLastId('reglement', 'code_reglement') + 1),  false, "disabled", "", "");
+				$items[] = new FormItem("Mode règlement","mode", "text", "",  true, "", "", "");
 				$items[] = new FormItem("","code", "hidden", (Base::getLastId('reglement', 'code_reglement') + 1),  false, "", "", "");
 				
 				// On crée le formulaire

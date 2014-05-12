@@ -1,0 +1,42 @@
+<?php
+
+session_start();
+
+/**
+ * view.HomeView.class.php : classe qui permet faire les views des Homes de l'application
+ *
+ * @author JARNAUX Noemie
+ * @author COURTOIS Gillaume
+ * @author RIVAS Ronel
+ * @author SUSTAITA Luis
+ *
+ * @package view
+**/
+
+class HomeView {
+
+	private $home;		
+	
+	private $mode;
+	
+	/**
+	* @access private
+	* @var user 
+	* User courante de l'application (SESSION)
+	*/
+	private $user;
+	
+	// Constructeur de la view
+	public function __construct($o, $m) {
+		$this->home = $o;
+		$this->mode = $m;			
+		
+		$ba = new BourseAuth();
+		$this->user = $ba->getUserProfile();		
+	}
+	
+	/**
+	*   Getter g&eacute;n&eacute;rique
+	*
+	*   fonction d'acc&eacute;s aux attributs d'un home.
+	*   Re

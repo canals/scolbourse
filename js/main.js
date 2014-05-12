@@ -84,7 +84,7 @@ function credits() {
 		var msg = "";
 		msg += "<div class='liste' style='padding:10px; text-align:left;'>";
 		msg += "<div align='left'>";
-		msg += "	<h3>ScolBourse: credits</h3>";		
+		msg += "	<h3>ScolBourse: cr&eacute;dits</h3>";		
 		msg += "</div>";	
 		msg += "<div align='left'>";
 		msg += xmlHttp.responseText;

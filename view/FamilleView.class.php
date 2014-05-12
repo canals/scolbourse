@@ -157,7 +157,7 @@ class FamilleView {
 			}		
 			$html .= $st->getParsedTemplate('FamilleListeSelect');									
 		} else 
-			$html .= "<br/><div>Aucune famille ne correspond &aagrave; votre crit&eagrave;re de selection...</div><br/>";
+			$html .= "<br/><div>Aucune famille ne correspond &aagrave; votre crit&eagrave;re de sélection...</div><br/>";
 		
 		$html .= "<div align='center'>";
 		$html .= "<a href='' onclick='closeMessage(); return false;'>";

@@ -845,7 +845,7 @@ class RapportControleur extends AbstractControleur {
 		$html .= "	<td  align='left'>Le rapport de la liste des manuels &agrave; bien &eacute;t&eacute; g&eacute;n&eacute;r&eacute;</td>";
 		$html .= "</tr>";
 		$html .= "<tr>";
-		$html .= "	<td  align='left'>Il est stock&eacute; dans le r&eacute;pertoire 'Rapports'</td>";
+		$html .= "	<td  align='left'>Il est stock&eacute; dans le r&eacute;pertoire 'rapports'</td>";
 		$html .= "</tr>";
 		$html .= "</table>";
 		$html .= "</div>";
@@ -1064,7 +1064,7 @@ class RapportControleur extends AbstractControleur {
 			$html .= "	<td  align='left'>Le rapport des invendus de la famille &agrave; bien &eacute;t&eacute; g&eacute;n&eacute;r&eacute;</td>";
 			$html .= "</tr>";
 			$html .= "<tr>";
-			$html .= "	<td  align='left'>Il est stock&eacute; dans le r&eacute;pertoire 'Rapports'</td>";
+			$html .= "	<td  align='left'>Il est stock&eacute; dans le r&eacute;pertoire 'rapports'</td>";
 			$html .= "</tr>";
 			}else{
 			$html .= "<tr>";
@@ -1192,7 +1192,7 @@ class RapportControleur extends AbstractControleur {
 		$html .= "	<td  align='left'>Le rapport du d&eacute;p&ocirc;t de la famille &agrave; bien &eacute;t&eacute; g&eacute;n&eacute;r&eacute;</td>";
 		$html .= "</tr>";
 		$html .= "<tr>";
-		$html .= "	<td  align='left'>Il est stock&eacute; dans le r&eacute;pertoire 'Rapports'</td>";
+		$html .= "	<td  align='left'>Il est stock&eacute; dans le r&eacute;pertoire 'rapports'</td>";
 		$html .= "</tr>";
 		}else{
 		$html .= "	<td  align='left'>Une Erreur est survenue lors de la création du rapport, la famille n'a pas encore de dossier !!</td>";
@@ -1313,7 +1313,7 @@ class RapportControleur extends AbstractControleur {
 		$html .= "	<td  align='left'>Le rapport des d&eacute;p&ocirc;ts &agrave; bien &eacute;t&eacute; g&eacute;n&eacute;r&eacute;</td>";
 		$html .= "</tr>";
 		$html .= "<tr>";
-		$html .= "	<td  align='left'>Il est stock&eacute; dans le r&eacute;pertoire 'Rapports'</td>";
+		$html .= "	<td  align='left'>Il est stock&eacute; dans le r&eacute;pertoire 'rapports'</td>";
 		$html .= "</tr>";
 		$html .= "</table>";
 		$html .= "</div>";
@@ -1527,7 +1527,7 @@ class RapportControleur extends AbstractControleur {
 		$html .= "	<td  align='left'>Le rapport des retours des invendus &agrave; bien &eacute;t&eacute; g&eacute;n&eacute;r&eacute;</td>";
 		$html .= "</tr>";
 		$html .= "<tr>";
-		$html .= "	<td  align='left'>Il est stock&eacute; dans le r&eacute;pertoire 'Rapports'</td>";
+		$html .= "	<td  align='left'>Il est stock&eacute; dans le r&eacute;pertoire 'rapports'</td>";
 		$html .= "</tr>";
 		$html .= "</table>";
 		$html .= "</div>";

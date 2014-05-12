@@ -1,7 +1,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 	<head>
-		<title>ScolBourse - Crédits</title>
+		<title>ScolBourse - Cr&eacute;dits</title>
 		<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 	</head>
 
@@ -23,7 +23,7 @@
 			<tr>
 				<td colspan="3">					
 					<b>L'&eacute;quipe de d&eacute;veloppement :</b>
-					<br/><i>(Sous la tutelle de M. Gerome Canals)</i>					
+					<br/><i>(Sous la tutelle de M. G&eacute;rome Canals)</i>					
 				</td>				
 			</tr>
 		</table><br/>
@@ -34,7 +34,7 @@
 						<img src="/ScolBoursePHP/images/guillaume.jpg" width="50" height="70"> COURTOIS Guillaume<br/>
 					</td>			
 					<td>
-						<img src="/ScolBoursePHP/images/noemie.jpg" width="60" height="80"> JARNOUX Noemie<br/>
+						<img src="/ScolBoursePHP/images/noemie.jpg" width="60" height="80"> JARNOUX No&eacute;mie<br/>
 					</td>
 					<td>&nbsp;</td>
 				</tr>

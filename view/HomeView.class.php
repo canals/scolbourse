@@ -105,11 +105,11 @@ class HomeView {
 		$html ="";		
 		$html .= "<div>"."\n";
 		$html .= "	<p>Espace de parametrage et d'administration de l'application ScolBourse</p> <br/><br/>\n";
-		$html .= " <p>ScolBourse Copyright (C) 2007-2008-2009 - <br/> No�mie Jarnoux ; Luis Sustaita ; 
+		$html .= " <p>ScolBourse Copyright (C) 2007-2008-2009 - <br/> No&eacute;mie Jarnoux ; Luis Sustaita ; 
                                  Guillaume Courtois ; Ronel Rivas ; 
-								 G�r�me Canals - Tous droits r�serv�s. <br/><br/>
+								 G&eacute;rome Canals - Tous droits r&eacute;serv&eacute;s. <br/><br/>
                    Ce programme vient SANS ABSOLUMENT AUCUNE GARANTIE ; <br/>
-				   Ceci est un logiciel libre et vous �tes invit� � le redistribuer
+				   Ceci est un logiciel libre et vous etes invit&eacute; &agrave, le redistribuer
   suivant certaines conditions ; </p>";
         $html .= "<p><a href=\"/ScolBoursePHP/licence.txt\"> Voir la licence </a></p>";
 		

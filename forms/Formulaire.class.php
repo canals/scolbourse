@@ -180,7 +180,7 @@ class Formulaire {
 							if($sels[$j])
 								$html .= "<option value='" . $vals[$j] . "' selected>" . $labs[$j] . "</option>";
 							else
-								$html .= "<option value='" . $vals[$j]. "'>" . $labs[$j] . "</option>";											
+								$html .= "<option value='" . $vals[$j]. "'>" . $labs[$j] . "</option>";										
 						$html .= "</select>";
 					} break;
 					
@@ -201,7 +201,7 @@ class Formulaire {
 							if($sels[$j]) {
 								$html .= "<input id='" . $item->getAttr("nom") . "' type='".$item->getAttr("type")."' ";
 								$html .= "name='".$item->getAttr("nom")."' value='".$vals[$j]."' checked ";
-								$html .= $item->getAttr("disabled") . " " . $item->getAttr("events"). "/>";															
+								$html .= $item->getAttr("disabled") . " " . $item->getAttr("events"). "/>";									
 							} else {
 								$html .= "<input id='" . $item->getAttr("nom") . "' type='". $item->getAttr("type") ."' ";
 								$html .= "name='" . $item->getAttr("nom") . "' value='".$vals[$j]."' " . $item->getAttr("disabled");
@@ -221,7 +221,7 @@ class Formulaire {
 							if($sels[$j]) {
 								$html .= "<input id='" . $item->getAttr("nom") . "' type='".$item->getAttr("type")."' ";
 								$html .= "name='".$noms[$j]."' checked " . $item->getAttr("disabled") . " ";
-								$html .= $item->getAttr("events"). "/>";															
+								$html .= $item->getAttr("events"). "/>";													
 							} else {
 								$html .= "<input id='" . $item->getAttr("nom") . "' type='".$item->getAttr("type")."' ";
 								$html .= "name='".$noms[$j]."' " .$item->getAttr("disabled")." ".$item->getAttr("events")." onkeypress='return handleEnter(this, event)'/>";
@@ -241,7 +241,7 @@ class Formulaire {
 					case "dateTime": {											
 						$html .= "<input id='" . $item->getAttr("nom") . "' type='text' name='" . $item->getAttr("nom") . "'";					
 						$html .= "value='". $item->getAttr("valeur") ."' " . $item->getAttr("disabled") . " ";
-						$html .= $item->getAttr("events"). "/>&nbsp;";																
+						$html .= $item->getAttr("events"). "/>&nbsp;";															
 						$html .= "<a onclick='displayDatePicker(\"" . $item->getAttr("nom") . "\", ";
 						$html .= "false, \"ymd\", \"-\")'><img src='/ScolBoursePHP/images/cal.gif' width='18' height='18'";
 						$html .= "border='0' alt='Faire click Here pour selectioner la date'/></a>";								
@@ -287,7 +287,7 @@ class Formulaire {
 		$html .= "			<td></td>";
 		$html .= "		</tr>";		
 		$html .= "		<tr><td colspan='4'>&nbsp;</td></tr>";		
-		$html .= "		<tr><td colspan='4'><i>Le champs <span class='frmObligatoire'>*</span> sont obligatoires.</i></td></tr>";		
+		$html .= "		<tr><td colspan='4'><i>Les champs <span class='frmObligatoire'>*</span> sont obligatoires.</i></td></tr>";		
 		$html .= "	</table>";
 		$html .= "</form>";
 					
@@ -302,10 +302,10 @@ class Formulaire {
 		
 		// Tableau de erreures
 		$mesErreurs = Array(
-			"Le formulaire n'est pas bien formée", 		
+			"Le formulaire n'est pas bien formé", 		
 			"Le champ est obligatoire",
 			"La valeur du champ email n'est pas valide",
-			"Les valeurs du champs n'est pas une valeur numerique valide",
+			"Les valeurs du champs n'est pas une valeur numérique valide",
 		);
 		
 		$i = 0;
@@ -382,7 +382,7 @@ class Formulaire {
 						if(isset($_REQUEST[$nom])) 
 							$sels[$j] = true;
 						 else 
-							$sels[$j] = false;																				
+							$sels[$j] = false;																	
 					}												
 					$valeurs[0] = $noms;
 					$valeurs[1] = $labs;
