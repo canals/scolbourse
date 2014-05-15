@@ -66,7 +66,7 @@ class BourseAuth {
 	
 	public function checkAuthLevel($level){
 		if(($this->_intern_ref==null)||($this->_intern_ref->getAttr("typeUtilisateur") < $level))
-			throw new AuthException("Vous n'&ecirc;tes pas autoris&eacute; � acc&eacute;der � cette page...",1);
+			throw new AuthException("Vous n'&ecirc;tes pas autoris&eacute; &agrave; acc&eacute;der &agrave; cette page...",1);
 	}
 	
 	public function getUserProfile() {

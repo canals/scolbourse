@@ -27,7 +27,7 @@
 from famille f, dossier_d_achat d, regle r
 where f.num_famille = d.num_dossier_achat
   and d.num_dossier_achat = r.num_dossier_achat
-  and r.code_reglement = 4
+  and ( r.code_reglement = 4 or  r.code_reglement = 5)
 order by f.num_famille]]></queryString>
 
 	<field name="nom_famille" class="java.lang.String"/>

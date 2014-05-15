@@ -176,7 +176,7 @@ class Base {
 		$query = "SELECT COUNT(" . $id .") as total FROM " . $tname . ";";						
 		$allrows = self::doSelect($query);		
 		if(count($allrows) != 1) 
-			throw new BaseException("Erreur avec la basse de donn�es...");			
+			throw new BaseException("Erreur avec la basse de donn&eacute;es...");			
 			
 		return $allrows[0]["total"];
 	}    

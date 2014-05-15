@@ -188,7 +188,7 @@ class FamilleControleur extends AbstractControleur {
 				$message = "Export de la liste de famille dans le fichier $fname";
 				$_SESSION["fichier"]=$fname;
 		    } else {
-				$message = "Export impossible : liste vide ou probleme ecriture dans le fichier $fname";
+				$message = "Export impossible : liste vide ou problême écriture dans le fichier $fname";
 			}	
 		$view = new FamilleView($message ,"exporterView");
 		$view->display (); 
@@ -197,7 +197,7 @@ class FamilleControleur extends AbstractControleur {
 			$mode = "ERREUR"; 
 			$titre = "[export impossible]"; 
 			$retour = "/ScolBoursePHP/index.php/Famille";							
-			$v = new MessageView($titre, "Ouuupss : un format d'export imprevu !", $mode, $retour);
+			$v = new MessageView($titre, "Ouuupss : un format d'export imprévu !", $mode, $retour);
 			$v->display (); 
             	 		
 		}		
@@ -233,7 +233,7 @@ class FamilleControleur extends AbstractControleur {
 			$row = fgetcsv( $file, 1024, ";", "\"" );
                         if (count($row) == 0) break;
 			if (count($row) <8) {
-				$message .="Erreur sur la ligne $k : colonne manquante (ligne non import�e)<br/>";
+				$message .="Erreur sur la ligne $k : colonne manquante (ligne non import&eacute;e)<br/>";
 				$erreur=true;
 			} else {
 				// on traite la ligne : cr�er la famille et ins�rer
